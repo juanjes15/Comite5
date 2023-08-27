@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class User extends Authenticatable
 {
@@ -21,6 +23,9 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'rol',
+        'aprendiz_id',
+        'instructor_id',
     ];
 
     /**
@@ -42,4 +47,22 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    //Los comités a los que pertenece el Usuario
+    public function comites(): BelongsToMany
+    {
+        return $this->belongsToMany(Comite::class)->as('ComiteUser');
+    }
+
+    //Obtener el aprendiz dueño del Usuario
+    public function aprendiz(): BelongsTo
+    {
+        return $this->belongsTo(Aprendiz::class);
+    }
+
+    //Obtener el instructor dueño del Usuario
+    public function instructor(): BelongsTo
+    {
+        return $this->belongsTo(Instructor::class);
+    }
 }
