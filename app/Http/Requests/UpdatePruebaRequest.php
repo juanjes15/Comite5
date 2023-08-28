@@ -11,7 +11,7 @@ class UpdatePruebaRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,12 @@ class UpdatePruebaRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'pru_tipo' => 'required',
+            'pru_descripcion' => 'required',
+            'pru_fecha' => 'required',
+            'pru_lugar' => 'required',
+            'pru_url' => 'required',
+            'solicitud_id' => 'required'
         ];
     }
 }

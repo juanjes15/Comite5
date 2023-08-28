@@ -11,7 +11,7 @@ class UpdateArticuloRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,9 @@ class UpdateArticuloRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'art_numero' => 'required',
+            'art_descripcion' => 'required',
+            'capitulo_id' => 'required'
         ];
     }
 }

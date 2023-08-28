@@ -8,59 +8,43 @@ use App\Models\Programa;
 
 class ProgramaController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    //Muestra un listado del recurso
     public function index()
     {
-        //
+        $programas = Programa::latest()->paginate(5);
+        return view('programas.index', compact('programas'))->with('i', (request()->input('page', 1) - 1) * 5);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
+    //Muestra el formulario de creación de un nuevo recurso
     public function create()
     {
-        //
+        return view('programas.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
+    //Almacena un recurso recién creado
     public function store(StoreProgramaRequest $request)
     {
-        //
+        Programa::create($request->validated());
+        return redirect()->route('programas.index');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Programa $programa)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
+    //Muestra el formulario para editar el recurso especificado
     public function edit(Programa $programa)
     {
-        //
+        return view('programas.edit', compact('programa'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
+    //Actualiza el recurso especificado en el almacenamiento
     public function update(UpdateProgramaRequest $request, Programa $programa)
     {
-        //
+        $programa->update($request->validated());
+        return redirect()->route('programas.index');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
+    //Elimina el recurso especificado del almacenamiento
     public function destroy(Programa $programa)
     {
-        //
+        $programa->delete();
+        return redirect()->route('programas.index');
     }
 }

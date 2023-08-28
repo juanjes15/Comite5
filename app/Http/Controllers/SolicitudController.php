@@ -8,59 +8,43 @@ use App\Models\Solicitud;
 
 class SolicitudController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    //Muestra un listado del recurso
     public function index()
     {
-        //
+        $solicituds = Solicitud::latest()->paginate(5);
+        return view('solicituds.index', compact('solicituds'))->with('i', (request()->input('page', 1) - 1) * 5);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
+    //Muestra el formulario de creación de un nuevo recurso
     public function create()
     {
-        //
+        return view('solicituds.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
+    //Almacena un recurso recién creado
     public function store(StoreSolicitudRequest $request)
     {
-        //
+        Solicitud::create($request->validated());
+        return redirect()->route('solicituds.index');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Solicitud $solicitud)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
+    //Muestra el formulario para editar el recurso especificado
     public function edit(Solicitud $solicitud)
     {
-        //
+        return view('solicituds.edit', compact('solicitud'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
+    //Actualiza el recurso especificado en el almacenamiento
     public function update(UpdateSolicitudRequest $request, Solicitud $solicitud)
     {
-        //
+        $solicitud->update($request->validated());
+        return redirect()->route('solicituds.index');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
+    //Elimina el recurso especificado del almacenamiento
     public function destroy(Solicitud $solicitud)
     {
-        //
+        $solicitud->delete();
+        return redirect()->route('solicituds.index');
     }
 }

@@ -11,7 +11,7 @@ class UpdateInstructorRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,11 @@ class UpdateInstructorRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'ins_identificacion' => 'required',
+            'ins_nombres' => 'required',
+            'ins_apellidos' => 'required',
+            'ins_email' => 'required',
+            'ins_telefono' => 'required',
         ];
     }
 }

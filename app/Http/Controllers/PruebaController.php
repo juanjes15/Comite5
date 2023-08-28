@@ -5,62 +5,49 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StorePruebaRequest;
 use App\Http\Requests\UpdatePruebaRequest;
 use App\Models\Prueba;
+use App\Models\Solicitud;
 
 class PruebaController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    //Muestra un listado del recurso
     public function index()
     {
-        //
+        $pruebas = Prueba::latest()->paginate(5);
+        return view('pruebas.index', compact('pruebas'))->with('i', (request()->input('page', 1) - 1) * 5);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
+    //Muestra el formulario de creación de un nuevo recurso
     public function create()
     {
-        //
+        $solicituds = Solicitud::all();
+        return view('pruebas.create', compact('solicituds'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
+    //Almacena un recurso recién creado
     public function store(StorePruebaRequest $request)
     {
-        //
+        Prueba::create($request->validated());
+        return redirect()->route('pruebas.index');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Prueba $prueba)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
+    //Muestra el formulario para editar el recurso especificado
     public function edit(Prueba $prueba)
     {
-        //
+        $solicituds = Solicitud::all();
+        return view('pruebas.edit', compact('prueba', 'solicituds'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
+    //Actualiza el recurso especificado en el almacenamiento
     public function update(UpdatePruebaRequest $request, Prueba $prueba)
     {
-        //
+        $prueba->update($request->validated());
+        return redirect()->route('pruebas.index');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
+    //Elimina el recurso especificado del almacenamiento
     public function destroy(Prueba $prueba)
     {
-        //
+        $prueba->delete();
+        return redirect()->route('pruebas.index');
     }
 }

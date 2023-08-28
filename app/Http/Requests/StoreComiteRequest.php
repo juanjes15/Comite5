@@ -11,7 +11,7 @@ class StoreComiteRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,12 @@ class StoreComiteRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'com_estado' => 'required',
+            'com_fecha' => 'required',
+            'com_lugar' => 'required',
+            'com_recomendacion' => 'required',
+            'com_acta' => 'required',
+            'solicitud_id' => 'required'
         ];
     }
 }

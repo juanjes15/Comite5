@@ -11,7 +11,7 @@ class UpdateFichaRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,15 @@ class UpdateFichaRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'fic_codigo' => 'required',
+            'fic_inicioLectiva' => 'required',
+            'fic_finLectiva' => 'required',
+            'fic_inicioProductiva' => 'required',
+            'fic_finProductiva' => 'required',
+            'fic_modalidad' => 'required',
+            'fic_jornada' => 'required',
+            'programa_id' => 'required',
+            'instructor_id' => 'required'
         ];
     }
 }

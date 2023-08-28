@@ -11,7 +11,7 @@ class UpdateProgramaRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,9 @@ class UpdateProgramaRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'pro_codigo' => 'required',
+            'pro_nombre' => 'required',
+            'pro_nivelFormacion' => 'required'
         ];
     }
 }

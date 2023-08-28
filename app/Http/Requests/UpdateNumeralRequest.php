@@ -11,7 +11,7 @@ class UpdateNumeralRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,10 @@ class UpdateNumeralRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'num_descripcion' => 'required',
+            'num_categoria' => 'required',
+            'num_tipoFalta' => 'required',
+            'articulo_id' => 'required'
         ];
     }
 }
