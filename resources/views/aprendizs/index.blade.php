@@ -9,9 +9,7 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
                 <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-                    @can('administrar')
-                        <x-link href="{{ route('aprendizs.create') }}" class="m-4">Añadir aprendiz</x-link>
-                    @endcan
+                    <x-link href="{{ route('aprendizs.create') }}" class="m-4">Añadir aprendiz</x-link>
                     <table class="w-full text-sm text-left text-gray-500 ">
                         <thead class="text-xs text-gray-700 uppercase bg-gray-50 ">
                             <tr>
@@ -30,10 +28,8 @@
                                 <th scope="col" class="px-6 py-3">
                                     Ficha
                                 </th>
-                                @can('administrar')
-                                    <th scope="col" class="px-6 py-3">
-                                    </th>
-                                @endcan
+                                <th scope="col" class="px-6 py-3">
+                                </th>
                             </tr>
                         </thead>
                         <tbody>
@@ -54,18 +50,16 @@
                                     <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap ">
                                         {{ $aprendiz->ficha->fic_codigo }}
                                     </td>
-                                    @can('administrar')
-                                        <td class="px-6 py-4">
-                                            <x-link href="{{ route('aprendizs.edit', $aprendiz) }}">Editar</x-link>
-                                            <form method="POST" action="{{ route('aprendizs.destroy', $aprendiz) }}"
-                                                class="inline-block">
-                                                @csrf
-                                                @method('DELETE')
-                                                <x-danger-button type="submit" onclick="return confirm('¿Está seguro?')">
-                                                    Eliminar</x-danger-button>
-                                            </form>
-                                        </td>
-                                    @endcan
+                                    <td class="px-6 py-4">
+                                        <x-link href="{{ route('aprendizs.edit', $aprendiz) }}">Editar</x-link>
+                                        <form method="POST" action="{{ route('aprendizs.destroy', $aprendiz) }}"
+                                            class="inline-block">
+                                            @csrf
+                                            @method('DELETE')
+                                            <x-danger-button type="submit" onclick="return confirm('¿Está seguro?')">
+                                                Eliminar</x-danger-button>
+                                        </form>
+                                    </td>
                                 </tr>
                             @empty
                                 <tr class="bg-white border-b">

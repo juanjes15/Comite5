@@ -51,11 +51,11 @@
                                 autocomplete="apr_fechaNacimiento" />
                         </div>
                         <div>
-                            <x-label for="fic_id" value="{{ __('Ficha') }}" />
-                            <select name="fic_id"
+                            <x-label for="ficha_id" value="{{ __('Ficha') }}" />
+                            <select name="ficha_id"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
                                 @foreach ($fichas as $ficha)
-                                    @if ($ficha->id == $aprendiz->fic_id)
+                                    @if ($ficha->id == $aprendiz->ficha_id)
                                         <option selected value="{{ $ficha->id }}">{{ $ficha->fic_codigo }}</option>
                                     @else
                                         <option value="{{ $ficha->id }}">{{ $ficha->fic_codigo }}</option>
@@ -67,7 +67,7 @@
                             <x-button>
                                 {{ __('Editar') }}
                             </x-button>
-                            <x-link href="{{ route('aprendizs.index') }}" class="mx-3">Atras</x-link>
+                            <x-link href="{{ url()->previous() }}" class="mx-3">Atras</x-link>
                         </div>
                 </div>
             </div>
