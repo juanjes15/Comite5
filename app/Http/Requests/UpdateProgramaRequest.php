@@ -2,29 +2,26 @@
 
 namespace App\Http\Requests;
 
+use App\Models\Programa;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class UpdateProgramaRequest extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     */
+    //Determinar si el usuario está autorizado a realizar esta solicitud
     public function authorize(): bool
     {
         return true;
     }
 
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array|string>
-     */
+    //Obtener las reglas de validación que se aplican a la solicitud
     public function rules(): array
     {
+        $programaId = $this->route('programa');
         return [
-            'pro_codigo' => 'required',
-            'pro_nombre' => 'required',
-            'pro_nivelFormacion' => 'required'
+            'pro_codigo' => ['required', 'digits_between:5,10', Rule::unique(Programa::class)->ignore($programaId)],
+            'pro_nombre' => ['required', 'string', 'max:255'],
+            'pro_nivelFormacion' => ['required', 'string', 'max:255']
         ];
     }
 }

@@ -2,29 +2,26 @@
 
 namespace App\Http\Requests;
 
+use App\Models\Articulo;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class UpdateArticuloRequest extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     */
+    //Determinar si el usuario está autorizado a realizar esta solicitud
     public function authorize(): bool
     {
         return true;
     }
 
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array|string>
-     */
+    //Obtener las reglas de validación que se aplican a la solicitud
     public function rules(): array
     {
+        $articuloId = $this->route('articulo');
         return [
-            'art_numero' => 'required',
-            'art_descripcion' => 'required',
-            'capitulo_id' => 'required'
+            'art_numero' => ['required', 'digits_between:1,3', Rule::unique(Articulo::class)->ignore($articuloId)],
+            'art_descripcion' => ['required', 'string', 'max:255'],
+            'capitulo_id' => ['required', 'exists:capitulos,id']
         ];
     }
 }

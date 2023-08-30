@@ -9,7 +9,7 @@ return new class extends Migration {
     {
         Schema::create('articulos', function (Blueprint $table) {
             $table->id();
-            $table->string('art_numero');
+            $table->string('art_numero')->unique();
             $table->string('art_descripcion');
             $table->foreignId('capitulo_id')->constrained();
             $table->timestamps();

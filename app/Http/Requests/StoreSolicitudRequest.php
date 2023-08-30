@@ -6,27 +6,21 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class StoreSolicitudRequest extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     */
+    //Determinar si el usuario está autorizado a realizar esta solicitud
     public function authorize(): bool
     {
         return true;
     }
 
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array|string>
-     */
+    //Obtener las reglas de validación que se aplican a la solicitud
     public function rules(): array
     {
         return [
-            'sol_lugar' => 'required',
-            'sol_motivo' => 'required',
-            'sol_descripcion' => 'required',
-            'sol_estado' => 'required',
-            'instructor_id' => 'required'
+            'sol_lugar' => ['required', 'string', 'max:255'],
+            'sol_motivo' => ['required', 'string', 'max:255'],
+            'sol_descripcion' => ['required', 'string', 'max:255'],
+            'sol_estado' => ['required', 'string', 'max:255'],
+            'instructor_id' => ['required', 'exists:instructors,id']
         ];
     }
 }

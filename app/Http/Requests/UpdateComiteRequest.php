@@ -6,28 +6,22 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class UpdateComiteRequest extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     */
+    //Determinar si el usuario está autorizado a realizar esta solicitud
     public function authorize(): bool
     {
         return true;
     }
 
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array|string>
-     */
+    //Obtener las reglas de validación que se aplican a la solicitud
     public function rules(): array
     {
         return [
-            'com_estado' => 'required',
-            'com_fecha' => 'required',
-            'com_lugar' => 'required',
-            'com_recomendacion' => 'required',
-            'com_acta' => 'required',
-            'solicitud_id' => 'required'
+            'com_estado' => ['required', 'string', 'max:255'],
+            'com_fecha' => ['required', 'date'],
+            'com_lugar' => ['required', 'string', 'max:255'],
+            'com_recomendacion' => ['required', 'string', 'max:255'],
+            'com_acta' => ['required', 'string', 'max:255'],
+            'solicitud_id' => ['required', 'exists:solicituds,id']
         ];
     }
 }

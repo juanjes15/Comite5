@@ -6,28 +6,22 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class StorePruebaRequest extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     */
+    //Determinar si el usuario está autorizado a realizar esta solicitud
     public function authorize(): bool
     {
         return true;
     }
 
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array|string>
-     */
+    //Obtener las reglas de validación que se aplican a la solicitud
     public function rules(): array
     {
         return [
-            'pru_tipo' => 'required',
-            'pru_descripcion' => 'required',
-            'pru_fecha' => 'required',
-            'pru_lugar' => 'required',
-            'pru_url' => 'required',
-            'solicitud_id' => 'required'
+            'pru_tipo' => ['required', 'string', 'max:255'],
+            'pru_descripcion' => ['required', 'string', 'max:255'],
+            'pru_fecha' => ['required', 'date', 'before:today'],
+            'pru_lugar' => ['required', 'string', 'max:255'],
+            'pru_url' => ['required', 'string', 'max:255'],
+            'solicitud_id' => ['required', 'exists:solicituds,id']
         ];
     }
 }

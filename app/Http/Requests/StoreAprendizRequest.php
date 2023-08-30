@@ -18,11 +18,11 @@ class StoreAprendizRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'apr_identificacion' => ['required', 'numeric', 'min:5', 'max:10', Rule::unique(Aprendiz::class, 'apr_identificacion')],
+            'apr_identificacion' => ['required', 'digits_between:5,10', Rule::unique(Aprendiz::class, 'apr_identificacion')],
             'apr_nombres' => ['required', 'string', 'max:255'],
             'apr_apellidos' => ['required', 'string', 'max:255'],
             'apr_email' => ['required', 'email', 'max:255', Rule::unique(Aprendiz::class, 'apr_email')],
-            'apr_telefono' => ['required', 'numeric', 'min:7', 'max:20'],
+            'apr_telefono' => ['required', 'digits_between:5,10'],
             'apr_direccion' => ['required', 'string', 'max:255'],
             'apr_fechaNacimiento' => ['required', 'date', 'before:today'],
             'ficha_id' => ['required', 'exists:fichas,id']

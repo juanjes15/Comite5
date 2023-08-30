@@ -6,26 +6,20 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class StoreNumeralRequest extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     */
+    //Determinar si el usuario está autorizado a realizar esta solicitud
     public function authorize(): bool
     {
         return true;
     }
 
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array|string>
-     */
+    //Obtener las reglas de validación que se aplican a la solicitud
     public function rules(): array
     {
         return [
-            'num_descripcion' => 'required',
-            'num_categoria' => 'required',
-            'num_tipoFalta' => 'required',
-            'articulo_id' => 'required'
+            'num_descripcion' => ['required', 'string'],
+            'num_categoria' => ['required', 'string', 'max:255'],
+            'num_tipoFalta' => ['required', 'string', 'max:255'],
+            'articulo_id' => ['required', 'exists:articulos,id']
         ];
     }
 }
