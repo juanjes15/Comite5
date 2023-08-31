@@ -56,9 +56,11 @@
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
                                 @foreach ($fichas as $ficha)
                                     @if ($ficha->id == $aprendiz->ficha_id)
-                                        <option selected value="{{ $ficha->id }}">{{ $ficha->fic_codigo }}</option>
+                                        <option selected value="{{ $ficha->id }}">{{ $ficha->fic_codigo }} -
+                                            {{ $ficha->programa->pro_nombre }}</option>
                                     @else
-                                        <option value="{{ $ficha->id }}">{{ $ficha->fic_codigo }}</option>
+                                        <option value="{{ $ficha->id }}">{{ $ficha->fic_codigo }} -
+                                            {{ $ficha->programa->pro_nombre }}</option>
                                     @endif
                                 @endforeach
                             </select>
@@ -69,6 +71,7 @@
                             </x-button>
                             <x-link href="{{ url()->previous() }}" class="mx-3">Atras</x-link>
                         </div>
+                    </form>
                 </div>
             </div>
         </div>

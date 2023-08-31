@@ -55,7 +55,8 @@
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
                                 <option value="">--Seleccione una Ficha--</option>
                                 @foreach ($fichas as $ficha)
-                                    <option value="{{ $ficha->id }}">{{ $ficha->fic_codigo }}</option>
+                                    <option value="{{ $ficha->id }}">{{ $ficha->fic_codigo }} -
+                                        {{ $ficha->programa->pro_nombre }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -65,6 +66,7 @@
                             </x-button>
                             <x-link href="{{ url()->previous() }}" class="mx-3">Atras</x-link>
                         </div>
+                    </form>
                 </div>
             </div>
         </div>
