@@ -18,9 +18,9 @@
         <x-sidebar />
 
         <div class="px-4 pt-11 sm:ml-64">
-            <div class="p-4 border-2 border-gray-200 border-dashed rounded-lg mt-14">
+            <div class="p-4 rounded-lg mt-14">
                 @if (isset($header))
-                    <header class="bg-white shadow">
+                    <header class="bg-orange-400 shadow rounded-lg">
                         <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
                             {{ $header }}
                         </div>

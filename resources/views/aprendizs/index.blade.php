@@ -1,17 +1,37 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Lista de aprendices') }}
+            {{ __('CRUD para los aprendices') }}
         </h2>
     </x-slot>
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
+            <div class="bg-orange-300 overflow-hidden shadow-xl sm:rounded-lg">
                 <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-                    <x-link href="{{ route('aprendizs.create') }}" class="m-4">Añadir aprendiz</x-link>
-                    <table class="w-full text-sm text-left text-gray-500 ">
-                        <thead class="text-xs text-gray-700 uppercase bg-gray-50 ">
+                    <div class="flex items-center justify-between m-4">
+                        <x-link2 href="{{ route('aprendizs.create') }}" class="m-4">Agregar aprendiz</x-link2>
+                        <form action="{{ route('aprendizs.index') }}" method="get" class="flex-grow ml-4">
+                            <label for="default-search"
+                                class="mb-2 text-sm font-medium text-gray-900 sr-only">Buscar</label>
+                            <div class="relative">
+                                <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                                    <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
+                                        xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                            stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
+                                    </svg>
+                                </div>
+                                <input name="q" type="search" id="default-search"
+                                    class="block w-full p-4 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-orange-500 focus:border-orange-500 "
+                                    placeholder="Busque por ficha o documento">
+                                <button type="submit"
+                                    class="text-white absolute right-2.5 bottom-2.5 bg-orange-600 hover:bg-orange-800 focus:ring-4 focus:outline-none focus:ring-orange-300 font-medium rounded-lg text-sm px-4 py-2">Buscar</button>
+                            </div>
+                        </form>
+                    </div>
+                    <table class="w-full text-sm text-left text-gray-500">
+                        <thead class="text-xs text-gray-700 uppercase bg-orange-200">
                             <tr>
                                 <th scope="col" class="px-6 py-3">
                                     Identificación
@@ -29,44 +49,32 @@
                                 </th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody class="bg-orange-100">
                             @forelse ($aprendizs as $aprendiz)
-                                <tr class="bg-white border-b ">
-                                    <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap ">
+                                <tr class="border-b">
+                                    <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
                                         {{ $aprendiz->apr_identificacion }}
                                     </td>
-                                    <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap ">
+                                    <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
                                         {{ $aprendiz->apr_nombres }}
                                     </td>
-                                    <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap ">
+                                    <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
                                         {{ $aprendiz->apr_apellidos }}
                                     </td>
-                                    <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap ">
+                                    <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
                                         {{ $aprendiz->ficha->fic_codigo }}
                                     </td>
-                                    <td class="px-6 py-4">
-                                        <x-link title="Editar" href="{{ route('aprendizs.edit', $aprendiz) }}"><svg
-                                                class="w-[16px] h-[16px] text-gray-800 dark:text-white"
-                                                aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                                                fill="currentColor" viewBox="0 0 20 18">
-                                                <path
-                                                    d="M12.687 14.408a3.01 3.01 0 0 1-1.533.821l-3.566.713a3 3 0 0 1-3.53-3.53l.713-3.566a3.01 3.01 0 0 1 .821-1.533L10.905 2H2.167A2.169 2.169 0 0 0 0 4.167v11.666A2.169 2.169 0 0 0 2.167 18h11.666A2.169 2.169 0 0 0 16 15.833V11.1l-3.313 3.308Zm5.53-9.065.546-.546a2.518 2.518 0 0 0 0-3.56 2.576 2.576 0 0 0-3.559 0l-.547.547 3.56 3.56Z" />
-                                                <path
-                                                    d="M13.243 3.2 7.359 9.081a.5.5 0 0 0-.136.256L6.51 12.9a.5.5 0 0 0 .59.59l3.566-.713a.5.5 0 0 0 .255-.136L16.8 6.757 13.243 3.2Z" />
-                                            </svg></x-link>
+                                    <td class="px-6 py-4 bg-orange-100 text-center">
+                                        <x-link title="Editar"
+                                            class="bg-amber-600 hover:bg-amber-700 focus:bg-amber-700 active:bg-amber-900"
+                                            href="{{ route('aprendizs.edit', $aprendiz) }}"><x-svg-edit></x-svg-edit></x-link>
                                         <form method="POST" action="{{ route('aprendizs.destroy', $aprendiz) }}"
                                             class="inline-block">
                                             @csrf
                                             @method('DELETE')
                                             <x-danger-button type="submit" title="Eliminar"
                                                 onclick="return confirm('¿Está seguro de eliminar este elemento?')">
-                                                <svg class="w-[16px] h-[16px] text-gray-800 dark:text-white"
-                                                    aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
-                                                    viewBox="0 0 18 20">
-                                                    <path stroke="currentColor" stroke-linecap="round"
-                                                        stroke-linejoin="round" stroke-width="2"
-                                                        d="M1 5h16M7 8v8m4-8v8M7 1h4a1 1 0 0 1 1 1v3H6V2a1 1 0 0 1 1-1ZM3 5h12v13a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V5Z" />
-                                                </svg></x-danger-button>
+                                                <x-svg-delete></x-svg-delete></x-danger-button>
                                         </form>
                                     </td>
                                 </tr>
@@ -82,6 +90,7 @@
                 </div>
             </div>
         </div>
+        <br>
         {!! $aprendizs->links() !!}
     </div>
 </x-app-layout>

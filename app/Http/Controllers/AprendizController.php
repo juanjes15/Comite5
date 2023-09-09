@@ -4,15 +4,24 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreAprendizRequest;
 use App\Http\Requests\UpdateAprendizRequest;
+use Illuminate\Http\Request;
+use Illuminate\Database\Eloquent\Builder;
 use App\Models\Aprendiz;
 use App\Models\Ficha;
 
 class AprendizController extends Controller
 {
     //Muestra un listado del recurso
-    public function index()
+    public function index(Request $request)
     {
-        $aprendizs = Aprendiz::latest()->paginate(5);
+        $aprendizs = Aprendiz::query()
+            ->when($request->q, function (Builder $query, $search) {
+                $query->whereHas('ficha', function (Builder $subquery) use ($search) {
+                    $subquery->where('fic_codigo', 'like', "%{$search}%");
+                })->orWhere('apr_identificacion', 'like', "%{$search}%");
+            })
+            ->paginate(5);
+
         return view('aprendizs.index', compact('aprendizs'))->with('i', (request()->input('page', 1) - 1) * 5);
     }
 
