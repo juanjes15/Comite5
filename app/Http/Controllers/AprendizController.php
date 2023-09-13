@@ -28,9 +28,10 @@ class AprendizController extends Controller
     //Muestra el formulario de creación de un nuevo recurso
     public function create()
     {
-        $fichas = Ficha::with('programa') // Cargar la relación programa para ordenar por pro_nombre
-            ->orderBy('pro_nombre')
-            ->orderBy('fic_codigo')
+        $fichas = Ficha::with('programa')
+            ->join('programas', 'fichas.programa_id', '=', 'programas.id')
+            ->orderBy('programas.pro_nombre')
+            ->orderBy('fichas.fic_codigo')
             ->get();
         return view('aprendizs.create', compact('fichas'));
     }
@@ -51,7 +52,11 @@ class AprendizController extends Controller
     //Muestra el formulario para editar el recurso especificado
     public function edit(Aprendiz $aprendiz)
     {
-        $fichas = Ficha::all();
+        $fichas = Ficha::with('programa')
+            ->join('programas', 'fichas.programa_id', '=', 'programas.id')
+            ->orderBy('programas.pro_nombre')
+            ->orderBy('fichas.fic_codigo')
+            ->get();
         return view('aprendizs.edit', compact('aprendiz', 'fichas'));
     }
 

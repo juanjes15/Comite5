@@ -70,19 +70,20 @@
                 <ul id="dropdown-example" class="hidden py-2 space-y-2">
                     <li>
                         <a class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100"
-                            href="{{ route('programas.index') }}">Programas</a>
-                    </li>
-                    <li>
-                        <a class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100"
-                            href="{{ route('fichas.index') }}">Fichas</a>
-                    </li>
-                    <li>
-                        <a class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100"
                             href="{{ route('instructors.index') }}">Instructores</a>
                     </li>
                     <li>
                         <a class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100"
                             href="{{ route('aprendizs.index') }}">Aprendices</a>
+                    </li>
+                    <hr class="h-px m-8 bg-gray-950 border-2">
+                    <li>
+                        <a class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100"
+                            href="{{ route('programas.index') }}">Programas</a>
+                    </li>
+                    <li>
+                        <a class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100"
+                            href="{{ route('fichas.index') }}">Fichas</a>
                     </li>
                     <hr class="h-px m-8 bg-gray-950 border-2">
                     <li>
@@ -96,23 +97,6 @@
                     <li>
                         <a class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100"
                             href="{{ route('numerals.index') }}">Numerales</a>
-                    </li>
-                    <hr class="h-px m-8 bg-gray-950 border-2">
-                    <li>
-                        <a class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100"
-                            href="{{ route('solicitudComites.index') }}">Solicitudes a comité</a>
-                    </li>
-                    <li>
-                        <a class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100"
-                            href="{{ route('comites.index') }}">Comites</a>
-                    </li>
-                    <li>
-                        <a class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100"
-                            href="{{ route('pruebas.index') }}">Pruebas</a>
-                    </li>
-                    <li>
-                        <a class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100"
-                            href="#">Gestor</a>
                     </li>
                 </ul>
             </li>
