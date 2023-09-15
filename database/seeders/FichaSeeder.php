@@ -9,7 +9,7 @@ class FichaSeeder extends Seeder
 {
     public function run(): void
     {
-        for ($i = 0; $i < 10; $i++) {
+        for ($i = 0; $i < 30; $i++) {
             DB::table('fichas')->insert([
                 'fic_codigo' => fake()->unique()->randomNumber(7, true),
                 'fic_inicioLectiva' => fake()->date(),

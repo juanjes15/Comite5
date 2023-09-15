@@ -4,15 +4,23 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreInstructorRequest;
 use App\Http\Requests\UpdateInstructorRequest;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Http\Request;
 use App\Models\Instructor;
 
 class InstructorController extends Controller
 {
     //Muestra un listado del recurso
-    public function index()
+    public function index(Request $request)
     {
-        $instructors = Instructor::latest()->paginate(5);
-        return view('instructors.index', compact('instructors'))->with('i', (request()->input('page', 1) - 1) * 5);
+        $instructors = Instructor::query()
+            ->when($request->q, function (Builder $query, $search) {
+                $query->where('ins_identificacion', 'like', "%{$search}%")
+                    ->orWhere('ins_nombres', 'like', "%{$search}%")
+                    ->orWhere('ins_apellidos', 'like', "%{$search}%");
+            })
+            ->paginate(5);
+        return view('instructors.index', compact('instructors'));
     }
 
     //Muestra el formulario de creación de un nuevo recurso

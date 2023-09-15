@@ -7,7 +7,7 @@
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
+            <div class="bg-orange-200 overflow-hidden shadow-xl sm:rounded-lg">
                 <div class="relative overflow-x-auto shadow-md sm:rounded-lg px-4 py-4">
                     <x-validation-errors class="mb-4" />
                     <form method="POST" action="{{ route('instructors.update', $instructor) }}">
@@ -40,10 +40,13 @@
                                 :value="$instructor->ins_telefono" required autofocus autocomplete="ins_telefono" />
                         </div>
                         <div class="flex mt-4">
-                            <x-button>
+                            <x-button
+                                class="bg-orange-600 hover:bg-orange-700 focus:bg-orange-700 active:bg-orange-900">
                                 {{ __('Editar') }}
                             </x-button>
-                            <x-link href="{{ route('instructors.index') }}" class="mx-3">Atras</x-link>
+                            <x-link class="mx-3 bg-red-600 hover:bg-red-500 active:bg-red-700 focus:ring-red-500"
+                                href="{{ url()->previous() }}">Atras
+                            </x-link>
                         </div>
                 </div>
             </div>

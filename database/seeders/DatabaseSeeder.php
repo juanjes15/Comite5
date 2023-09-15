@@ -3,13 +3,28 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
+use App\Models\User;
 
 class DatabaseSeeder extends Seeder
 {
     public function run(): void
     {
-        \App\Models\User::factory(10)->create();
-        
+        //Creación de usuario administrador
+        User::create([
+            'name' => 'Administrador',
+            'email' => 'admin@admin.com',
+            'email_verified_at' => now(),
+            'password' => Hash::make('password'),
+            'remember_token' => Str::random(10),
+            'rol' => 'Administrador',
+        ]);
+
+        //Creación de usuarios de prueba
+        \App\Models\User::factory(30)->create();
+
+        //Ejecución de las demás semillas
         $this->call([
             ProgramaSeeder::class,
             InstructorSeeder::class,

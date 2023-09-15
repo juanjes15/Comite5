@@ -9,7 +9,7 @@ class InstructorSeeder extends Seeder
 {
     public function run(): void
     {
-        for ($i = 0; $i < 10; $i++) {
+        for ($i = 0; $i < 30; $i++) {
             DB::table('instructors')->insert([
                 'ins_identificacion' => fake()->unique()->randomNumber(9, true),
                 'ins_nombres' => fake()->firstName(),

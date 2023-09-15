@@ -22,7 +22,7 @@ class AprendizController extends Controller
             })
             ->paginate(5);
 
-        return view('aprendizs.index', compact('aprendizs'))->with('i', (request()->input('page', 1) - 1) * 5);
+        return view('aprendizs.index', compact('aprendizs'));
     }
 
     //Muestra el formulario de creación de un nuevo recurso

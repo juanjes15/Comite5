@@ -9,7 +9,7 @@ class AprendizSeeder extends Seeder
 {
     public function run(): void
     {
-        for ($i = 0; $i < 10; $i++) {
+        for ($i = 0; $i < 60; $i++) {
             DB::table('aprendizs')->insert([
                 'apr_identificacion' => fake()->unique()->randomNumber(9, true),
                 'apr_nombres' => fake()->firstName(),
