@@ -17,10 +17,10 @@
         @include('layouts.navigation')
         <x-sidebar />
 
-        <div class="px-4 pt-11 sm:ml-64">
+        <div class="pr-4 pt-11 sm:ml-64">
             <div class="p-4 rounded-lg mt-14">
                 @if (isset($header))
-                    <header class="bg-orange-400 shadow rounded-lg">
+                    <header class="bg-gray1 shadow-lg rounded-lg shadow-gray1/80 text-xl text-white font-semibold">
                         <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
                             {{ $header }}
                         </div>

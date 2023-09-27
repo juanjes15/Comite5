@@ -1,4 +1,4 @@
-<nav x-data="{ open: false }" class="bg-green-500 border-b border-gray-100 px-4 py-2.5 fixed left-0 right-0 top-0 z-50">
+<nav x-data="{ open: false }" class="bg-pattern px-4 py-2.5 fixed left-0 right-0 top-0 z-50 shadow-lg shadow-sena-700">
     <!-- Primary Navigation Menu -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-16">
@@ -8,7 +8,7 @@
                     <a href="{{ route('dashboard') }}">
                         <img src="{{ asset('img/icon.png') }}" class="mr-3 h-12" alt="CODES" />
                     </a>
-                    <p class="ml-6 text-2xl font-bold">CODES</p>
+                    <p class="ml-6 text-2xl font-bold">Comité de Evaluación y Seguimiento CODES</p>
                 </div>
             </div>
 
@@ -17,7 +17,7 @@
                 <x-dropdown align="right" width="48">
                     <x-slot name="trigger">
                         <button
-                            class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-100 bg-lime-600 hover:text-white hover:bg-lime-800 focus:outline-none transition ease-in-out duration-150">
+                            class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-100 bg-sena-700 hover:text-black hover:bg-sena-200 focus:outline-none transition ease-in-out duration-150">
                             <div>{{ Auth::user()->name }}</div>
 
                             <div class="ml-1">
