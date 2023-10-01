@@ -1,19 +1,19 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Lista de capitulos') }}
+        <h2 class="leading-tight">
+            {{ __('CRUD para los Capitulos del Reglamento') }}
         </h2>
     </x-slot>
 
-    <div class="py-12">
+    <div class="py-12 text-black font-medium">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
+            <div class="bg-gray2 overflow-hidden shadow-xl sm:rounded-lg">
                 <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-                    @can('administrar')
-                        <x-link href="{{ route('capitulos.create') }}" class="m-4">Añadir capitulo</x-link>
-                    @endcan
-                    <table class="w-full text-sm text-left text-gray-500 ">
-                        <thead class="text-xs text-gray-700 uppercase bg-gray-50 ">
+                    <div class="flex items-center justify-between m-4">
+                        <x-link href="{{ route('capitulos.create') }}" class="m-4">Agregar capítulo</x-link>
+                    </div>
+                    <table class="w-full text-sm text-left">
+                        <thead class="text-xs text-gray-700 uppercase bg-mint2">
                             <tr>
                                 <th scope="col" class="px-6 py-3">
                                     Número
@@ -21,37 +21,37 @@
                                 <th scope="col" class="px-6 py-3">
                                     Descripción
                                 </th>
-                                @can('administrar')
-                                    <th scope="col" class="px-6 py-3">
-                                    </th>
-                                @endcan
+                                <th scope="col" class="px-6 py-3">
+                                </th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody class="bg-mint1">
                             @forelse ($capitulos as $capitulo)
-                                <tr class="bg-white border-b ">
-                                    <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap ">
+                                <tr class="border-b">
+                                    <td class="px-6 py-4 whitespace-nowrap">
                                         {{ $capitulo->cap_numero }}
                                     </td>
-                                    <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap ">
+                                    <td class="px-6 py-4 whitespace-nowrap">
                                         {{ $capitulo->cap_descripcion }}
                                     </td>
-                                    @can('administrar')
-                                        <td class="px-6 py-4">
-                                            <x-link href="{{ route('capitulos.edit', $capitulo) }}">Editar</x-link>
-                                            <form method="POST" action="{{ route('capitulos.destroy', $capitulo) }}"
-                                                class="inline-block">
-                                                @csrf
-                                                @method('DELETE')
-                                                <x-danger-button type="submit" onclick="return confirm('¿Está seguro?')">
-                                                    Eliminar</x-danger-button>
-                                            </form>
-                                        </td>
-                                    @endcan
+                                    <td class="px-6 py-4 text-center">
+                                        <x-link2 title="Editar" href="{{ route('capitulos.edit', $capitulo) }}">
+                                            <x-svg-edit></x-svg-edit>
+                                        </x-link2>
+                                        <form method="POST" action="{{ route('capitulos.destroy', $capitulo) }}"
+                                            class="inline-block">
+                                            @csrf
+                                            @method('DELETE')
+                                            <x-danger-button type="submit" title="Eliminar"
+                                                onclick="return confirm('¿Está seguro de eliminar el capítulo {{ $capitulo->cap_numero }}?')">
+                                                <x-svg-delete></x-svg-delete>
+                                            </x-danger-button>
+                                        </form>
+                                    </td>
                                 </tr>
                             @empty
                                 <tr class="bg-white border-b">
-                                    <td colspan="4" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
+                                    <td colspan="5" class="px-6 py-4 whitespace-nowrap">
                                         {{ __('No se encontraron capitulos') }}
                                     </td>
                                 </tr>
@@ -61,6 +61,7 @@
                 </div>
             </div>
         </div>
+        <br>
         {!! $capitulos->links() !!}
     </div>
 </x-app-layout>

@@ -18,7 +18,7 @@
                                     <x-svg-search></x-svg-search>
                                 </div>
                                 <input name="q" type="search" id="default-search"
-                                    placeholder="Busque por ficha o documento"
+                                    placeholder="Buscar por ficha o documento"
                                     class="block w-full p-4 pl-10 text-sm border rounded-lg focus:ring-cyan-800 focus:border-cyan-800 ">
                                 <x-button class="absolute right-2.5 bottom-2.5" type="submit">Buscar</x-button>
                             </div>
