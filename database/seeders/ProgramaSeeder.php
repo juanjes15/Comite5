@@ -59,5 +59,40 @@ class ProgramaSeeder extends Seeder
             'pro_nombre' => 'Producción de Componentes Mecánicos con Máquinas de Control Numérico Computarizado',
             'pro_nivelFormacion' => 'Tecnólogo',
         ]);
+        DB::table('programas')->insert([
+            'pro_codigo' => fake()->unique()->randomNumber(7, true),
+            'pro_nombre' => 'Gestión de la Producción Industrial',
+            'pro_nivelFormacion' => 'Tecnólogo',
+        ]);
+        DB::table('programas')->insert([
+            'pro_codigo' => fake()->unique()->randomNumber(7, true),
+            'pro_nombre' => 'Desarrollo de Sistemas Electrónicos Industriales',
+            'pro_nivelFormacion' => 'Tecnólogo',
+        ]);
+        DB::table('programas')->insert([
+            'pro_codigo' => fake()->unique()->randomNumber(7, true),
+            'pro_nombre' => 'Automatización de Sistemas Mecatrónicos',
+            'pro_nivelFormacion' => 'Tecnólogo',
+        ]);
+        DB::table('programas')->insert([
+            'pro_codigo' => fake()->unique()->randomNumber(7, true),
+            'pro_nombre' => 'Automatización Industrial',
+            'pro_nivelFormacion' => 'Tecnólogo',
+        ]);
+        DB::table('programas')->insert([
+            'pro_codigo' => fake()->unique()->randomNumber(7, true),
+            'pro_nombre' => 'Implementación de Infraestructura de Tecnología de la Información y las Comunicaciones',
+            'pro_nivelFormacion' => 'Tecnólogo',
+        ]);
+        DB::table('programas')->insert([
+            'pro_codigo' => fake()->unique()->randomNumber(7, true),
+            'pro_nombre' => 'Implementación y Mantenimiento de Sistemas de Instrumentación y Control de Procesos Industriales',
+            'pro_nivelFormacion' => 'Tecnólogo',
+        ]);
+        DB::table('programas')->insert([
+            'pro_codigo' => fake()->unique()->randomNumber(7, true),
+            'pro_nombre' => 'Gestión Logística',
+            'pro_nivelFormacion' => 'Tecnólogo',
+        ]);
     }
 }
