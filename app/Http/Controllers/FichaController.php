@@ -20,8 +20,8 @@ class FichaController extends Controller
     //Muestra el formulario de creación de un nuevo recurso
     public function create()
     {
-        $programas = Programa::all();
-        $instructors = Instructor::all();
+        $programas = Programa::orderBy('pro_nombre')->get();
+        $instructors = Instructor::orderBy('ins_nombres')->orderBy('ins_apellidos')->get();
         return view('fichas.create', compact('programas', 'instructors'));
     }
 
@@ -35,8 +35,8 @@ class FichaController extends Controller
     //Muestra el formulario para editar el recurso especificado
     public function edit(Ficha $ficha)
     {
-        $programas = Programa::all();
-        $instructors = Instructor::all();
+        $programas = Programa::orderBy('pro_nombre')->get();
+        $instructors = Instructor::orderBy('ins_nombres')->orderBy('ins_apellidos')->get();
         return view('fichas.edit', compact('ficha', 'programas', 'instructors'));
     }
 

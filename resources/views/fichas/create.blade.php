@@ -39,13 +39,21 @@
                         </div>
                         <div>
                             <x-label for="fic_modalidad" value="{{ __('Modalidad') }}" />
-                            <x-input id="fic_modalidad" type="text" name="fic_modalidad" :value="old('fic_modalidad')" required
-                                autofocus autocomplete="fic_modalidad" />
+                            <select name="fic_modalidad" class="bg-white rounded-md block w-full p-1.5">
+                                <option value="">--Seleccione una modalidad--</option>
+                                <option value="Presencial">Presencial</option>
+                                <option value="Virtual">Virtual</option>
+                                <option value="Mixta">Mixta</option>
+                            </select>
                         </div>
                         <div>
                             <x-label for="fic_jornada" value="{{ __('Jornada') }}" />
-                            <x-input id="fic_jornada" type="text" name="fic_jornada" :value="old('fic_jornada')" required
-                                autofocus autocomplete="fic_jornada" />
+                            <select name="fic_jornada" class="bg-white rounded-md block w-full p-1.5">
+                                <option value="">--Seleccione una jornada--</option>
+                                <option value="Diurna">Diurna</option>
+                                <option value="Nocturna">Nocturna</option>
+                                <option value="Mixta">Mixta</option>
+                            </select>
                         </div>
                         <div>
                             <x-label for="programa_id" value="{{ __('Programa') }}" />

@@ -19,7 +19,7 @@ class NumeralController extends Controller
     //Muestra el formulario de creación de un nuevo recurso
     public function create()
     {
-        $articulos = Articulo::all();
+        $articulos = Articulo::orderBy('art_numero')->get();
         return view('numerals.create', compact('articulos'));
     }
 
@@ -33,7 +33,7 @@ class NumeralController extends Controller
     //Muestra el formulario para editar el recurso especificado
     public function edit(Numeral $numeral)
     {
-        $articulos = Articulo::all();
+        $articulos = Articulo::orderBy('art_numero')->get();
         return view('numerals.edit', compact('numeral', 'articulos'));
     }
 

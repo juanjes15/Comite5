@@ -19,13 +19,20 @@
                         </div>
                         <div>
                             <x-label for="num_categoria" value="{{ __('Categoria') }}" />
-                            <x-input id="num_categoria" type="text" name="num_categoria" :value="old('num_categoria')" required
-                                autofocus autocomplete="num_categoria" />
+                            <select name="num_categoria" class="bg-white rounded-md block w-full p-1.5">
+                                <option value="">--Seleccione una categoría--</option>
+                                <option value="Académica">Académica</option>
+                                <option value="Disciplinaria">Disciplinaria</option>
+                            </select>
                         </div>
                         <div>
                             <x-label for="num_tipoFalta" value="{{ __('Tipo de Falta') }}" />
-                            <x-input id="num_tipoFalta" type="text" name="num_tipoFalta" :value="old('num_tipoFalta')" required
-                                autofocus autocomplete="num_tipoFalta" />
+                            <select name="num_tipoFalta" class="bg-white rounded-md block w-full p-1.5">
+                                <option value="">--Seleccione el Tipo de Falta--</option>
+                                <option value="Leve">Leve</option>
+                                <option value="Grave">Grave</option>
+                                <option value="Gravísima">Gravísima</option>
+                            </select>
                         </div>
                         <div>
                             <x-label for="articulo_id" value="{{ __('Articulo') }}" />

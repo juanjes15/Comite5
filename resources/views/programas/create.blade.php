@@ -24,8 +24,11 @@
                         </div>
                         <div>
                             <x-label for="pro_nivelFormacion" value="{{ __('Nivel de Formación') }}" />
-                            <x-input id="pro_nivelFormacion" type="text" name="pro_nivelFormacion" :value="old('pro_nivelFormacion')"
-                                required autofocus autocomplete="pro_nivelFormacion" />
+                            <select name="pro_nivelFormacion" class="bg-white rounded-md block w-full p-1.5">
+                                <option value="">--Seleccione un nivel de formación--</option>
+                                <option value="Técnico">Técnico</option>
+                                <option value="Tecnólogo">Tecnólogo</option>
+                            </select>
                         </div>
                         <div class="flex mt-4">
                             <x-button>

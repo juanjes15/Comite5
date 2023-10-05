@@ -8,7 +8,7 @@
                     <a href="{{ route('dashboard') }}">
                         <img src="{{ asset('img/icon.png') }}" class="mr-3 h-12" alt="CODES" />
                     </a>
-                    <p class="ml-6 text-2xl font-bold">Comité de Evaluación y Seguimiento CODES</p>
+                    <img src="{{ asset('img/logo.png') }}" class="ml-3 h-10" alt="CODES" />
                 </div>
             </div>
 
