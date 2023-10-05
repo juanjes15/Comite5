@@ -27,6 +27,7 @@ class UserController extends Controller
     }
 
     //Almacena un recurso recién creado
+    //No está siendo usado
     public function store(Request $request)
     {
         $request->validate([
@@ -69,16 +70,9 @@ class UserController extends Controller
     }
 
     //Elimina el recurso especificado del almacenamiento
-    public function destroy(Request $request)
+    public function destroy(User $user)
     {
-        $request->validateWithBag('userDeletion', [
-            'password' => ['required', 'current_password'],
-        ]);
-
-        $user = $request->user();
-
         $user->delete();
-
         return redirect()->route('users.index');
     }
 }
