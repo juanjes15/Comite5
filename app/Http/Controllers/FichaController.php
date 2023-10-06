@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreFichaRequest;
 use App\Http\Requests\UpdateFichaRequest;
+use Illuminate\Http\Request;
+use Illuminate\Database\Eloquent\Builder;
 use App\Models\Ficha;
 use App\Models\Programa;
 use App\Models\Instructor;
@@ -11,9 +13,15 @@ use App\Models\Instructor;
 class FichaController extends Controller
 {
     //Muestra un listado del recurso
-    public function index()
+    public function index(Request $request)
     {
-        $fichas = Ficha::latest()->paginate(5);
+        $fichas = Ficha::query()
+            ->when($request->q, function (Builder $query, $search) {
+                $query->whereHas('programa', function (Builder $subquery) use ($search) {
+                    $subquery->where('pro_nombre', 'like', "%{$search}%");
+                })->orWhere('fic_codigo', 'like', "%{$search}%");
+            })
+            ->paginate(5);
         return view('fichas.index', compact('fichas'))->with('i', (request()->input('page', 1) - 1) * 5);
     }
 

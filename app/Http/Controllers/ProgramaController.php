@@ -4,14 +4,22 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreProgramaRequest;
 use App\Http\Requests\UpdateProgramaRequest;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Http\Request;
 use App\Models\Programa;
 
 class ProgramaController extends Controller
 {
     //Muestra un listado del recurso
-    public function index()
+    public function index(Request $request)
     {
-        $programas = Programa::latest()->paginate(5);
+        $programas = Programa::query()
+            ->when($request->q, function (Builder $query, $search) {
+                $query->where('pro_nombre', 'like', "%{$search}%")
+                    ->orWhere('pro_codigo', 'like', "%{$search}%")
+                    ->orWhere('pro_nivelFormacion', 'like', "%{$search}%");
+            })
+            ->paginate(5);
         return view('programas.index', compact('programas'))->with('i', (request()->input('page', 1) - 1) * 5);
     }
 

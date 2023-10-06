@@ -17,7 +17,7 @@
                                 <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
                                     <x-svg-search></x-svg-search>
                                 </div>
-                                <input name="q" type="search" id="default-search" placeholder="Buscar por ..."
+                                <input name="q" type="search" id="default-search" placeholder="Buscar por código o programa"
                                     class="block w-full p-4 pl-10 text-sm border rounded-lg focus:ring-cyan-800 focus:border-cyan-800 ">
                                 <x-button class="absolute right-2.5 bottom-2.5" type="submit">Buscar</x-button>
                             </div>

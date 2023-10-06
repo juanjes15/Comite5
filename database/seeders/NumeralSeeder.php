@@ -240,13 +240,13 @@ class NumeralSeeder extends Seeder
         DB::table('numerals')->insert([
             'num_descripcion' => 'Utilizar el nombre del SENA, las instalaciones, el internet y nuevas tecnologías, para actividades particulares o con ánimo de lucro, exceptuando aquellas que sean parte de proyectos productivos aprobados por el Subdirector de Centro o la instancia competente.',
             'num_categoria' => 'Disciplinaria',
-            'num_tipoFalta' => 'Gravisimo',
+            'num_tipoFalta' => 'Gravísima',
             'articulo_id' => 9,
         ]);
         DB::table('numerals')->insert([
             'num_descripcion' => 'Hurtar, estafar o abusar de la confianza de cualquier integrante de la comunidad educativa, o amenazarlo, sobornarlo, coaccionarlo o agredirlo verbal o físicamente, o ser cómplice o copartícipe de delitos contra ellos o contra la Institución.',
             'num_categoria' => 'Disciplinaria',
-            'num_tipoFalta' => 'Gravisimo',
+            'num_tipoFalta' => 'Gravísima',
             'articulo_id' => 9,
         ]);
         DB::table('numerals')->insert([
@@ -276,7 +276,7 @@ class NumeralSeeder extends Seeder
         DB::table('numerals')->insert([
             'num_descripcion' => 'Generar, transmitir, publicar o enviar información confidencial, de circulación restringida, inadecuada, malintencionada, violenta, pornográfica, insultos o agresiones por los medios de comunicación físicos o electrónicos, disponibles para su proceso formativo.',
             'num_categoria' => 'Disciplinaria',
-            'num_tipoFalta' => 'Gravisimo',
+            'num_tipoFalta' => 'Gravísima',
             'articulo_id' => 9,
         ]);
         DB::table('numerals')->insert([
@@ -288,13 +288,13 @@ class NumeralSeeder extends Seeder
         DB::table('numerals')->insert([
             'num_descripcion' => 'Realizar comportamientos contrarios a la normativa SENA en lugares donde se adelanten eventos de formación nacional o internacional, que atenten contra la imagen del SENA o del país.',
             'num_categoria' => 'Disciplinario',
-            'num_tipoFalta' => 'Gravisimo',
+            'num_tipoFalta' => 'Gravísima',
             'articulo_id' => 9,
         ]);
         DB::table('numerals')->insert([
             'num_descripcion' => 'Incumplir las normas de convivencia establecidas en cada Centro de Formación o Centro de convivencia.',
             'num_categoria' => 'Disciplinario',
-            'num_tipoFalta' => 'Gravisimo',
+            'num_tipoFalta' => 'Gravísima',
             'articulo_id' => 9,
         ]);
         DB::table('numerals')->insert([
@@ -306,13 +306,13 @@ class NumeralSeeder extends Seeder
         DB::table('numerals')->insert([
             'num_descripcion' => 'Elaborar escritos o mensajes satíricos, dibujar y/o escribir sobre cualquier superficie, objeto o mueble de las instalaciones donde se desarrollan programas de formación; o pegar avisos, carteles, pancartas o análogos en sitios no autorizados.',
             'num_categoria' => 'Disciplinaria',
-            'num_tipoFalta' => 'Gravisimo',
+            'num_tipoFalta' => 'Gravísima',
             'articulo_id' => 9,
         ]);
         DB::table('numerals')->insert([
             'num_descripcion' => 'Propiciar conductas, propuestas o actos inmorales hacia cualquier miembro de la comunidad educativa, que atenten contra la integridad física, moral y/o psicológica.',
             'num_categoria' => 'Disciplinaria',
-            'num_tipoFalta' => 'Gravisimo',
+            'num_tipoFalta' => 'Gravísima',
             'articulo_id' => 9,
         ]);
     }

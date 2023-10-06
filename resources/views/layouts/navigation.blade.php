@@ -6,9 +6,9 @@
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
                     <a href="{{ route('dashboard') }}">
-                        <img src="{{ asset('img/icon.png') }}" class="mr-3 h-12" alt="CODES" />
+                        <img src="{{ asset('img/nessie.webp') }}" class="mr-3 h-16" alt="CODES" />
                     </a>
-                    <img src="{{ asset('img/logo.png') }}" class="ml-3 h-10" alt="CODES" />
+                    <img src="{{ asset('img/logo.gif') }}" class="ml-3 h-16" alt="CODES" />
                 </div>
             </div>
 
