@@ -43,7 +43,6 @@
                                 <option value="">--Seleccione una modalidad--</option>
                                 <option value="Presencial">Presencial</option>
                                 <option value="Virtual">Virtual</option>
-                                <option value="Mixta">Mixta</option>
                             </select>
                         </div>
                         <div>
@@ -51,8 +50,8 @@
                             <select name="fic_jornada" class="bg-white rounded-md block w-full p-1.5">
                                 <option value="">--Seleccione una jornada--</option>
                                 <option value="Diurna">Diurna</option>
-                                <option value="Nocturna">Nocturna</option>
                                 <option value="Mixta">Mixta</option>
+                                <option value="Nocturna">Nocturna</option>
                             </select>
                         </div>
                         <div>

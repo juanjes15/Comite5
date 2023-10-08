@@ -9,14 +9,21 @@ use Illuminate\Validation\Rules;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\ProfileUpdateRequest;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\View\View;
 
 class UserController extends Controller
 {
     //Muestra un listado del recurso
-    public function index()
+    public function index(Request $request)
     {
-        $users = User::latest()->paginate(5);
+        $users = User::query()
+            ->when($request->q, function (Builder $query, $search) {
+                $query->where('name', 'like', "%{$search}%")
+                    ->orWhere('email', 'like', "%{$search}%")
+                    ->orWhere('rol', 'like', "%{$search}%");
+            })
+            ->paginate(5);
         return view('users.index', compact('users'))->with('i', (request()->input('page', 1) - 1) * 5);
     }
 

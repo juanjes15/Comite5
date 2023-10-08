@@ -4,15 +4,24 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreArticuloRequest;
 use App\Http\Requests\UpdateArticuloRequest;
+use Illuminate\Http\Request;
+use Illuminate\Database\Eloquent\Builder;
 use App\Models\Articulo;
 use App\Models\Capitulo;
 
 class ArticuloController extends Controller
 {
     //Muestra un listado del recurso
-    public function index()
+    public function index(Request $request)
     {
-        $articulos = Articulo::latest()->paginate(5);
+        $articulos = Articulo::query()
+            ->when($request->q, function (Builder $query, $search) {
+                $query->whereHas('capitulo', function (Builder $subquery) use ($search) {
+                    $subquery->where('cap_numero', 'like', "%{$search}%");
+                })->orWhere('art_numero', 'like', "%{$search}%")
+                    ->orWhere('art_descripcion', 'like', "%{$search}%");
+            })
+            ->paginate(5);
         return view('articulos.index', compact('articulos'))->with('i', (request()->input('page', 1) - 1) * 5);
     }
 

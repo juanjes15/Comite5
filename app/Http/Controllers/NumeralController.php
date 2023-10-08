@@ -4,15 +4,25 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreNumeralRequest;
 use App\Http\Requests\UpdateNumeralRequest;
+use Illuminate\Http\Request;
+use Illuminate\Database\Eloquent\Builder;
 use App\Models\Articulo;
 use App\Models\Numeral;
 
 class NumeralController extends Controller
 {
     //Muestra un listado del recurso
-    public function index()
+    public function index(Request $request)
     {
-        $numerals = Numeral::latest()->paginate(5);
+        $numerals = Numeral::query()
+            ->when($request->q, function (Builder $query, $search) {
+                $query->whereHas('articulo', function (Builder $subquery) use ($search) {
+                    $subquery->where('art_numero', 'like', "%{$search}%");
+                })->orWhere('num_descripcion', 'like', "%{$search}%")
+                    ->orWhere('num_categoria', 'like', "%{$search}%")
+                    ->orWhere('num_tipoFalta', 'like', "%{$search}%");
+            })
+            ->paginate(5);
         return view('numerals.index', compact('numerals'))->with('i', (request()->input('page', 1) - 1) * 5);
     }
 
