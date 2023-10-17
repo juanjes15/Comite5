@@ -22,7 +22,7 @@ class DatabaseSeeder extends Seeder
         ]);
 
         //Creación de usuarios de prueba
-        \App\Models\User::factory(30)->create();
+        User::factory(30)->create();
 
         //Ejecución de las demás semillas
         $this->call([
