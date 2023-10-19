@@ -24,6 +24,7 @@ Route::middleware('auth')->group(function () {
 
     //Rutas para el administrador
     Route::middleware('checkUserRole:Administrador')->group(function () {
+        //Rutas para los CRUD'S
         Route::resources([
             'programas' => ProgramaController::class,
             'fichas' => FichaController::class,
@@ -32,10 +33,18 @@ Route::middleware('auth')->group(function () {
             'capitulos' => CapituloController::class,
             'articulos' => ArticuloController::class,
             'numerals' => NumeralController::class,
-            'users' => UserController::class,
         ]);
+        //Rutas para el CRUD de usuarios y asignación de roles
+        Route::get('/users', [UserController::class, 'index'])->name('users.index');
         Route::get('register', [RegisteredUserController::class, 'create'])->name('register');
         Route::post('register', [RegisteredUserController::class, 'store']);
+        Route::get('/users/{user}/edit', [UserController::class, 'edit'])->name('users.edit');
+        Route::put('/users/{user}', [UserController::class, 'update'])->name('users.update');
+        Route::delete('/users/{user}', [UserController::class, 'destroy'])->name('users.destroy');
+        Route::get('/users/aprendiz', [UserController::class, 'addRolAprendiz'])->name('users.addRolAprendiz');
+        Route::put('/users/aprendiz/{user}', [UserController::class, 'storeRolAprendiz'])->name('users.storeRolAprendiz');
+        Route::get('/users/instructor', [UserController::class, 'addRolInstructor'])->name('users.addRolInstructor');
+        Route::put('/users/instructor/{user}', [UserController::class, 'storeRolInstructor'])->name('users.storeRolInstructor');
     });
 });
 

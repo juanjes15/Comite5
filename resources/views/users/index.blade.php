@@ -31,7 +31,7 @@
                                     Nombre
                                 </th>
                                 <th scope="col" class="px-6 py-3">
-                                    Email
+                                    Correo
                                 </th>
                                 <th scope="col" class="px-6 py-3">
                                     Rol
