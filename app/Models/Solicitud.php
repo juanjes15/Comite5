@@ -42,6 +42,12 @@ class Solicitud extends Model
         return $this->belongsToMany(Aprendiz::class)->as('AprendizSolicitud');
     }
 
+    //Los instructores que pertenecen a la Solicitud
+    public function instructors(): BelongsToMany
+    {
+        return $this->belongsToMany(Instructor::class)->as('InstructorSolicitud');
+    }
+
     //Los numerales que pertenecen a la Solicitud
     public function numerals(): BelongsToMany
     {
