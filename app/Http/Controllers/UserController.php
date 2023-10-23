@@ -6,13 +6,7 @@ use App\Models\Aprendiz;
 use App\Models\Instructor;
 use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Http\RedirectResponse;
-use Illuminate\Validation\Rules;
-use Illuminate\Auth\Events\Registered;
-use Illuminate\Support\Facades\Hash;
-use App\Http\Requests\ProfileUpdateRequest;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\View\View;
 use Illuminate\Validation\Rule;
 
 class UserController extends Controller
@@ -29,57 +23,6 @@ class UserController extends Controller
             ->paginate(5);
         return view('users.index', compact('users'))->with('i', (request()->input('page', 1) - 1) * 5);
     }
-
-    /*
-    //Muestra el formulario de creación de un nuevo recurso
-    public function create(): View
-    {
-        return view('auth.register');
-    }
-
-    //Almacena un recurso recién creado
-    //No está siendo usado
-    public function store(Request $request)
-    {
-        $request->validate([
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:' . User::class],
-            'password' => ['required', 'confirmed', Rules\Password::defaults()],
-        ]);
-
-        $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-        ]);
-
-        event(new Registered($user));
-
-        return redirect()->route('users.index');
-    }
-
-    //Muestra el formulario para editar el recurso especificado
-    public function edit(Request $request): View
-    {
-        return view('profile.edit', [
-            'user' => $request->user(),
-        ]);
-    }
-
-    //Actualiza el recurso especificado en el almacenamiento
-    public function update(ProfileUpdateRequest $request): RedirectResponse
-    {
-        $request->user()->fill($request->validated());
-
-        if ($request->user()->isDirty('email')) {
-            $request->user()->email_verified_at = null;
-        }
-
-        $request->user()->save();
-
-        return redirect()->route('users.index');
-    }
-    */
 
     //Muestra el formulario para editar el recurso especificado
     public function edit(User $user)
@@ -111,33 +54,44 @@ class UserController extends Controller
 
         //Redirecciona a diferentes vistas dependiendo del rol seleccionado
         if ($user->rol === 'Aprendiz') {
-            $aprendizs = Aprendiz::all();
+            $aprendizs = Aprendiz::orderBy('apr_nombres')->orderBy('apr_apellidos')->get();
             return view('users.addRolAprendiz', compact('user', 'aprendizs'));
         } else if ($user->rol === 'Instructor') {
-            $instructors = Instructor::all();
+            $instructors = Instructor::orderBy('ins_nombres')->orderBy('ins_apellidos')->get();
             return view('users.addRolInstructor', compact('user', 'instructors'));
         } else {
+            //Si el usuario anteriormente era un instructor, eliminamos dicha asociación
+            if ($user->instructor_id !== null) {
+                $user->instructor()->dissociate();
+            }
+            //Si el usuario anteriormente era un estudiante, eliminamos dicha asociación
+            if ($user->aprendiz_id !== null) {
+                $user->aprendiz()->dissociate();
+            }
             return redirect()->route('users.index');
         }
     }
 
-    public function addRolAprendiz(User $user)
+    public function addRolAprendiz()
     {
-        return view('users.addRolAprendiz', compact('user'));
+        return view('users.addRolAprendiz');
     }
 
-    public function addRolInstructor(User $user)
+    public function addRolInstructor()
     {
-        return view('users.addRolInstructor', compact('user'));
+        return view('users.addRolInstructor');
     }
 
     public function storeRolAprendiz(Request $request, User $user)
     {
         $validatedData = $request->validate([
-            'aprendiz_id' => 'required',
+            'aprendiz_id' => ['required', 'exists:aprendizs,id'],
         ]);
 
+        //Hace la asociación entre la llave foranea y la llave primaria de las tablas
         $user->aprendiz()->associate($validatedData['aprendiz_id']);
+
+        //Si el usuario anteriormente era un instructor, eliminamos dicha asociación
         if ($user->instructor_id !== null) {
             $user->instructor()->dissociate();
         }
@@ -149,10 +103,13 @@ class UserController extends Controller
     public function storeRolInstructor(Request $request, User $user)
     {
         $validatedData = $request->validate([
-            'instructor_id' => 'required',
+            'instructor_id' => ['required', 'exists:instructors,id'],
         ]);
 
+        //Hace la asociación entre la llave foranea y la llave primaria de las tablas
         $user->instructor()->associate($validatedData['instructor_id']);
+
+        //Si el usuario anteriormente era un estudiante, eliminamos dicha asociación
         if ($user->aprendiz_id !== null) {
             $user->aprendiz()->dissociate();
         }
