@@ -15,7 +15,6 @@ class Solicitud extends Model
         'sol_motivo',
         'sol_descripcion',
         'sol_estado',
-        'instructor_id',
     ];
 
     //Obtener el instructor dueño de la Solicitud

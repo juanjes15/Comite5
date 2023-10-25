@@ -52,22 +52,25 @@ Route::middleware('auth')->group(function () {
     Route::middleware('checkUserRole:Administrador,Instructor')->group(function () {
         //RUTAS PARA SOLICITAR UN COMITÉ
         //Inicio (solo vista)
-        Route::get('/InsViews/solicitudInicio', [InsViewController::class, 'sol1Ini'])->name('insViews.sol1Ini');
+        Route::get('/instructor/solicitudInicio', [InsViewController::class, 'sol1Ini'])->name('insViews.sol1Ini');
+        //Muestra la vista (GET) y almacena (POST) la ficha a la cuál pertence el aprendiz que va a comité
+        Route::get('/instructor/solicitudFicha', [InsViewController::class, 'sol2Fic'])->name('insViews.sol2Fic');
+        Route::post('/instructor/solicitudFicha', [InsViewController::class, 'store2Fic']);
         //Muestra la vista (GET) y almacena (POST) la información básica para solicitar un comité
-        Route::get('/InsViews/solicitudInfoBasica', [InsViewController::class, 'sol2Inf'])->name('insViews.sol2Inf');
-        Route::post('/InsViews/solicitudInfoBasica', [InsViewController::class, 'store2Inf']);
+        Route::get('/instructor/solicitudInfoBasica', [InsViewController::class, 'sol3Inf'])->name('insViews.sol3Inf');
+        Route::post('/instructor/solicitudInfoBasica', [InsViewController::class, 'store3Inf']);
         //Muestra la vista (GET) y almacena (POST) los instructores relacionados en una solicitud de comité
-        Route::get('/InsViews/solicitudInstructores', [InsViewController::class, 'sol3Ins'])->name('insViews.sol3Ins');
-        Route::post('/InsViews/solicitudInstructores', [InsViewController::class, 'store3Ins']);
+        Route::get('/instructor/solicitudInstructores', [InsViewController::class, 'sol4Ins'])->name('insViews.sol4Ins');
+        Route::post('/instructor/solicitudInstructores', [InsViewController::class, 'store4Ins']);
         //Muestra la vista (GET) y almacena (POST) los aprendices relacionados en una solicitud de comité
-        Route::get('/InsViews/solicitudAprendices', [InsViewController::class, 'sol4Apr'])->name('insViews.sol4Apr');
-        Route::post('/InsViews/solicitudAprendices', [InsViewController::class, 'store4Apr']);
+        Route::get('/instructor/solicitudAprendices', [InsViewController::class, 'sol5Apr'])->name('insViews.sol5Apr');
+        Route::post('/instructor/solicitudAprendices', [InsViewController::class, 'store5Apr']);
         //Muestra la vista (GET) y almacena (POST) las faltas cometidas en una solicitud de comité
-        Route::get('/InsViews/solicitudFaltas', [InsViewController::class, 'sol5Fal'])->name('insViews.sol5Fal');
-        Route::post('/InsViews/solicitudFaltas', [InsViewController::class, 'store5Fal']);
+        Route::get('/instructor/solicitudFaltas', [InsViewController::class, 'sol6Fal'])->name('insViews.sol6Fal');
+        Route::post('/instructor/solicitudFaltas', [InsViewController::class, 'store6Fal']);
         //Muestra la vista (GET) y almacena (POST) las pruebas en una solicitud de comité
-        Route::get('/InsViews/solicitudPruebas', [InsViewController::class, 'sol6Pru'])->name('insViews.sol6Pru');
-        Route::post('/InsViews/solicitudPruebas', [InsViewController::class, 'store6Pru']);
+        Route::get('/instructor/solicitudPruebas', [InsViewController::class, 'sol7Pru'])->name('insViews.sol7Pru');
+        Route::post('/instructor/solicitudPruebas', [InsViewController::class, 'store7Pru']);
     });
 });
 

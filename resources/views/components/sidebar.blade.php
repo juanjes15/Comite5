@@ -50,7 +50,7 @@
                     <ul id="dropdown-instructor" class="hidden py-2 space-y-2">
                         <li>
                             <a class="flex items-center w-full p-2 transition duration-75 rounded-lg pl-11 group bg-sena-600 hover:text-black hover:bg-sena-200"
-                                href="{{ route('instructors.index') }}">Instructores</a>
+                                href="{{ route('insViews.sol1Ini') }}">Solicitar comité</a>
                         </li>
                     </ul>
                 </li>

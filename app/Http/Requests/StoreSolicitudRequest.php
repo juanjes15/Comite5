@@ -20,7 +20,6 @@ class StoreSolicitudRequest extends FormRequest
             'sol_motivo' => ['required', 'string', 'max:255'],
             'sol_descripcion' => ['required', 'string', 'max:255'],
             'sol_estado' => ['required', 'string', 'max:255'],
-            'instructor_id' => ['required', 'exists:instructors,id']
         ];
     }
 }
