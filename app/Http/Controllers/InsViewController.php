@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Instructor;
 use App\Models\Solicitud;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreSolicitudRequest;
+use Illuminate\Support\Facades\DB;
 
 class InsViewController extends Controller
 {
@@ -36,7 +38,7 @@ class InsViewController extends Controller
     }
     public function store3Inf(StoreSolicitudRequest $request)
     {
-        $solicitud = Solicitud::create($request->all());
+        $solicitud = Solicitud::create($request->validated());
 
         // Almacena el ID de solicitud en la sesión
         session(['solicitud_id' => $solicitud->id]);
@@ -45,6 +47,31 @@ class InsViewController extends Controller
     }
     public function sol4Ins()
     {
-        return view('insViews.sol4Ins');
+        // Accede al valor de 'solicitud_id' almacenado en la sesión
+        $solicitud_id = session('solicitud_id');
+
+        $instructors = Instructor::orderBy('ins_nombres')->orderBy('ins_apellidos')->get();
+
+        return view('insViews.sol4Ins', compact('solicitud_id', 'instructors'));
+    }
+    public function store4Ins(Request $request)
+    {
+        // Validación de los datos del formulario
+        $request->validate([
+            'instructor_id.*' => ['required', 'exists:instructors,id'],
+        ]);
+        // Accede al valor de 'solicitud_id' almacenado en la sesión
+        $solicitud_id = session('solicitud_id');
+
+        $instructorIds = $request->input('instructor_id');
+        foreach ($instructorIds as $instructorId) {
+            // Utiliza la función insert para crear una entrada en la tabla instructor_solicitud
+            DB::table('instructor_solicitud')->insert([
+                'instructor_id' => $instructorId,
+                'solicitud_id' => $solicitud_id,
+            ]);
+        }
+
+        return redirect()->route('insViews.sol5Apr');
     }
 }
