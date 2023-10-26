@@ -10,28 +10,17 @@
             <div class="bg-mint1 overflow-hidden shadow-xl sm:rounded-lg">
                 <div class="relative overflow-x-auto shadow-md sm:rounded-lg px-4 py-4">
                     <x-validation-errors class="mb-4" />
-                    <form method="POST" action="{{ route('insViews.sol3Inf') }}">
+                    <form method="POST" action="{{ route('insViews.sol2Fic') }}">
                         @csrf
                         <div>
-                            <x-label for="sol_lugar" value="{{ __('Lugar') }}" />
-                            <x-input id="sol_lugar" class="block mt-1 w-full" type="text" name="sol_lugar"
-                                :value="old('sol_lugar')" required autofocus autocomplete="sol_lugar" />
-                        </div>
-                        <div>
-                            <x-label for="sol_motivo" value="{{ __('Motivo') }}" />
-                            <x-input id="sol_motivo" class="block mt-1 w-full" type="text" name="sol_motivo"
-                                :value="old('sol_motivo')" required autofocus autocomplete="sol_motivo" />
-                        </div>
-                        <div>
-                            <x-label for="sol_descripcion" value="{{ __('Descripción') }}" />
-                            <x-input id="sol_descripcion" class="block mt-1 w-full" type="text"
-                                name="sol_descripcion" :value="old('sol_descripcion')" required autofocus
-                                autocomplete="sol_descripcion" />
-                        </div>
-                        <div>
-                            <x-label for="sol_estado" value="{{ __('Estado') }}" />
-                            <x-input id="sol_estado" class="block mt-1 w-full" type="text" name="sol_estado"
-                                value="Solicitado" required autofocus autocomplete="sol_estado" />
+                            <x-label for="ficha_id" value="{{ __('Fichas') }}" />
+                            <select name="ficha_id" id="ficha_id" class="bg-white rounded-md block w-full p-1.5">
+                                <option value="">--Seleccione una Ficha--</option>
+                                @foreach ($fichas as $ficha)
+                                    <option value="{{ $ficha->id }}">
+                                        {{ $ficha->fic_codigo }} - {{ $ficha->programa->pro_nombre }}</option>
+                                @endforeach
+                            </select>
                         </div>
                         <div class="flex mt-4">
                             <x-button>
