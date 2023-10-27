@@ -40,13 +40,23 @@
                         </div>
                         <div>
                             <x-label for="fic_modalidad" value="{{ __('Modalidad') }}" />
-                            <x-input id="fic_modalidad" type="text" name="fic_modalidad" :value="$ficha->fic_modalidad" required
-                                autofocus autocomplete="fic_modalidad" />
+                            <select name="fic_modalidad" class="bg-white rounded-md block w-full p-1.5">
+                                <option value="Presencial" @if ($ficha->fic_modalidad === 'Presencial') selected @endif>Presencial
+                                </option>
+                                <option value="Virtual" @if ($ficha->fic_modalidad === 'Virtual') selected @endif>Virtual
+                                </option>
+                            </select>
                         </div>
                         <div>
                             <x-label for="fic_jornada" value="{{ __('Jornada') }}" />
-                            <x-input id="fic_jornada" type="text" name="fic_jornada" :value="$ficha->fic_jornada" required
-                                autofocus autocomplete="fic_jornada" />
+                            <select name="fic_jornada" class="bg-white rounded-md block w-full p-1.5">
+                                <option value="Diurna" @if ($ficha->fic_jornada === 'Diurna') selected @endif>Diurna
+                                </option>
+                                <option value="Nocturna" @if ($ficha->fic_jornada === 'Nocturna') selected @endif>Nocturna
+                                </option>
+                                <option value="Mixta" @if ($ficha->fic_jornada === 'Mixta') selected @endif>Mixta
+                                </option>
+                            </select>
                         </div>
                         <div>
                             <x-label for="programa_id" value="{{ __('Programa') }}" />

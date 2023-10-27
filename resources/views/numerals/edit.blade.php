@@ -20,13 +20,24 @@
                         </div>
                         <div>
                             <x-label for="num_categoria" value="{{ __('Categoria') }}" />
-                            <x-input id="num_categoria" type="text" name="num_categoria" :value="$numeral->num_categoria" required
-                                autofocus autocomplete="num_categoria" />
+                            <select name="num_categoria" class="bg-white rounded-md block w-full p-1.5">
+                                <option value="Académica" @if ($numeral->num_categoria === 'Académica') selected @endif>Académica
+                                </option>
+                                <option value="Disciplinaria" @if ($numeral->num_categoria === 'Disciplinaria') selected @endif>
+                                    Disciplinaria
+                                </option>
+                            </select>
                         </div>
                         <div>
                             <x-label for="num_tipoFalta" value="{{ __('Tipo de Falta') }}" />
-                            <x-input id="num_tipoFalta" type="text" name="num_tipoFalta" :value="$numeral->num_tipoFalta" required
-                                autofocus autocomplete="num_tipoFalta" />
+                            <select name="num_tipoFalta" class="bg-white rounded-md block w-full p-1.5">
+                                <option value="Leve" @if ($numeral->num_tipoFalta === 'Leve') selected @endif>Leve
+                                </option>
+                                <option value="Grave" @if ($numeral->num_tipoFalta === 'Grave') selected @endif>Grave
+                                </option>
+                                <option value="Gravísima" @if ($numeral->num_tipoFalta === 'Gravísima') selected @endif>Gravísima
+                                </option>
+                            </select>
                         </div>
                         <div>
                             <x-label for="articulo_id" value="{{ __('Articulo') }}" />
