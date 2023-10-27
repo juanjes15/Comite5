@@ -18,9 +18,15 @@
                                 class="bg-white rounded-md block w-full p-1.5 my-2">
                                 <option value="ss">--Seleccione Instructores--</option>
                                 @foreach ($instructors as $instructor)
-                                    <option value="{{ $instructor->id }}">
-                                        {{ $instructor->ins_nombres }} {{ $instructor->ins_apellidos }}
-                                    </option>
+                                    @if ($instructor->id == $instructor_id)
+                                        <option selected value="{{ $instructor->id }}">
+                                            {{ $instructor->ins_nombres }} {{ $instructor->ins_apellidos }}
+                                        </option>
+                                    @else
+                                        <option value="{{ $instructor->id }}">
+                                            {{ $instructor->ins_nombres }} {{ $instructor->ins_apellidos }}
+                                        </option>
+                                    @endif
                                 @endforeach
                             </select>
                         </div>

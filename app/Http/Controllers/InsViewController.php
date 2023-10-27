@@ -50,9 +50,12 @@ class InsViewController extends Controller
         // Accede al valor de 'solicitud_id' almacenado en la sesión
         $solicitud_id = session('solicitud_id');
 
+        //Obtenemos el id del gestor que está haciendo la solicitud
+        $instructor_id = auth()->user()->instructor->id;
+
         $instructors = Instructor::orderBy('ins_nombres')->orderBy('ins_apellidos')->get();
 
-        return view('insViews.sol4Ins', compact('solicitud_id', 'instructors'));
+        return view('insViews.sol4Ins', compact('solicitud_id', 'instructors', 'instructor_id'));
     }
     public function store4Ins(Request $request)
     {
