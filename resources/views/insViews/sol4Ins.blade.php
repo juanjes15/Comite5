@@ -16,7 +16,7 @@
                             <x-label for="instructor_id" value="{{ __('Instructores') }}" />
                             <select name="instructor_id[]" id="instructor_id"
                                 class="bg-white rounded-md block w-full p-1.5 my-2">
-                                <option value="ss">--Seleccione Instructores--</option>
+                                <option value="">--Seleccione Instructores--</option>
                                 @foreach ($instructors as $instructor)
                                     @if ($instructor->id == $instructor_id)
                                         <option selected value="{{ $instructor->id }}">
