@@ -3,9 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Solicitud extends Model
@@ -17,22 +15,16 @@ class Solicitud extends Model
         'sol_estado',
     ];
 
-    //Obtener el instructor dueño de la Solicitud
-    public function instructor(): BelongsTo
-    {
-        return $this->belongsTo(Instructor::class);
-    }
-
     //Obtener el comité asociado a la Solicitud
     public function comite(): HasOne
     {
         return $this->hasOne(Comite::class);
     }
 
-    //Obtener todas las pruebas para la Solicitud
-    public function pruebas(): HasMany
+    //Obtener las pruebas asociadas a la Solicitud
+    public function prueba(): HasOne
     {
-        return $this->hasMany(Prueba::class);
+        return $this->hasOne(Prueba::class);
     }
 
     //Los aprendices que pertenecen a la Solicitud

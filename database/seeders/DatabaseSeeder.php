@@ -11,6 +11,20 @@ class DatabaseSeeder extends Seeder
 {
     public function run(): void
     {
+        //Ejecución de semillas
+        $this->call([
+            ProgramaSeeder::class,
+            InstructorSeeder::class,
+            FichaSeeder::class,
+            AprendizSeeder::class,
+            CapituloSeeder::class,
+            ArticuloSeeder::class,
+            NumeralSeeder::class,
+        ]);
+
+        //Creación de usuarios de prueba
+        User::factory(10)->create();
+
         //Creación de usuario administrador
         User::create([
             'name' => 'Administrador',
@@ -29,6 +43,7 @@ class DatabaseSeeder extends Seeder
             'password' => Hash::make('password'),
             'remember_token' => Str::random(10),
             'rol' => 'Aprendiz',
+            'aprendiz_id' => 1,
         ]);
 
         //Creación de usuario instructor
@@ -39,6 +54,7 @@ class DatabaseSeeder extends Seeder
             'password' => Hash::make('password'),
             'remember_token' => Str::random(10),
             'rol' => 'Instructor',
+            'instructor_id' => 1,
         ]);
 
         //Creación de usuario gestor
@@ -59,20 +75,6 @@ class DatabaseSeeder extends Seeder
             'password' => Hash::make('password'),
             'remember_token' => Str::random(10),
             'rol' => 'Subdirector',
-        ]);
-
-        //Creación de usuarios de prueba
-        User::factory(10)->create();
-
-        //Ejecución de las demás semillas
-        $this->call([
-            ProgramaSeeder::class,
-            InstructorSeeder::class,
-            FichaSeeder::class,
-            AprendizSeeder::class,
-            CapituloSeeder::class,
-            ArticuloSeeder::class,
-            NumeralSeeder::class,
         ]);
     }
 }
