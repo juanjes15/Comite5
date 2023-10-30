@@ -49,7 +49,7 @@ Route::middleware('auth')->group(function () {
     });
 
     //Rutas para el administrador y el instructor
-    Route::middleware('checkUserRole:Administrador,Instructor')->group(function () {
+    Route::middleware('checkUserRole:Instructor')->group(function () {
         //RUTAS PARA SOLICITAR UN COMITÉ
         //Inicio (solo vista)
         Route::get('/instructor/solicitudInicio', [InsViewController::class, 'sol1Ini'])->name('insViews.sol1Ini');
