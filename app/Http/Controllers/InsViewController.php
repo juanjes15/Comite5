@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Articulo;
+use App\Models\Capitulo;
 use App\Models\Ficha;
 use App\Models\Instructor;
 use App\Models\Solicitud;
@@ -114,5 +116,43 @@ class InsViewController extends Controller
         }
 
         return redirect()->route('insViews.sol6Fal');
+    }
+
+    public function sol6Fal()
+    {
+        //Accede al valor de 'solicitud_id' almacenado en la sesión
+        $solicitud_id = session('solicitud_id');
+
+        $capitulos = Capitulo::all();
+
+        return view('insViews.sol6Fal', compact('solicitud_id', 'capitulos'));
+    }
+    public function articulos(Request $request)
+    {
+        if (isset($request->texto)) {
+            $articulos = Articulo::wherecapitulo_id($request->texto)->get();
+            return response()->json([
+                'lista' => $articulos,
+                'success' => true
+            ]);
+        } else {
+            return response()->json([
+                'success' => false
+            ]);
+        }
+    }
+    public function numerales(Request $request)
+    {
+        if (isset($request->texto)) {
+            $numerales = Articulo::wherearticulo_id($request->texto)->get();
+            return response()->json([
+                'lista' => $numerales,
+                'success' => true
+            ]);
+        } else {
+            return response()->json([
+                'success' => false
+            ]);
+        }
     }
 }

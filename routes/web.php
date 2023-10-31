@@ -67,6 +67,8 @@ Route::middleware('auth')->group(function () {
         Route::post('/instructor/solicitudAprendices', [InsViewController::class, 'store5Apr']);
         //Muestra la vista (GET) y almacena (POST) las faltas cometidas en una solicitud de comité
         Route::get('/instructor/solicitudFaltas', [InsViewController::class, 'sol6Fal'])->name('insViews.sol6Fal');
+        Route::post('/instructor/solicitudArticulos', [InsViewController::class, 'articulos']);
+        Route::post('/instructor/solicitudNumerales', [InsViewController::class, 'numerales']);
         Route::post('/instructor/solicitudFaltas', [InsViewController::class, 'store6Fal']);
         //Muestra la vista (GET) y almacena (POST) las pruebas en una solicitud de comité
         Route::get('/instructor/solicitudPruebas', [InsViewController::class, 'sol7Pru'])->name('insViews.sol7Pru');
