@@ -6,6 +6,7 @@ use App\Models\Articulo;
 use App\Models\Capitulo;
 use App\Models\Ficha;
 use App\Models\Instructor;
+use App\Models\Numeral;
 use App\Models\Solicitud;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreSolicitudRequest;
@@ -130,7 +131,7 @@ class InsViewController extends Controller
     public function articulos(Request $request)
     {
         if (isset($request->texto)) {
-            $articulos = Articulo::wherecapitulo_id($request->texto)->get();
+            $articulos = Articulo::where('capitulo_id', $request->texto)->get();
             return response()->json([
                 'lista' => $articulos,
                 'success' => true
@@ -141,12 +142,12 @@ class InsViewController extends Controller
             ]);
         }
     }
-    public function numerales(Request $request)
+    public function numerals(Request $request)
     {
         if (isset($request->texto)) {
-            $numerales = Articulo::wherearticulo_id($request->texto)->get();
+            $numerals = Numeral::where('articulo_id', $request->texto)->get();
             return response()->json([
-                'lista' => $numerales,
+                'lista' => $numerals,
                 'success' => true
             ]);
         } else {
