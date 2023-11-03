@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\MorphToMany;
 
 class Numeral extends Model
 {
@@ -22,8 +22,8 @@ class Numeral extends Model
     }
 
     //Las solicitudes a las que pertenece el Numeral
-    public function solicituds(): BelongsToMany
+    public function solicituds(): MorphToMany
     {
-        return $this->belongsToMany(Solicitud::class, 'norma_infringida')->as('NormaInfringida');
+        return $this->morphToMany(Solicitud::class, 'normas')->as('Norma');
     }
 }

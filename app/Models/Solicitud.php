@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Relations\MorphToMany;
 
 class Solicitud extends Model
 {
@@ -40,8 +41,14 @@ class Solicitud extends Model
     }
 
     //Los numerales que pertenecen a la Solicitud
-    public function numerals(): BelongsToMany
+    public function numerals(): MorphToMany
     {
-        return $this->belongsToMany(Numeral::class, 'norma_infringida')->as('NormaInfringida');
+        return $this->morphedByMany(Numeral::class, 'normas')->as('Norma');
+    }
+
+    //Los articulos que pertenecen a la Solicitud
+    public function articulos(): MorphToMany
+    {
+        return $this->morphedByMany(Articulo::class, 'normas')->as('Norma');
     }
 }

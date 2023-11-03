@@ -7,9 +7,10 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration {
     public function up(): void
     {
-        Schema::create('norma_infringida', function (Blueprint $table) {
+        Schema::create('normas', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('numeral_id')->constrained()->cascadeOnDelete();
+            $table->string('norma_type');
+            $table->foreignId('norma_id')->constrained()->cascadeOnDelete();
             $table->foreignId('solicitud_id')->constrained()->cascadeOnDelete();
             $table->timestamps();
         });

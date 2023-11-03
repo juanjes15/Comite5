@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\MorphToMany;
 
 class Articulo extends Model
 {
@@ -24,5 +25,11 @@ class Articulo extends Model
     public function capitulo(): BelongsTo
     {
         return $this->belongsTo(Capitulo::class);
+    }
+
+    //Las solicitudes a las que pertenece el Artículo
+    public function solicituds(): MorphToMany
+    {
+        return $this->morphToMany(Solicitud::class, 'normas')->as('Norma');
     }
 }
