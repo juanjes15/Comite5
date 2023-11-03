@@ -170,7 +170,7 @@ class InsViewController extends Controller
             $articulo_id = $request->input('articulo_id');
             $articulo = Articulo::find($articulo_id);
             $articulo->solicituds()->save($solicitud);
-        } else { //Si el formulario envió numeral_id (es un númeral), relacionamos con numeral
+        } else { //Si el formulario envió numeral_id (es un numeral), relacionamos con numeral
             $request->validate([
                 'numeral_id' => ['required', 'exists:numerals,id'],
             ]);
