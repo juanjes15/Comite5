@@ -17,10 +17,13 @@
                                 {{ $capitulo->cap_descripcion }}</option>
                         @endforeach
                     </select>
-                    <x-label value="{{ __('Articulos') }}" />
-                    <select id="_articulo" class="bg-white rounded-md block w-full p-1.5 my-2"></select>
                     <form method="POST" action="{{ route('insViews.sol6Fal') }}">
                         @csrf
+                        <div>
+                            <x-label for="articulo_id" value="{{ __('Articulos') }}" />
+                            <select name="articulo_id" id="_articulo"
+                                class="bg-white rounded-md block w-full p-1.5 my-2"></select>
+                        </div>
                         <div>
                             <x-label for="numeral_id" value="{{ __('Numerales') }}" />
                             <select name="numeral_id" id="_numeral"
@@ -54,11 +57,10 @@
         }).then(response => {
             return response.json()
         }).then(data => {
-            var opciones = "<option value=''>Elegir</option>";
+            var opciones = "<option value=''>Escoja un artículo</option>";
             for (let i in data.lista) {
                 opciones += '<option value="' + data.lista[i].id + '">' + data.lista[i].art_numero +
-                    ' - ' + data.lista[i].art_descripcion +
-                    '</option>';
+                    ' - ' + data.lista[i].art_descripcion + '</option>';
             }
             document.getElementById("_articulo").innerHTML = opciones;
         }).catch(error => console.error(error));
@@ -77,11 +79,14 @@
         }).then(response => {
             return response.json()
         }).then(data => {
-            var opciones = "<option value=''>Elegir</option>";
-            for (let i in data.lista) {
-                opciones += '<option value="' + data.lista[i].id + '">' + data.lista[i]
-                    .num_descripcion +
-                    '</option>';
+            if (data.lista[0] != null) {
+                var opciones = "<option value=''>Escoja un numeral</option>";
+                for (let i in data.lista) {
+                    opciones += '<option value="' + data.lista[i].id + '">' + data.lista[i]
+                        .num_descripcion + '</option>';
+                }
+            } else {
+                var opciones = "<option value=''>No se encontraron numerales</option>";
             }
             document.getElementById("_numeral").innerHTML = opciones;
         }).catch(error => console.error(error));

@@ -24,6 +24,6 @@ class Numeral extends Model
     //Las solicitudes a las que pertenece el Numeral
     public function solicituds(): MorphToMany
     {
-        return $this->morphToMany(Solicitud::class, 'normas')->as('Norma');
+        return $this->morphToMany(Solicitud::class, 'norma')->as('Norma');
     }
 }

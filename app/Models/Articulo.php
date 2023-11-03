@@ -30,6 +30,6 @@ class Articulo extends Model
     //Las solicitudes a las que pertenece el Artículo
     public function solicituds(): MorphToMany
     {
-        return $this->morphToMany(Solicitud::class, 'normas')->as('Norma');
+        return $this->morphToMany(Solicitud::class, 'norma')->as('Norma');
     }
 }

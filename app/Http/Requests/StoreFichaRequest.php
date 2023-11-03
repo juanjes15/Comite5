@@ -20,9 +20,9 @@ class StoreFichaRequest extends FormRequest
         return [
             'fic_codigo' => ['required', 'digits_between:5,10', Rule::unique(Ficha::class)],
             'fic_inicioLectiva' => ['required', 'date'],
-            'fic_finLectiva' => ['required', 'date'],
-            'fic_inicioProductiva' => ['required', 'date'],
-            'fic_finProductiva' => ['required', 'date'],
+            'fic_finLectiva' => ['required', 'date', 'after:fic_inicioLectiva'],
+            'fic_inicioProductiva' => ['required', 'date','after:fic_finLectiva'],
+            'fic_finProductiva' => ['required', 'date', 'after:fic_inicioProductiva'],
             'fic_modalidad' => ['required', 'string', 'max:255'],
             'fic_jornada' => ['required', 'string', 'max:255'],
             'programa_id' => ['required', 'exists:programas,id'],

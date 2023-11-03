@@ -8,10 +8,8 @@ return new class extends Migration {
     public function up(): void
     {
         Schema::create('normas', function (Blueprint $table) {
-            $table->id();
-            $table->string('norma_type');
-            $table->foreignId('norma_id')->constrained()->cascadeOnDelete();
             $table->foreignId('solicitud_id')->constrained()->cascadeOnDelete();
+            $table->morphs('norma');
             $table->timestamps();
         });
     }

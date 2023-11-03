@@ -43,12 +43,12 @@ class Solicitud extends Model
     //Los numerales que pertenecen a la Solicitud
     public function numerals(): MorphToMany
     {
-        return $this->morphedByMany(Numeral::class, 'normas')->as('Norma');
+        return $this->morphedByMany(Numeral::class, 'norma')->as('Norma');
     }
 
     //Los articulos que pertenecen a la Solicitud
     public function articulos(): MorphToMany
     {
-        return $this->morphedByMany(Articulo::class, 'normas')->as('Norma');
+        return $this->morphedByMany(Articulo::class, 'norma')->as('Norma');
     }
 }
