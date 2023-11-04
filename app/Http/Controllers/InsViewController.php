@@ -123,10 +123,39 @@ class InsViewController extends Controller
     {
         //Accede al valor de 'solicitud_id' almacenado en la sesión
         $solicitud_id = session('solicitud_id');
+        $solicitud = Solicitud::find($solicitud_id);
 
         $capitulos = Capitulo::all();
+        //Artículos y Numerales ya asociados a la solicitud
+        $articulos = $solicitud->articulos;
+        $numerals = $solicitud->numerals;
 
-        return view('insViews.sol6Fal', compact('solicitud_id', 'capitulos'));
+        return view('insViews.sol6Fal', compact('solicitud_id', 'capitulos', 'articulos', 'numerals'));
+    }
+    public function store6Fal(Request $request)
+    {
+        //Accede al valor de 'solicitud_id' almacenado en la sesión
+        $solicitud_id = session('solicitud_id');
+        $solicitud = Solicitud::find($solicitud_id);
+
+        //Si es null numeral_id, significa que es un articulo sin numerales, relacionamos con articulos
+        if ($request->input('numeral_id') == null) {
+            $request->validate([
+                'articulo_id' => ['required', 'exists:articulos,id'],
+            ]);
+            $articulo_id = $request->input('articulo_id');
+            $articulo = Articulo::find($articulo_id);
+            $articulo->solicituds()->save($solicitud);
+        } else { //Si el formulario envió numeral_id (es un numeral), relacionamos con numeral
+            $request->validate([
+                'numeral_id' => ['required', 'exists:numerals,id'],
+            ]);
+            $numeral_id = $request->input('numeral_id');
+            $numeral = Numeral::find($numeral_id);
+            $numeral->solicituds()->save($solicitud);
+        }
+
+        return redirect()->route('insViews.sol6Fal');
     }
     public function articulos(Request $request)
     {
@@ -155,30 +184,5 @@ class InsViewController extends Controller
                 'success' => false
             ]);
         }
-    }
-    public function store6Fal(Request $request)
-    {
-        //Accede al valor de 'solicitud_id' almacenado en la sesión
-        $solicitud_id = session('solicitud_id');
-        $solicitud = Solicitud::find($solicitud_id);
-
-        //Si es null numeral_id, significa que es un articulo sin numerales, relacionamos con articulos
-        if ($request->input('numeral_id') == null) {
-            $request->validate([
-                'articulo_id' => ['required', 'exists:articulos,id'],
-            ]);
-            $articulo_id = $request->input('articulo_id');
-            $articulo = Articulo::find($articulo_id);
-            $articulo->solicituds()->save($solicitud);
-        } else { //Si el formulario envió numeral_id (es un numeral), relacionamos con numeral
-            $request->validate([
-                'numeral_id' => ['required', 'exists:numerals,id'],
-            ]);
-            $numeral_id = $request->input('numeral_id');
-            $numeral = Numeral::find($numeral_id);
-            $numeral->solicituds()->save($solicitud);
-        }
-
-        return redirect()->route('insViews.sol7Pru');
     }
 }

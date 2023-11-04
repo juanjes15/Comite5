@@ -31,11 +31,94 @@
                         </div>
                         <div class="flex mt-4">
                             <x-button>
-                                {{ __('Siguiente') }}
+                                {{ __('Agregar norma infringida') }}
                             </x-button>
-                            <x-linkb href="{{ url()->previous() }}" class="mx-3">Atras</x-link>
                         </div>
                     </form>
+                    <h2 class="mt-6 mb-2 font-semibold">Artículos infringidos en esta solicitud</h2>
+                    <table class="w-full text-sm text-left">
+                        <thead class="text-xs text-gray-700 uppercase bg-mint2">
+                            <tr>
+                                <th scope="col" class="px-6 py-3">
+                                    Número
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                    Descripción
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                    Capitulo
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody class="bg-mint1">
+                            @forelse ($articulos as $articulo)
+                                <tr class="border-b">
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        {{ $articulo->art_numero }}
+                                    </td>
+                                    <td class="px-6 py-4 truncate max-w-xs">
+                                        {{ $articulo->art_descripcion }}
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        {{ $articulo->capitulo->cap_numero }}
+                                    </td>
+                                </tr>
+                            @empty
+                                <tr class="bg-white border-b">
+                                    <td colspan="5" class="px-6 py-4 whitespace-nowrap">
+                                        {{ __('No se encontraron articulos infringidos') }}
+                                    </td>
+                                </tr>
+                            @endforelse
+                        </tbody>
+                    </table>
+                    <h2 class="mt-6 mb-2 font-semibold">Numerales infringidos en esta solicitud</h2>
+                    <table class="w-full text-sm text-left">
+                        <thead class="text-xs text-gray-700 uppercase bg-mint2">
+                            <tr>
+                                <th scope="col" class="px-6 py-3">
+                                    Artículo
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                    Descripción
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                    Categoría
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                    Tipo de Falta
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody class="bg-mint1">
+                            @forelse ($numerals as $numeral)
+                                <tr class="border-b">
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        {{ $numeral->articulo->art_numero }}
+                                    </td>
+                                    <td class="px-6 py-4 truncate max-w-xs">
+                                        {{ $numeral->num_descripcion }}
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        {{ $numeral->num_categoria }}
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        {{ $numeral->num_tipoFalta }}
+                                    </td>
+                                </tr>
+                            @empty
+                                <tr class="bg-white border-b">
+                                    <td colspan="5" class="px-6 py-4 whitespace-nowrap">
+                                        {{ __('No se encontraron numerales infringidos') }}
+                                    </td>
+                                </tr>
+                            @endforelse
+                        </tbody>
+                    </table>
+                    <div class="flex mt-4">
+                        <x-link2 href="{{ route('insViews.sol7Pru') }}"> Siguiente </x-link2>
+                        <x-linkb href="{{ url()->previous() }}" class="mx-3">Atras</x-link>
+                    </div>
                 </div>
             </div>
         </div>
