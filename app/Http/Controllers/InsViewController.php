@@ -2,15 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StorePruebaRequest;
 use App\Models\Articulo;
 use App\Models\Capitulo;
 use App\Models\Ficha;
 use App\Models\Instructor;
 use App\Models\Numeral;
+use App\Models\Prueba;
 use App\Models\Solicitud;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreSolicitudRequest;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class InsViewController extends Controller
 {
@@ -184,5 +187,18 @@ class InsViewController extends Controller
                 'success' => false
             ]);
         }
+    }
+
+    public function sol7Pru()
+    {
+        $solicitud_id = session('solicitud_id');
+        return view('insViews.sol7Pru', compact('solicitud_id'));
+    }
+    public function store7Pru(StorePruebaRequest $request)
+    {
+        $path = Storage::disk('public')->put('pruebas', $request->file('pru_url'));
+        $prueba = Prueba::create($request->validated());
+
+        return redirect()->route('insViews.sol1Ini');
     }
 }
