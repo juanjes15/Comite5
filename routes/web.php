@@ -1,6 +1,8 @@
 <?php
 
+use OpenAI\Laravel\Facades\OpenAI;
 use App\Http\Controllers\InsViewController;
+use App\Http\Controllers\Profile\AvatarController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\ProfileController;
@@ -21,6 +23,7 @@ Route::middleware('auth')->group(function () {
     Route::view('/dashboard', 'dashboard')->name('dashboard');
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::patch('/profile/avatar', [AvatarController::class, 'update'])->name('profile.avatar');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     //Rutas para el administrador
@@ -78,3 +81,12 @@ Route::middleware('auth')->group(function () {
 
 //Rutas de Breeze para el login, registro y verificación de correo. Ver routes/auth.php
 require __DIR__ . '/auth.php';
+
+Route::get('/openai', function () {
+    $result = OpenAI::completions()->create([
+        'model' => 'text-davinci-003',
+        'prompt' => 'PHP is',
+    ]);
+
+    echo $result['choices'][0]['text'];
+});
