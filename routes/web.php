@@ -1,6 +1,5 @@
 <?php
 
-use OpenAI\Laravel\Facades\OpenAI;
 use App\Http\Controllers\InsViewController;
 use App\Http\Controllers\Profile\AvatarController;
 use Illuminate\Support\Facades\Route;
@@ -51,7 +50,7 @@ Route::middleware('auth')->group(function () {
         Route::put('/users/instructor/{user}', [UserController::class, 'storeRolInstructor'])->name('users.storeRolInstructor');
     });
 
-    //Rutas para el administrador y el instructor
+    //Rutas para el instructor
     Route::middleware('checkUserRole:Instructor')->group(function () {
         //RUTAS PARA SOLICITAR UN COMITÉ
         //Inicio (solo vista)
@@ -81,12 +80,3 @@ Route::middleware('auth')->group(function () {
 
 //Rutas de Breeze para el login, registro y verificación de correo. Ver routes/auth.php
 require __DIR__ . '/auth.php';
-
-Route::get('/openai', function () {
-    $result = OpenAI::completions()->create([
-        'model' => 'text-davinci-003',
-        'prompt' => 'PHP is',
-    ]);
-
-    echo $result['choices'][0]['text'];
-});
