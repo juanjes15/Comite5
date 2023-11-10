@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Database\Eloquent\Builder;
 use App\Http\Requests\StorePruebaRequest;
 use App\Models\Articulo;
 use App\Models\Capitulo;
@@ -208,5 +209,17 @@ class InsViewController extends Controller
         Prueba::create($validatedData);
 
         return redirect()->route('insViews.sol1Ini');
+    }
+
+    public function revSol(Request $request)
+    {
+        $solicituds = Solicitud::query()
+            ->when($request->q, function (Builder $query, $search) {
+                $query->where('created_at', 'like', "%{$search}%")
+                    ->orWhere('sol_lugar', 'like', "%{$search}%")
+                    ->orWhere('sol_motivo', 'like', "%{$search}%");
+            })
+            ->paginate(5);
+        return view('insViews.revSol', compact('solicituds'));
     }
 }
