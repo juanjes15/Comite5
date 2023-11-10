@@ -196,8 +196,16 @@ class InsViewController extends Controller
     }
     public function store7Pru(StorePruebaRequest $request)
     {
+        // Obtiene los datos validados del request
+        $validatedData = $request->validated();
+
+        //Guardo el archivo en el disco public, carpeta pruebas
         $path = Storage::disk('public')->put('pruebas', $request->file('pru_url'));
-        $prueba = Prueba::create($request->validated());
+
+        // Cambia el path del archivo por el nuevo en los datos validados
+        $validatedData['pru_url'] = $path;
+
+        Prueba::create($validatedData);
 
         return redirect()->route('insViews.sol1Ini');
     }

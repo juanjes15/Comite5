@@ -10,7 +10,7 @@
             <div class="bg-mint1 overflow-hidden shadow-xl sm:rounded-lg">
                 <div class="relative overflow-x-auto shadow-md sm:rounded-lg px-4 py-4">
                     <x-validation-errors class="mb-4" />
-                    <form method="POST" action="{{ route('insViews.sol7Pru') }}">
+                    <form method="POST" action="{{ route('insViews.sol7Pru') }}" enctype="multipart/form-data">
                         @csrf
                         <div>
                             <x-label for="pru_tipo" value="{{ __('Tipo de prueba(s)') }}" />
@@ -38,7 +38,7 @@
                             <x-input id="pru_url" class="block mt-1 w-full" type="file" name="pru_url"
                                 :value="old('pru_url')" required autofocus autocomplete="pru_url" />
                         </div>
-                        <input type="text" name="solicitud_id" value="$solicitud_id">
+                        <input type="text" name="solicitud_id" hidden value="{{ $solicitud_id }}">
                         <div class="flex mt-4">
                             <x-button>
                                 {{ __('Siguiente') }}
