@@ -22,7 +22,7 @@ class Solicitud extends Model
         return $this->hasOne(Comite::class);
     }
 
-    //Obtener las pruebas asociadas a la Solicitud
+    //Obtener la prueba asociada a la Solicitud
     public function prueba(): HasOne
     {
         return $this->hasOne(Prueba::class);

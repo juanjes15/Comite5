@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="leading-tight">
-            {{ __('Solicitudes pendientes de aprobación') }}
+            {{ __('Solicitudes de comité pendientes de aprobación') }}
         </h2>
     </x-slot>
 

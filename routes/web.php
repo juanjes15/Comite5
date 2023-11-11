@@ -77,28 +77,24 @@ Route::middleware('auth')->group(function () {
         Route::post('/instructor/solicitudPruebas', [InsViewController::class, 'store7Pru']);
 
         //RUTAS PARA REGISTRAR UNA NOVEDAD EN UNA SOLICITUD (REVISAR/EDITAR SOLICITUD)
-        //Todas las solicitudes del gestor (solo vista)
+        //Todas las solicitudes del gestor y eliminar solicitudes
         Route::get('/instructor/revisarSolicitudes', [InsViewController::class, 'revSol'])->name('insViews.revSol');
-        //Detalle y eliminar de la solicitud
+        Route::delete('/instructor/eliminarSolicitud/{solicitud}', [InsViewController::class, 'revDel'])->name('insViews.revDel');
+        //Detalle, actualizar inf básica, descargar y actualizar pruebas de la solicitud
         Route::get('/instructor/revisarDetalle/{solicitud}', [InsViewController::class, 'revDet'])->name('insViews.revDet');
-        Route::delete('/instructor/eliminarSolicitud', [InsViewController::class, 'revDel'])->name('insViews.revDel');
-        //Muestra la vista (GET) y almacena (POST) la información básica de una solicitud
-        Route::get('/instructor/revisarInfoBasica', [InsViewController::class, 'revInf'])->name('insViews.revInf');
-        Route::post('/instructor/revisarInfoBasica', [InsViewController::class, 'storeInf']);
+        Route::put('/instructor/revisarInfoBasica/{solicitud}', [InsViewController::class, 'storeInf'])->name('insViews.updInf');
+        Route::put('/instructor/revisarPruebas/{solicitud}', [InsViewController::class, 'storePru'])->name('insViews.updPru');
         //Muestra la vista (GET) y almacena (POST) los instructores relacionados de una solicitud
-        Route::get('/instructor/revisarInstructores', [InsViewController::class, 'revIns'])->name('insViews.revIns');
-        Route::post('/instructor/revisarInstructores', [InsViewController::class, 'storeIns']);
+        Route::get('/instructor/revisarInstructores/{solicitud}', [InsViewController::class, 'revIns'])->name('insViews.revIns');
+        Route::post('/instructor/revisarInstructores/{solicitud}', [InsViewController::class, 'storeIns']);
         //Muestra la vista (GET) y almacena (POST) los aprendices relacionados de una solicitud
-        Route::get('/instructor/revisarAprendices', [InsViewController::class, 'revApr'])->name('insViews.revApr');
-        Route::post('/instructor/revisarAprendices', [InsViewController::class, 'storeApr']);
+        Route::get('/instructor/revisarAprendices/{solicitud}', [InsViewController::class, 'revApr'])->name('insViews.revApr');
+        Route::post('/instructor/revisarAprendices/{solicitud}', [InsViewController::class, 'storeApr']);
         //Muestra la vista (GET) y almacena (POST) las faltas cometidas en una solicitud
-        Route::get('/instructor/revisarFaltas', [InsViewController::class, 'revFal'])->name('insViews.revFal');
-        Route::post('/instructor/revisarFaltas', [InsViewController::class, 'storeFal']);
-        Route::post('/instructor/articulos', [InsViewController::class, 'articulos']);
-        Route::post('/instructor/numerals', [InsViewController::class, 'numerals']);
-        //Muestra la vista (GET) y almacena (POST) las pruebas en una solicitud
-        Route::get('/instructor/revisarPruebas', [InsViewController::class, 'revPru'])->name('insViews.revPru');
-        Route::post('/instructor/revisarPruebas', [InsViewController::class, 'storePru']);
+        Route::get('/instructor/revisarFaltas/{solicitud}', [InsViewController::class, 'revFal'])->name('insViews.revFal');
+        Route::post('/instructor/revisarFaltas/{solicitud}', [InsViewController::class, 'storeFal']);
+        Route::post('/instructor/revisarFaltas/articulos', [InsViewController::class, 'articulos']);
+        Route::post('/instructor/revisarFaltas/numerals', [InsViewController::class, 'numerals']);
     });
 });
 

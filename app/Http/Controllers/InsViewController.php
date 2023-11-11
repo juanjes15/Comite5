@@ -213,13 +213,55 @@ class InsViewController extends Controller
 
     public function revSol(Request $request)
     {
+        //TODO: Las solicitudes deben ser de sólo el gestor logueado
         $solicituds = Solicitud::query()
             ->when($request->q, function (Builder $query, $search) {
-                $query->where('created_at', 'like', "%{$search}%")
+                $query->where('sol_estado', 'like', "Solicitado")
+                    ->orWhere('created_at', 'like', "%{$search}%")
                     ->orWhere('sol_lugar', 'like', "%{$search}%")
                     ->orWhere('sol_motivo', 'like', "%{$search}%");
             })
             ->paginate(5);
         return view('insViews.revSol', compact('solicituds'));
+    }
+
+    public function revDet(Solicitud $solicitud)
+    {
+        $instructors = $solicitud->instructors;
+        $aprendizs = $solicitud->aprendizs;
+        $articulos = $solicitud->articulos;
+        $numerals = $solicitud->numerals;
+        $prueba = $solicitud->prueba;
+        return view('insViews.revDet', compact('solicitud', 'instructors', 'aprendizs', 'articulos', 'numerals', 'prueba'));
+    }
+
+    public function revFal(Solicitud $solicitud)
+    {
+        $capitulos = Capitulo::all();
+        $articulos = $solicitud->articulos;
+        $numerals = $solicitud->numerals;
+
+        return view('insViews.revFal', compact('solicitud', 'capitulos', 'articulos', 'numerals'));
+    }
+    public function storeFal(Request $request, Solicitud $solicitud)
+    {
+        //Si es null numeral_id, significa que es un articulo sin numerales, relacionamos con articulos
+        if ($request->input('numeral_id') == null) {
+            $request->validate([
+                'articulo_id' => ['required', 'exists:articulos,id'],
+            ]);
+            $articulo_id = $request->input('articulo_id');
+            $articulo = Articulo::find($articulo_id);
+            $articulo->solicituds()->save($solicitud);
+        } else { //Si el formulario envió numeral_id (es un numeral), relacionamos con numeral
+            $request->validate([
+                'numeral_id' => ['required', 'exists:numerals,id'],
+            ]);
+            $numeral_id = $request->input('numeral_id');
+            $numeral = Numeral::find($numeral_id);
+            $numeral->solicituds()->save($solicitud);
+        }
+
+        return redirect()->route('insViews.revFal');
     }
 }

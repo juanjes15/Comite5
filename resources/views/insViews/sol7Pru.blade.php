@@ -24,8 +24,8 @@
                                 autocomplete="pru_descripcion" />
                         </div>
                         <div>
-                            <x-label for="pru_fecha" value="{{ __('Fecha de los sucesos') }}" />
-                            <x-input id="pru_fecha" class="block mt-1 w-full" type="date" name="pru_fecha"
+                            <x-label for="pru_fecha" value="{{ __('Fecha y hora de los sucesos') }}" />
+                            <x-input id="pru_fecha" class="block mt-1 w-full" type="datetime-local" name="pru_fecha"
                                 :value="old('pru_fecha')" required autofocus autocomplete="pru_fecha" />
                         </div>
                         <div>
