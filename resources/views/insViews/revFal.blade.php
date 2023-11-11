@@ -48,6 +48,8 @@
                                 <th scope="col" class="px-6 py-3">
                                     Capitulo
                                 </th>
+                                <th scope="col" class="px-6 py-3">
+                                </th>
                             </tr>
                         </thead>
                         <tbody class="bg-mint1">
@@ -61,6 +63,18 @@
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap">
                                         {{ $articulo->capitulo->cap_numero }}
+                                    </td>
+                                    <td class="px-6 py-4 text-center">
+                                        <form method="POST"
+                                            action="{{ route('insViews.revArt', ['solicitud' => $solicitud, 'articulo' => $articulo]) }}"
+                                            class="inline-block">
+                                            @csrf
+                                            @method('DELETE')
+                                            <x-danger-button type="submit" title="Eliminar"
+                                                onclick="return confirm('¿Está seguro de eliminar este articulo?')">
+                                                <x-svg-delete></x-svg-delete>
+                                            </x-danger-button>
+                                        </form>
                                     </td>
                                 </tr>
                             @empty
@@ -88,6 +102,8 @@
                                 <th scope="col" class="px-6 py-3">
                                     Tipo de Falta
                                 </th>
+                                <th scope="col" class="px-6 py-3">
+                                </th>
                             </tr>
                         </thead>
                         <tbody class="bg-mint1">
@@ -104,6 +120,18 @@
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap">
                                         {{ $numeral->num_tipoFalta }}
+                                    </td>
+                                    <td class="px-6 py-4 text-center">
+                                        <form method="POST"
+                                            action="{{ route('insViews.revNum', ['solicitud' => $solicitud, 'numeral' => $numeral]) }}"
+                                            class="inline-block">
+                                            @csrf
+                                            @method('DELETE')
+                                            <x-danger-button type="submit" title="Eliminar"
+                                                onclick="return confirm('¿Está seguro de eliminar este numeral?')">
+                                                <x-svg-delete></x-svg-delete>
+                                            </x-danger-button>
+                                        </form>
                                     </td>
                                 </tr>
                             @empty
@@ -127,7 +155,7 @@
 <script>
     const csrfToken = document.head.querySelector("[name~=csrf-token][content]").content;
     document.getElementById('_capitulo').addEventListener('change', (e) => {
-        fetch('articulos', {
+        fetch('/instructor/articulos', {
             method: 'POST',
             body: JSON.stringify({
                 texto: e.target.value
@@ -149,7 +177,7 @@
     })
 
     document.getElementById('_articulo').addEventListener('change', (e) => {
-        fetch('numerals', {
+        fetch('/instructor/numerals', {
             method: 'POST',
             body: JSON.stringify({
                 texto: e.target.value

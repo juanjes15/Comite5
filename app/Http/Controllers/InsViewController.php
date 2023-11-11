@@ -262,6 +262,16 @@ class InsViewController extends Controller
             $numeral->solicituds()->save($solicitud);
         }
 
-        return redirect()->route('insViews.revFal');
+        return redirect()->route('insViews.revFal', $solicitud);
+    }
+    public function revArt(Solicitud $solicitud, Articulo $articulo)
+    {
+        $articulo->solicituds()->detach($solicitud);
+        return redirect()->route('insViews.revFal', $solicitud);
+    }
+    public function revNum(Solicitud $solicitud, Numeral $numeral)
+    {
+        $numeral->solicituds()->detach($solicitud);
+        return redirect()->route('insViews.revFal', $solicitud);
     }
 }

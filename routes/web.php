@@ -90,11 +90,11 @@ Route::middleware('auth')->group(function () {
         //Muestra la vista (GET) y almacena (POST) los aprendices relacionados de una solicitud
         Route::get('/instructor/revisarAprendices/{solicitud}', [InsViewController::class, 'revApr'])->name('insViews.revApr');
         Route::post('/instructor/revisarAprendices/{solicitud}', [InsViewController::class, 'storeApr']);
-        //Muestra la vista (GET) y almacena (POST) las faltas cometidas en una solicitud
+        //Muestra la vista (GET) y almacena (POST) las faltas cometidas en una solicitud. Elimina articulos y numerales
         Route::get('/instructor/revisarFaltas/{solicitud}', [InsViewController::class, 'revFal'])->name('insViews.revFal');
         Route::post('/instructor/revisarFaltas/{solicitud}', [InsViewController::class, 'storeFal']);
-        Route::post('/instructor/revisarFaltas/articulos', [InsViewController::class, 'articulos']);
-        Route::post('/instructor/revisarFaltas/numerals', [InsViewController::class, 'numerals']);
+        Route::delete('/instructor/eliminarArticulo/{solicitud}/{articulo}', [InsViewController::class, 'revArt'])->name('insViews.revArt');
+        Route::delete('/instructor/eliminarNumeral/{solicitud}/{numeral}', [InsViewController::class, 'revNum'])->name('insViews.revNum');
     });
 });
 
