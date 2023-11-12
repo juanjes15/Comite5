@@ -274,4 +274,15 @@ class InsViewController extends Controller
         $numeral->solicituds()->detach($solicitud);
         return redirect()->route('insViews.revFal', $solicitud);
     }
+
+    public function dowPru(Prueba $prueba)
+    {
+        $filePath = storage_path('app/public/' . $prueba->pru_url);
+        if (file_exists($filePath)) {
+            return response()->file($filePath, $prueba->pru_tipo);
+        } else {
+            return redirect()->back()->with('error', 'El archivo no existe');
+        }
+        //return Storage::disk('public')->download($prueba->pru_url);
+    }
 }

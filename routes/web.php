@@ -84,6 +84,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/instructor/revisarDetalle/{solicitud}', [InsViewController::class, 'revDet'])->name('insViews.revDet');
         Route::put('/instructor/revisarInfoBasica/{solicitud}', [InsViewController::class, 'storeInf'])->name('insViews.updInf');
         Route::put('/instructor/revisarPruebas/{solicitud}', [InsViewController::class, 'storePru'])->name('insViews.updPru');
+        Route::get('/instructor/descargar/{prueba}', [InsViewController::class, 'dowPru'])->name('insViews.dowPru');
         //Muestra la vista (GET) y almacena (POST) los instructores relacionados de una solicitud
         Route::get('/instructor/revisarInstructores/{solicitud}', [InsViewController::class, 'revIns'])->name('insViews.revIns');
         Route::post('/instructor/revisarInstructores/{solicitud}', [InsViewController::class, 'storeIns']);
