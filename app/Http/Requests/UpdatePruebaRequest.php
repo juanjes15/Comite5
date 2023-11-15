@@ -18,9 +18,9 @@ class UpdatePruebaRequest extends FormRequest
         return [
             'pru_tipo' => ['required', 'string', 'max:255'],
             'pru_descripcion' => ['required', 'string', 'max:255'],
-            'pru_fecha' => ['required', 'date', 'before:today'],
+            'pru_fecha' => ['required', 'date'],
             'pru_lugar' => ['required', 'string', 'max:255'],
-            'pru_url' => ['required', 'string', 'max:255'],
+            'pru_url' => ['file'],
             'solicitud_id' => ['required', 'exists:solicituds,id']
         ];
     }

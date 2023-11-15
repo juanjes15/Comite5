@@ -18,7 +18,7 @@
                             <div>
                                 <x-label for="created_at" value="{{ __('Fecha y hora de la solicitud') }}" />
                                 <x-input id="created_at" type="datetime-local" name="created_at" :value="$solicitud->created_at"
-                                    required autofocus disabled autocomplete="created_at" />
+                                    autofocus disabled autocomplete="created_at" />
                             </div>
                             <div>
                                 <x-label for="sol_lugar" value="{{ __('Lugar de los hechos') }}" />
@@ -219,7 +219,7 @@
                     <div class="bg-sena-100 p-6 rounded-lg mb-6">
                         <h1 class="mb-2 text-lg font-semibold">Material probatorio de esta solicitud</h1>
                         <x-validation-errors class="mb-4" />
-                        <form method="POST" action="{{ route('insViews.updPru', $solicitud) }}"
+                        <form method="POST" action="{{ route('insViews.updPru', $prueba) }}"
                             enctype="multipart/form-data">
                             @csrf
                             @method('PUT')

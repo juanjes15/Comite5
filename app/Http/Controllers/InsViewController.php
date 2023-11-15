@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\UpdatePruebaRequest;
+use App\Http\Requests\UpdateSolicitudRequest;
 use Illuminate\Database\Eloquent\Builder;
 use App\Http\Requests\StorePruebaRequest;
 use App\Models\Articulo;
@@ -213,7 +215,7 @@ class InsViewController extends Controller
 
     public function revSol(Request $request)
     {
-        //TODO: Las solicitudes deben ser de sólo el gestor logueado
+        //TODO: Las solicitudes deben ser de sólo del gestor logueado
         $solicituds = Solicitud::query()
             ->when($request->q, function (Builder $query, $search) {
                 $query->where('sol_estado', 'like', "Solicitado")
@@ -233,6 +235,43 @@ class InsViewController extends Controller
         $numerals = $solicitud->numerals;
         $prueba = $solicitud->prueba;
         return view('insViews.revDet', compact('solicitud', 'instructors', 'aprendizs', 'articulos', 'numerals', 'prueba'));
+    }
+    public function updInf(UpdateSolicitudRequest $request, Solicitud $solicitud)
+    {
+        $solicitud->update($request->validated());
+        return redirect()->back();
+    }
+    public function dowPru(Prueba $prueba)
+    {
+        $filePath = storage_path('app/public/' . $prueba->pru_url);
+        if (file_exists($filePath)) {
+            //return response()->file($filePath, $prueba->pru_tipo);
+            return Storage::disk('public')->download($prueba->pru_url);
+        } else {
+            return redirect()->back()->with('error', 'El archivo no existe');
+        }
+    }
+    public function updPru(UpdatePruebaRequest $request, Prueba $prueba)
+    {
+        // Obtiene los datos validados del request
+        $validatedData = $request->validated();
+
+        // Verifica si se proporcionó un nuevo archivo
+        if ($request->hasFile('pru_url')) {
+            // Elimina el archivo anterior
+            Storage::disk('public')->delete($prueba->pru_url);
+
+            // Guarda el nuevo archivo en el disco public, carpeta pruebas
+            $path = Storage::disk('public')->put('pruebas', $request->file('pru_url'));
+
+            // Cambia el path del archivo por el nuevo en los datos validados
+            $validatedData['pru_url'] = $path;
+        }
+
+        // Actualiza los demás campos
+        $prueba->update($validatedData);
+
+        return redirect()->back();
     }
 
     public function revFal(Solicitud $solicitud)
@@ -273,16 +312,5 @@ class InsViewController extends Controller
     {
         $numeral->solicituds()->detach($solicitud);
         return redirect()->route('insViews.revFal', $solicitud);
-    }
-
-    public function dowPru(Prueba $prueba)
-    {
-        $filePath = storage_path('app/public/' . $prueba->pru_url);
-        if (file_exists($filePath)) {
-            //return response()->file($filePath, $prueba->pru_tipo);
-            return Storage::disk('public')->download($prueba->pru_url);
-        } else {
-            return redirect()->back()->with('error', 'El archivo no existe');
-        }
     }
 }

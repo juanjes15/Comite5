@@ -19,7 +19,7 @@ class UpdateSolicitudRequest extends FormRequest
             'sol_lugar' => ['required', 'string', 'max:255'],
             'sol_motivo' => ['required', 'string', 'max:255'],
             'sol_descripcion' => ['required', 'string', 'max:255'],
-            'sol_estado' => ['required', 'string', 'max:255'],
+            'sol_estado' => ['string', 'max:255'],
         ];
     }
 }
