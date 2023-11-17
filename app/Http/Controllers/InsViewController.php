@@ -10,6 +10,7 @@ use App\Models\Articulo;
 use App\Models\Capitulo;
 use App\Models\Ficha;
 use App\Models\Instructor;
+use App\Models\Aprendiz;
 use App\Models\Numeral;
 use App\Models\Prueba;
 use App\Models\Solicitud;
@@ -273,6 +274,54 @@ class InsViewController extends Controller
 
         return redirect()->back();
     }
+    public function revIns(Solicitud $solicitud)
+    {
+        $instructors = Instructor::orderBy('ins_nombres')->orderBy('ins_apellidos')->get();
+        $instructors2 = $solicitud->instructors;
+
+        return view('insViews.revIns', compact('solicitud', 'instructors', 'instructors2'));
+    }
+    public function storeIns(Request $request, Solicitud $solicitud)
+    {
+        $request->validate([
+            'instructor_id' => ['required', 'exists:instructors,id'],
+        ]);
+        $instructor_id = $request->input('instructor_id');
+        $instructor = Instructor::find($instructor_id);
+        $instructor->solicituds()->save($solicitud);
+
+        return redirect()->route('insViews.revIns', $solicitud);
+    }
+    public function delIns(Solicitud $solicitud, Instructor $instructor)
+    {
+        $instructor->solicituds()->detach($solicitud);
+        return redirect()->route('insViews.revIns', $solicitud);
+    }
+    public function revApr(Solicitud $solicitud)
+    {
+        $aprendizs2 = $solicitud->aprendizs;
+        //La ficha a la pertenece el primer aprendiz citado a comité
+        $ficha = $aprendizs2[0]->ficha;
+        //Todos los aprendices de la anterior ficha
+        $aprendizs = $ficha->aprendizs;
+
+        return view('insViews.revApr', compact('solicitud', 'aprendizs', 'aprendizs2'));
+    }
+    public function storeApr(Request $request, Solicitud $solicitud)
+    {
+        $request->validate([
+            'aprendiz_id' => ['required', 'exists:aprendizs,id'],
+        ]);
+        $aprendiz_id = $request->input('aprendiz_id');
+        $aprendiz = Aprendiz::find($aprendiz_id);
+        $aprendiz->solicituds()->save($solicitud);
+        return redirect()->route('insViews.revApr', $solicitud);
+    }
+    public function delApr(Solicitud $solicitud, Aprendiz $aprendiz)
+    {
+        $aprendiz->solicituds()->detach($solicitud);
+        return redirect()->route('insViews.revApr', $solicitud);
+    }
 
     public function revFal(Solicitud $solicitud)
     {
@@ -312,5 +361,10 @@ class InsViewController extends Controller
     {
         $numeral->solicituds()->detach($solicitud);
         return redirect()->route('insViews.revFal', $solicitud);
+    }
+    public function revDel(Solicitud $solicitud)
+    {
+        $solicitud->delete();
+        return redirect()->route('insViews.revSol');
     }
 }

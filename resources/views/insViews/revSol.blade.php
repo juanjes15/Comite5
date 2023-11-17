@@ -55,6 +55,15 @@
                                         <x-link2 title="Detalles" href="{{ route('insViews.revDet', $solicitud) }}">
                                             <x-svg-edit></x-svg-edit>
                                         </x-link2>
+                                        <form method="POST" action="{{ route('insViews.revDel', $solicitud) }}"
+                                            class="inline-block">
+                                            @csrf
+                                            @method('DELETE')
+                                            <x-danger-button type="submit" title="Eliminar"
+                                                onclick="return confirm('¿Está seguro de eliminar esta solicitud?')">
+                                                <x-svg-delete></x-svg-delete>
+                                            </x-danger-button>
+                                        </form>
                                     </td>
                                 </tr>
                             @empty

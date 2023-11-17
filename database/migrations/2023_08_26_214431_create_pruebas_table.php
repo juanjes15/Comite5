@@ -14,7 +14,7 @@ return new class extends Migration {
             $table->dateTime('pru_fecha');
             $table->string('pru_lugar');
             $table->string('pru_url');
-            $table->foreignId('solicitud_id')->constrained();
+            $table->foreignId('solicitud_id')->constrained()->cascadeOnDelete();
             $table->timestamps();
         });
     }
