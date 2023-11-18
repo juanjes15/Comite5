@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\InsViewController;
+use App\Http\Controllers\GesViewController;
 use App\Http\Controllers\Profile\AvatarController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\RegisteredUserController;
@@ -98,6 +99,16 @@ Route::middleware('auth')->group(function () {
         Route::post('/instructor/revisarFaltas/{solicitud}', [InsViewController::class, 'storeFal']);
         Route::delete('/instructor/eliminarArticulo/{solicitud}/{articulo}', [InsViewController::class, 'revArt'])->name('insViews.revArt');
         Route::delete('/instructor/eliminarNumeral/{solicitud}/{numeral}', [InsViewController::class, 'revNum'])->name('insViews.revNum');
+    });
+
+    //Rutas para el Gestor de Comites
+    Route::middleware('checkUserRole:Gestor de Comites')->group(function () {
+        //RUTAS PARA ACEPTAR O RECHAZAR UNA SOLICITUD A COMITÉ
+        //Todas las solicitudes en estado "Solicitado"
+        Route::get('/gestor/revisarSolicitudes', [GesViewController::class, 'revSol'])->name('gesViews.revSol');
+        //Detalle de la solicitud
+        Route::get('/gestor/revisarDetalle/{solicitud}', [GesViewController::class, 'revDet'])->name('gesViews.revDet');
+        Route::get('/gestor/descargar/{prueba}', [GesViewController::class, 'dowPru'])->name('gesViews.dowPru');
     });
 });
 

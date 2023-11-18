@@ -32,10 +32,8 @@
                                 </option>
                                 <option value="Instructor" @if ($user->rol === 'Instructor') selected @endif>Instructor
                                 </option>
-                                <option value="Gestor de Comités" @if ($user->rol === 'Gestor de Comités') selected @endif>
-                                    Gestor de Comités</option>
-                                <option value="Subdirector" @if ($user->rol === 'Subdirector') selected @endif>
-                                    Subdirector</option>
+                                <option value="Gestor de Comites" @if ($user->rol === 'Gestor de Comites') selected @endif>
+                                    Gestor de Comites</option>
                                 <option value="Administrador" @if ($user->rol === 'Administrador') selected @endif>
                                     Administrador
                                 </option>

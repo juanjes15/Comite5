@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\UpdatePruebaRequest;
 use App\Http\Requests\UpdateSolicitudRequest;
-use Illuminate\Database\Eloquent\Builder;
 use App\Http\Requests\StorePruebaRequest;
 use App\Models\Articulo;
 use App\Models\Capitulo;

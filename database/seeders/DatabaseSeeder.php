@@ -64,17 +64,7 @@ class DatabaseSeeder extends Seeder
             'email_verified_at' => now(),
             'password' => Hash::make('password'),
             'remember_token' => Str::random(10),
-            'rol' => 'Gestor de Comités',
-        ]);
-
-        //Creación de usuario subdirector
-        User::create([
-            'name' => 'Subdirector',
-            'email' => 'subdirector@subdirector.com',
-            'email_verified_at' => now(),
-            'password' => Hash::make('password'),
-            'remember_token' => Str::random(10),
-            'rol' => 'Subdirector',
+            'rol' => 'Gestor de Comites',
         ]);
     }
 }
