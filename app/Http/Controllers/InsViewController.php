@@ -216,17 +216,22 @@ class InsViewController extends Controller
 
     public function revSol(Request $request)
     {
-        //TODO: Las solicitudes deben ser de sólo del gestor logueado
-        $solicituds = Solicitud::query()
-            ->when($request->q, function (Builder $query, $search) {
-                $query->where('sol_estado', 'like', "Solicitado")
-                    ->orWhere('created_at', 'like', "%{$search}%")
+        $fichas = auth()->user()->instructor->fichas;
+
+        $solicituds = Solicitud::whereHas('aprendizs', function ($query) use ($fichas) {
+            $query->whereIn('ficha_id', $fichas->pluck('id'));
+        })
+            ->where('sol_estado', '=', 'Solicitado')
+            ->when($request->q, function ($query, $search) {
+                $query->where('created_at', 'like', "%{$search}%")
                     ->orWhere('sol_lugar', 'like', "%{$search}%")
                     ->orWhere('sol_motivo', 'like', "%{$search}%");
             })
             ->paginate(5);
+
         return view('insViews.revSol', compact('solicituds'));
     }
+
 
     public function revDet(Solicitud $solicitud)
     {
