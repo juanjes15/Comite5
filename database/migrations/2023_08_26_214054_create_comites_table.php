@@ -12,8 +12,8 @@ return new class extends Migration {
             $table->string('com_estado');
             $table->dateTime('com_fecha');
             $table->string('com_lugar');
-            $table->string('com_recomendacion');
-            $table->string('com_acta');
+            $table->string('com_recomendacion')->nullable();
+            $table->string('com_acta')->nullable();
             $table->foreignId('solicitud_id')->constrained();
             $table->timestamps();
         });

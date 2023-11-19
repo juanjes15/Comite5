@@ -19,8 +19,8 @@ class StoreComiteRequest extends FormRequest
             'com_estado' => ['required', 'string', 'max:255'],
             'com_fecha' => ['required', 'date'],
             'com_lugar' => ['required', 'string', 'max:255'],
-            'com_recomendacion' => ['required', 'string', 'max:255'],
-            'com_acta' => ['required', 'string', 'max:255'],
+            'com_recomendacion' => ['string', 'max:255'],
+            'com_acta' => ['string', 'max:255'],
             'solicitud_id' => ['required', 'exists:solicituds,id']
         ];
     }

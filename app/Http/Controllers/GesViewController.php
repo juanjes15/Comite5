@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreComiteRequest;
 use Illuminate\Http\Request;
 use App\Models\Solicitud;
+use App\Models\Comite;
 use App\Models\Prueba;
 use Illuminate\Support\Facades\Storage;
 
@@ -42,5 +44,24 @@ class GesViewController extends Controller
         } else {
             return redirect()->back()->with('error', 'El archivo no existe');
         }
+    }
+
+    public function solNo(Solicitud $solicitud)
+    {
+        $solicitud->sol_estado = 'Rechazado';
+        $solicitud->save();
+        return redirect()->route('gesViews.revSol');
+    }
+    public function solSi(Solicitud $solicitud)
+    {
+        return view('gesViews.comIni', compact('solicitud'));
+    }
+    public function comIni(StoreComiteRequest $request)
+    {
+        $comite = Comite::create($request->validated());
+        $solicitud = $comite->solicitud;
+        $solicitud->sol_estado = 'Aceptado';
+        $solicitud->save();
+        return redirect()->route('gesViews.revSol');
     }
 }

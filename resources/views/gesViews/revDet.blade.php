@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="leading-tight">
-            {{ __('Detalles de la solicitud #') . $solicitud->id }}
+            {{ __('Detalles de la solicitud #') . $solicitud->id . ' - Instructor: ' . $solicitud->aprendizs[0]->ficha->instructor->ins_nombres . ' ' . $solicitud->aprendizs[0]->ficha->instructor->ins_apellidos }}
         </h2>
     </x-slot>
 
@@ -230,6 +230,10 @@
                                 </div>
                             @endif
                         </div>
+                    </div>
+                    <div class="flex mt-4">
+                        <x-link href="{{ route('gesViews.solSi', $solicitud) }}" class="mx-3">Aprobar Solicitud</x-link>
+                        <x-linkb href="{{ route('gesViews.solNo', $solicitud) }}" class="mx-3">Rechazar Solicitud</x-linkb>
                     </div>
                 </div>
             </div>

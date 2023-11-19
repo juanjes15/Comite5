@@ -109,6 +109,10 @@ Route::middleware('auth')->group(function () {
         //Detalle de la solicitud
         Route::get('/gestor/revisarDetalle/{solicitud}', [GesViewController::class, 'revDet'])->name('gesViews.revDet');
         Route::get('/gestor/descargar/{prueba}', [GesViewController::class, 'dowPru'])->name('gesViews.dowPru');
+        //Aceptar y rechazar
+        Route::get('/gestor/rechazar/{solicitud}', [GesViewController::class, 'solNo'])->name('gesViews.solNo');
+        Route::get('/gestor/aceptar/{solicitud}', [GesViewController::class, 'solSi'])->name('gesViews.solSi');
+        Route::post('/gestor/comiteInicio', [GesViewController::class, 'comIni'])->name('gesViews.comIni');
     });
 });
 

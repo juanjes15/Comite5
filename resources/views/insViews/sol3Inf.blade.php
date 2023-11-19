@@ -28,11 +28,7 @@
                                 name="sol_descripcion" :value="old('sol_descripcion')" required autofocus
                                 autocomplete="sol_descripcion" />
                         </div>
-                        <div>
-                            <x-label for="sol_estado" value="{{ __('Estado') }}" />
-                            <x-input id="sol_estado" class="block mt-1 w-full" type="text" name="sol_estado"
-                                value="Solicitado" required autofocus autocomplete="sol_estado" />
-                        </div>
+                        <input type="text" name="sol_estado" hidden value="Solicitado">
                         <div class="flex mt-4">
                             <x-button>
                                 {{ __('Siguiente') }}
