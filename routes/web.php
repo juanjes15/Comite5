@@ -105,14 +105,21 @@ Route::middleware('auth')->group(function () {
     Route::middleware('checkUserRole:Gestor de Comites')->group(function () {
         //RUTAS PARA ACEPTAR O RECHAZAR UNA SOLICITUD A COMITÉ
         //Todas las solicitudes en estado "Solicitado"
-        Route::get('/gestor/revisarSolicitudes', [GesViewController::class, 'revSol'])->name('gesViews.revSol');
+        Route::get('/gestor/solicitudes', [GesViewController::class, 'solAll'])->name('gesViews.solAll');
         //Detalle de la solicitud
-        Route::get('/gestor/revisarDetalle/{solicitud}', [GesViewController::class, 'revDet'])->name('gesViews.revDet');
+        Route::get('/gestor/detalleSolicitud/{solicitud}', [GesViewController::class, 'solDet'])->name('gesViews.solDet');
         Route::get('/gestor/descargar/{prueba}', [GesViewController::class, 'dowPru'])->name('gesViews.dowPru');
         //Aceptar y rechazar
         Route::get('/gestor/rechazar/{solicitud}', [GesViewController::class, 'solNo'])->name('gesViews.solNo');
         Route::get('/gestor/aceptar/{solicitud}', [GesViewController::class, 'solSi'])->name('gesViews.solSi');
-        Route::post('/gestor/comiteInicio', [GesViewController::class, 'comIni'])->name('gesViews.comIni');
+        Route::post('/gestor/inicioComite', [GesViewController::class, 'comIni'])->name('gesViews.comIni');
+        //RUTAS PARA ENTRAR EN SESIÓN
+        //Todos los comites en estado "Iniciado"
+        Route::get('/gestor/comites', [GesViewController::class, 'comAll'])->name('gesViews.comAll');
+        //Detalle del comité
+        Route::get('/gestor/detalleComite/{comite}', [GesViewController::class, 'comDet'])->name('gesViews.comDet');
+        //Inicio de sesión
+        Route::get('/gestor/sesionComite/{comite}', [GesViewController::class, 'comSes'])->name('gesViews.comSes');
     });
 });
 

@@ -10,7 +10,7 @@
             <div class="bg-gray2 overflow-hidden shadow-xl sm:rounded-lg">
                 <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
                     <div class="flex items-center justify-between m-4">
-                        <form action="{{ route('gesViews.revSol') }}" method="get" class="flex-grow ml-4">
+                        <form action="{{ route('gesViews.solAll') }}" method="get" class="flex-grow ml-4">
                             <label for="default-search" class="mb-2 text-sm sr-only">Buscar</label>
                             <div class="relative">
                                 <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
@@ -53,7 +53,7 @@
                                         {{ $solicitud->sol_motivo }}
                                     </td>
                                     <td class="px-6 py-4 text-center">
-                                        <x-link2 title="Detalles" href="{{ route('gesViews.revDet', $solicitud) }}">
+                                        <x-link2 title="Detalles" href="{{ route('gesViews.solDet', $solicitud) }}">
                                             <x-svg-edit></x-svg-edit>
                                         </x-link2>
                                     </td>

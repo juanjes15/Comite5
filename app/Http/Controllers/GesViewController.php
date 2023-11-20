@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Storage;
 
 class GesViewController extends Controller
 {
-    public function revSol(Request $request)
+    public function solAll(Request $request)
     {
         $solicituds = Solicitud::where('sol_estado', '=', 'Solicitado')
             ->when($request->q, function ($query, $search) {
@@ -21,18 +21,18 @@ class GesViewController extends Controller
             })
             ->paginate(5);
 
-        return view('gesViews.revSol', compact('solicituds'));
+        return view('gesViews.solAll', compact('solicituds'));
     }
 
 
-    public function revDet(Solicitud $solicitud)
+    public function solDet(Solicitud $solicitud)
     {
         $instructors = $solicitud->instructors;
         $aprendizs = $solicitud->aprendizs;
         $articulos = $solicitud->articulos;
         $numerals = $solicitud->numerals;
         $prueba = $solicitud->prueba;
-        return view('gesViews.revDet', compact('solicitud', 'instructors', 'aprendizs', 'articulos', 'numerals', 'prueba'));
+        return view('gesViews.solDet', compact('solicitud', 'instructors', 'aprendizs', 'articulos', 'numerals', 'prueba'));
     }
 
     public function dowPru(Prueba $prueba)
@@ -50,7 +50,7 @@ class GesViewController extends Controller
     {
         $solicitud->sol_estado = 'Rechazado';
         $solicitud->save();
-        return redirect()->route('gesViews.revSol');
+        return redirect()->route('gesViews.solAll');
     }
     public function solSi(Solicitud $solicitud)
     {
@@ -68,6 +68,6 @@ class GesViewController extends Controller
         foreach ($aprendizs as $aprendiz) {
             $aprendiz->increment('apr_numComites');
         }
-        return redirect()->route('gesViews.revSol');
+        return redirect()->route('gesViews.solAll');
     }
 }

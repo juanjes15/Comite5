@@ -36,7 +36,6 @@
                             <x-label for="sol_observacion" value="{{ __('Observaciones') }}" />
                             <x-input id="sol_observacion" type="text" name="sol_observacion" :value="$solicitud->sol_observacion"
                                 disabled autocomplete="sol_observacion" />
-                            <x-input-error class="mt-2" :messages="$errors->get('sol_observacion')" />
                         </div>
                     </div>
 

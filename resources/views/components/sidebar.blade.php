@@ -198,7 +198,7 @@
 
             @if (auth()->user()->rol === 'Gestor de Comites')
                 <li>
-                    <a href="{{ route('gesViews.revSol') }}"
+                    <a href="{{ route('gesViews.solAll') }}"
                         class="flex items-center p-3 rounded-lg group bg-sena-700 hover:text-black hover:bg-sena-200">
                         <svg class="flex-shrink-0 w-5 h-5 text-sena-400 transition duration-75 group-hover:text-black"
                             aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
