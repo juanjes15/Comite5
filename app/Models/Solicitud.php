@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
 
 class Solicitud extends Model
@@ -14,12 +15,13 @@ class Solicitud extends Model
         'sol_motivo',
         'sol_descripcion',
         'sol_estado',
+        'sol_observacion',
     ];
 
-    //Obtener el comité asociado a la Solicitud
-    public function comite(): HasOne
+    //Obtener los comités asociados a la Solicitud
+    public function comite(): HasMany
     {
-        return $this->hasOne(Comite::class);
+        return $this->hasMany(Comite::class);
     }
 
     //Obtener la prueba asociada a la Solicitud

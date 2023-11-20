@@ -26,6 +26,7 @@ class UpdateAprendizRequest extends FormRequest
             'apr_telefono' => ['required', 'digits_between:5,10'],
             'apr_direccion' => ['required', 'string', 'max:255'],
             'apr_fechaNacimiento' => ['required', 'date', 'before:today'],
+            'apr_numComites' => ['required', 'numeric', 'between:0,3'],
             'ficha_id' => ['required', 'exists:fichas,id']
         ];
     }

@@ -19,7 +19,7 @@
                                 <option value="">--Seleccione un Aprendiz--</option>
                                 @foreach ($aprendizs as $aprendiz)
                                     <option value="{{ $aprendiz->id }}">
-                                        {{ $aprendiz->apr_nombres }} {{ $aprendiz->apr_apellidos }}
+                                        {{ $aprendiz->apr_nombres }} {{ $aprendiz->apr_apellidos }} - {{ $aprendiz->apr_numComites }} Comité(s)
                                     </option>
                                 @endforeach
                             </select>
@@ -35,7 +35,7 @@
                         <thead class="text-xs text-gray-700 uppercase bg-mint2">
                             <tr>
                                 <th scope="col" class="px-6 py-3">
-                                    Identificación
+                                    Comités asistidos
                                 </th>
                                 <th scope="col" class="px-6 py-3">
                                     Nombres
@@ -51,7 +51,7 @@
                             @forelse ($aprendizs2 as $aprendiz)
                                 <tr class="border-b">
                                     <td class="px-6 py-4 whitespace-nowrap">
-                                        {{ $aprendiz->apr_identificacion }}
+                                        {{ $aprendiz->apr_numComites }}
                                     </td>
                                     <td class="px-6 py-4 truncate max-w-xs">
                                         {{ $aprendiz->apr_nombres }}

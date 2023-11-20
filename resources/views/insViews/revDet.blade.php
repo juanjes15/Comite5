@@ -38,6 +38,12 @@
                                     required autofocus autocomplete="sol_descripcion" />
                                 <x-input-error class="mt-2" :messages="$errors->get('sol_descripcion')" />
                             </div>
+                            <div>
+                                <x-label for="sol_observacion" value="{{ __('Observaciones') }}" />
+                                <x-input id="sol_observacion" type="text" name="sol_observacion" :value="$solicitud->sol_observacion"
+                                    autofocus autocomplete="sol_observacion" />
+                                <x-input-error class="mt-2" :messages="$errors->get('sol_observacion')" />
+                            </div>
                             <div class="flex mt-4">
                                 <x-button>
                                     {{ __('Editar') }}
@@ -94,7 +100,7 @@
                             <thead class="text-xs text-gray-700 uppercase bg-mint2">
                                 <tr>
                                     <th scope="col" class="px-6 py-3">
-                                        Identificación
+                                        Comités asistidos
                                     </th>
                                     <th scope="col" class="px-6 py-3">
                                         Nombres
@@ -108,7 +114,7 @@
                                 @forelse ($aprendizs as $aprendiz)
                                     <tr class="border-b">
                                         <td class="px-6 py-4 whitespace-nowrap">
-                                            {{ $aprendiz->apr_identificacion }}
+                                            {{ $aprendiz->apr_numComites }}
                                         </td>
                                         <td class="px-6 py-4 truncate max-w-xs">
                                             {{ $aprendiz->apr_nombres }}

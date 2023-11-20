@@ -19,7 +19,7 @@
                                 <option value="">--Seleccione Aprendices--</option>
                                 @foreach ($aprendizs as $aprendiz)
                                     <option value="{{ $aprendiz->id }}">
-                                        {{ $aprendiz->apr_nombres }} {{ $aprendiz->apr_apellidos }}
+                                        {{ $aprendiz->apr_nombres }} {{ $aprendiz->apr_apellidos }} - {{ $aprendiz->apr_numComites }} Comité(s)
                                     </option>
                                 @endforeach
                             </select>

@@ -13,6 +13,7 @@ return new class extends Migration {
             $table->string('sol_motivo');
             $table->string('sol_descripcion');
             $table->string('sol_estado');
+            $table->string('sol_observacion')->nullable();
             $table->timestamps();
         });
     }

@@ -16,6 +16,7 @@ return new class extends Migration {
             $table->string('apr_telefono');
             $table->string('apr_direccion');
             $table->date('apr_fechaNacimiento');
+            $table->integer('apr_numComites');
             $table->foreignId('ficha_id')->constrained();
             $table->timestamps();
         });

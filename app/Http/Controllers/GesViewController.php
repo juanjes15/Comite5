@@ -59,9 +59,15 @@ class GesViewController extends Controller
     public function comIni(StoreComiteRequest $request)
     {
         $comite = Comite::create($request->validated());
+        //Cambiamos la solicitud a Aceptado
         $solicitud = $comite->solicitud;
         $solicitud->sol_estado = 'Aceptado';
         $solicitud->save();
+        //A cada aprendiz en esta solicitud se le aumenta su número de comités asistidos
+        $aprendizs = $solicitud->aprendizs;
+        foreach ($aprendizs as $aprendiz) {
+            $aprendiz->increment('apr_numComites');
+        }
         return redirect()->route('gesViews.revSol');
     }
 }

@@ -49,6 +49,11 @@
                                 :value="$aprendiz->apr_fechaNacimiento" required autofocus autocomplete="apr_fechaNacimiento" />
                         </div>
                         <div>
+                            <x-label for="apr_numComites" value="{{ __('Comités asistidos') }}" />
+                            <x-input id="apr_numComites" type="number" name="apr_numComites" :value="$aprendiz->apr_numComites" required
+                                autofocus autocomplete="apr_numComites" />
+                        </div>
+                        <div>
                             <x-label for="ficha_id" value="{{ __('Ficha') }}" />
                             <select name="ficha_id" class="bg-white rounded-md block w-full p-1.5">
                                 @foreach ($fichas as $ficha)
