@@ -70,4 +70,26 @@ class GesViewController extends Controller
         }
         return redirect()->route('gesViews.solAll');
     }
+
+    public function comAll(Request $request)
+    {
+        $comites = Comite::where('com_estado', '=', 'Iniciado')
+            ->when($request->q, function ($query, $search) {
+                $query->where('com_fecha', 'like', "%{$search}%")
+                    ->orWhere('com_lugar', 'like', "%{$search}%");
+            })
+            ->orderBy('com_fecha', 'asc')
+            ->paginate(5);
+
+        return view('gesViews.comAll', compact('comites'));
+    }
+    public function comDet(Comite $comite)
+    {
+        $instructors = $comite->solicitud->instructors;
+        $aprendizs = $comite->solicitud->aprendizs;
+        $articulos = $comite->solicitud->articulos;
+        $numerals = $comite->solicitud->numerals;
+        $prueba = $comite->solicitud->prueba;
+        return view('gesViews.comDet', compact('comite', 'instructors', 'aprendizs', 'articulos', 'numerals', 'prueba'));
+    }
 }

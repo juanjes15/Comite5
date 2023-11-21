@@ -11,30 +11,44 @@
                 <div class="relative overflow-x-auto shadow-md sm:rounded-lg px-4 py-4">
 
                     <div class="bg-sena-100 p-6 rounded-lg mb-6">
+                        <h1 class="my-2 text-lg font-semibold">Información del Comité</h1>
+                        <div>
+                            <x-label for="com_fecha" value="{{ __('Fecha y hora programada del comité') }}" />
+                            <x-input id="com_fecha" type="datetime-local" name="com_fecha" :value="$comite->com_fecha" disabled
+                                autocomplete="com_fecha" />
+                        </div>
+                        <div>
+                            <x-label for="com_lugar" value="{{ __('Lugar para el comité') }}" />
+                            <x-input id="com_lugar" type="text" name="com_lugar" :value="$comite->com_lugar" disabled
+                                autocomplete="com_lugar" />
+                        </div>
+                    </div>
+
+                    <div class="bg-sena-100 p-6 rounded-lg mb-6">
                         <h1 class="my-2 text-lg font-semibold">Información de la Solicitud</h1>
                         <div>
                             <x-label for="created_at" value="{{ __('Fecha y hora de la solicitud') }}" />
-                            <x-input id="created_at" type="datetime-local" name="created_at" :value="$solicitud->created_at" disabled
+                            <x-input id="created_at" type="datetime-local" name="created_at" :value="$comite->solicitud->created_at" disabled
                                 autocomplete="created_at" />
                         </div>
                         <div>
                             <x-label for="sol_lugar" value="{{ __('Lugar de los hechos') }}" />
-                            <x-input id="sol_lugar" type="text" name="sol_lugar" :value="$solicitud->sol_lugar" disabled
+                            <x-input id="sol_lugar" type="text" name="sol_lugar" :value="$comite->solicitud->sol_lugar" disabled
                                 autocomplete="sol_lugar" />
                         </div>
                         <div>
                             <x-label for="sol_motivo" value="{{ __('Motivo de la solicitud') }}" />
-                            <x-input id="sol_motivo" type="text" name="sol_motivo" :value="$solicitud->sol_motivo" disabled
+                            <x-input id="sol_motivo" type="text" name="sol_motivo" :value="$comite->solicitud->sol_motivo" disabled
                                 autocomplete="sol_motivo" />
                         </div>
                         <div>
                             <x-label for="sol_descripcion" value="{{ __('Descripción de la solicitud') }}" />
-                            <x-input id="sol_descripcion" type="text" name="sol_descripcion" :value="$solicitud->sol_descripcion"
+                            <x-input id="sol_descripcion" type="text" name="sol_descripcion" :value="$comite->solicitud->sol_descripcion"
                                 disabled autocomplete="sol_descripcion" />
                         </div>
                         <div>
                             <x-label for="sol_observacion" value="{{ __('Observaciones') }}" />
-                            <x-input id="sol_observacion" type="text" name="sol_observacion" :value="$solicitud->sol_observacion"
+                            <x-input id="sol_observacion" type="text" name="sol_observacion" :value="$comite->solicitud->sol_observacion"
                                 disabled autocomplete="sol_observacion" />
                         </div>
                     </div>

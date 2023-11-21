@@ -71,6 +71,6 @@
             </div>
         </div>
         <br>
-        {!! $solicituds->appends(['q' => request()->input('q')])->links() !!}
+        {!! $comites->appends(['q' => request()->input('q')])->links() !!}
     </div>
 </x-app-layout>
