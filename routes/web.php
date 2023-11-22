@@ -121,6 +121,9 @@ Route::middleware('auth')->group(function () {
         Route::get('/gestor/detalleComite/{comite}', [GesViewController::class, 'comDet'])->name('gesViews.comDet');
         //Inicio de sesión
         Route::get('/gestor/sesionComite/{comite}', [GesViewController::class, 'comSes'])->name('gesViews.comSes');
+        //Descargos
+        Route::put('/gestor/descargoInstructor/{comite}/{instructor}', [GesViewController::class, 'comIns'])->name('gesViews.comIns');
+        Route::put('/gestor/descargoAprendiz/{comite}/{aprendiz}', [GesViewController::class, 'comApr'])->name('gesViews.comApr');
     });
 });
 

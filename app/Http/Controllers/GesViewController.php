@@ -3,11 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreComiteRequest;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
+use App\Models\Instructor;
 use App\Models\Solicitud;
+use App\Models\Aprendiz;
 use App\Models\Comite;
 use App\Models\Prueba;
-use Illuminate\Support\Facades\Storage;
 
 class GesViewController extends Controller
 {
@@ -91,5 +93,29 @@ class GesViewController extends Controller
         $numerals = $comite->solicitud->numerals;
         $prueba = $comite->solicitud->prueba;
         return view('gesViews.comDet', compact('comite', 'instructors', 'aprendizs', 'articulos', 'numerals', 'prueba'));
+    }
+    public function comSes(Comite $comite)
+    {
+        $instructors = $comite->solicitud->instructors;
+        $aprendizs = $comite->solicitud->aprendizs;
+        $articulos = $comite->solicitud->articulos;
+        $numerals = $comite->solicitud->numerals;
+        $prueba = $comite->solicitud->prueba;
+        return view('gesViews.comSes', compact('comite', 'instructors', 'aprendizs', 'articulos', 'numerals', 'prueba'));
+    }
+    public function comIns(Request $request, Comite $comite, Instructor $instructor)
+    {
+        $request->validate([
+            'is_descargo' => ['required', 'string'],
+        ]);
+        $is_descargo = $request->input('is_descargo');
+        $solicitud = $comite->solicitud;
+        $instructor->solicituds()->detach($solicitud);
+        return redirect()->route('gesViews.comSes', $comite);
+    }
+    public function comApr(Request $request, Comite $comite, Aprendiz $aprendiz)
+    {
+        $solicitud = $comite->solicitud;
+        return redirect()->route('gesViews.comSes', $comite);
     }
 }
