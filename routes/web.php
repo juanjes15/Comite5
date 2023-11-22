@@ -113,7 +113,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/gestor/rechazar/{solicitud}', [GesViewController::class, 'solNo'])->name('gesViews.solNo');
         Route::get('/gestor/aceptar/{solicitud}', [GesViewController::class, 'solSi'])->name('gesViews.solSi');
         Route::post('/gestor/inicioComite', [GesViewController::class, 'comIni'])->name('gesViews.comIni');
-        
+
         //RUTAS PARA ENTRAR EN SESIÓN
         //Todos los comites en estado "Iniciado"
         Route::get('/gestor/comites', [GesViewController::class, 'comAll'])->name('gesViews.comAll');

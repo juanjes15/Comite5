@@ -9,7 +9,7 @@ return new class extends Migration {
     {
         Schema::create('comite_user', function (Blueprint $table) {
             $table->id();
-            $table->string('cu_descargo', 7000);
+            $table->string('cu_descargo', 7000)->nullable();
             $table->foreignId('comite_id')->constrained()->cascadeOnDelete();
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->timestamps();
