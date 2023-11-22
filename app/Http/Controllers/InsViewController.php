@@ -231,7 +231,6 @@ class InsViewController extends Controller
         return view('insViews.revSol', compact('solicituds'));
     }
 
-
     public function revDet(Solicitud $solicitud)
     {
         $instructors = $solicitud->instructors;
@@ -278,6 +277,7 @@ class InsViewController extends Controller
 
         return redirect()->back();
     }
+
     public function revIns(Solicitud $solicitud)
     {
         $instructors = Instructor::orderBy('ins_nombres')->orderBy('ins_apellidos')->get();
@@ -301,6 +301,7 @@ class InsViewController extends Controller
         $instructor->solicituds()->detach($solicitud);
         return redirect()->route('insViews.revIns', $solicitud);
     }
+
     public function revApr(Solicitud $solicitud)
     {
         $aprendizs2 = $solicitud->aprendizs;
@@ -366,6 +367,7 @@ class InsViewController extends Controller
         $numeral->solicituds()->detach($solicitud);
         return redirect()->route('insViews.revFal', $solicitud);
     }
+    
     public function revDel(Solicitud $solicitud)
     {
         $solicitud->delete();
