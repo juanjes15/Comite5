@@ -2,21 +2,21 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\UpdatePruebaRequest;
 use App\Http\Requests\UpdateSolicitudRequest;
+use App\Http\Requests\StoreSolicitudRequest;
+use App\Http\Requests\UpdatePruebaRequest;
 use App\Http\Requests\StorePruebaRequest;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Http\Request;
+use App\Models\Instructor;
+use App\Models\Solicitud;
 use App\Models\Articulo;
 use App\Models\Capitulo;
-use App\Models\Ficha;
-use App\Models\Instructor;
 use App\Models\Aprendiz;
 use App\Models\Numeral;
 use App\Models\Prueba;
-use App\Models\Solicitud;
-use Illuminate\Http\Request;
-use App\Http\Requests\StoreSolicitudRequest;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Storage;
+use App\Models\Ficha;
 
 class InsViewController extends Controller
 {

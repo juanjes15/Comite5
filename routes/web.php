@@ -1,19 +1,19 @@
 <?php
 
-use App\Http\Controllers\InsViewController;
-use App\Http\Controllers\GesViewController;
-use App\Http\Controllers\Profile\AvatarController;
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\RegisteredUserController;
-use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\ProgramaController;
-use App\Http\Controllers\FichaController;
+use App\Http\Controllers\Profile\AvatarController;
 use App\Http\Controllers\InstructorController;
+use App\Http\Controllers\ProgramaController;
 use App\Http\Controllers\AprendizController;
 use App\Http\Controllers\CapituloController;
 use App\Http\Controllers\ArticuloController;
 use App\Http\Controllers\NumeralController;
+use App\Http\Controllers\InsViewController;
+use App\Http\Controllers\GesViewController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\FichaController;
 use App\Http\Controllers\UserController;
+use Illuminate\Support\Facades\Route;
 
 //Landing page
 Route::view('/', 'welcome');

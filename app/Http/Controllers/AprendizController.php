@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreAprendizRequest;
 use App\Http\Requests\UpdateAprendizRequest;
-use Illuminate\Http\Request;
+use App\Http\Requests\StoreAprendizRequest;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Http\Request;
 use App\Models\Aprendiz;
 use App\Models\Ficha;
 

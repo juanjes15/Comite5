@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreArticuloRequest;
 use App\Http\Requests\UpdateArticuloRequest;
-use Illuminate\Http\Request;
+use App\Http\Requests\StoreArticuloRequest;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Http\Request;
 use App\Models\Articulo;
 use App\Models\Capitulo;
 

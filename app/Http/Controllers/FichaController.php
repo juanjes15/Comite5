@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreFichaRequest;
-use App\Http\Requests\UpdateFichaRequest;
-use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Builder;
-use App\Models\Ficha;
-use App\Models\Programa;
+use App\Http\Requests\UpdateFichaRequest;
+use App\Http\Requests\StoreFichaRequest;
+use Illuminate\Http\Request;
 use App\Models\Instructor;
+use App\Models\Programa;
+use App\Models\Ficha;
 
 class FichaController extends Controller
 {

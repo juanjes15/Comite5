@@ -2,9 +2,9 @@
 
 namespace App\Http\Requests;
 
-use App\Models\Aprendiz;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
+use App\Models\Aprendiz;
 
 class UpdateAprendizRequest extends FormRequest
 {

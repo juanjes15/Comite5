@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreNumeralRequest;
 use App\Http\Requests\UpdateNumeralRequest;
-use Illuminate\Http\Request;
+use App\Http\Requests\StoreNumeralRequest;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Http\Request;
 use App\Models\Articulo;
 use App\Models\Numeral;
 

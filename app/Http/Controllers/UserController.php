@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Aprendiz;
-use App\Models\Instructor;
-use App\Models\User;
-use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Validation\Rule;
+use Illuminate\Http\Request;
+use App\Models\Instructor;
+use App\Models\Aprendiz;
+use App\Models\User;
 
 class UserController extends Controller
 {

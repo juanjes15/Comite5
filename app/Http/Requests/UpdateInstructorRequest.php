@@ -2,9 +2,9 @@
 
 namespace App\Http\Requests;
 
-use App\Models\Instructor;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
+use App\Models\Instructor;
 
 class UpdateInstructorRequest extends FormRequest
 {

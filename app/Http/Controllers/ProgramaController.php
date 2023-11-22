@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreProgramaRequest;
 use App\Http\Requests\UpdateProgramaRequest;
+use App\Http\Requests\StoreProgramaRequest;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use App\Models\Programa;

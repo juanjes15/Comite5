@@ -2,9 +2,9 @@
 
 namespace App\Http\Requests;
 
-use App\Models\Articulo;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
+use App\Models\Articulo;
 
 class UpdateArticuloRequest extends FormRequest
 {
