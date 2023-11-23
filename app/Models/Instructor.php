@@ -34,4 +34,10 @@ class Instructor extends Model
     {
         return $this->hasOne(User::class);
     }
+
+    //Obtener todos los planes de mejoramiento del Instructor
+    public function plans(): HasMany
+    {
+        return $this->hasMany(Plan::class);
+    }
 }

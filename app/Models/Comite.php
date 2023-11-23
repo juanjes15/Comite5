@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Model;
 
 class Comite extends Model
@@ -27,5 +28,11 @@ class Comite extends Model
     public function users(): BelongsToMany
     {
         return $this->belongsToMany(User::class)->as('ComiteUser');
+    }
+
+    //Obtener el plan de mejoramiento asociado al Comite
+    public function plan(): HasOne
+    {
+        return $this->hasOne(Plan::class);
     }
 }
