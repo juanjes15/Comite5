@@ -26,7 +26,7 @@ class Instructor extends Model
     //Las solicitudes a las que pertenece el Instructor
     public function solicituds(): BelongsToMany
     {
-        return $this->belongsToMany(Solicitud::class)->as('InstructorSolicitud');
+        return $this->belongsToMany(Solicitud::class)->as('InstructorSolicitud')->withPivot('is_descargo');
     }
 
     //Obtener el usuario asociado al Instructor

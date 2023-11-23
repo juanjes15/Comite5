@@ -114,16 +114,24 @@ Route::middleware('auth')->group(function () {
         Route::get('/gestor/aceptar/{solicitud}', [GesViewController::class, 'solSi'])->name('gesViews.solSi');
         Route::post('/gestor/inicioComite', [GesViewController::class, 'comIni'])->name('gesViews.comIni');
 
-        //RUTAS PARA ENTRAR EN SESIÓN
+        //RUTAS PARA ENTRAR EN SESIÓN, SESIÓN Y FINALIZAR COMITÉ
         //Todos los comites en estado "Iniciado"
         Route::get('/gestor/comites', [GesViewController::class, 'comAll'])->name('gesViews.comAll');
         //Detalle del comité
         Route::get('/gestor/detalleComite/{comite}', [GesViewController::class, 'comDet'])->name('gesViews.comDet');
+        //Todos los comites en estado "En sesion"
+        Route::get('/gestor/comitesEnSesion', [GesViewController::class, 'comAls'])->name('gesViews.comAls');
         //Inicio de sesión
         Route::get('/gestor/sesionComite/{comite}', [GesViewController::class, 'comSes'])->name('gesViews.comSes');
         //Descargos
         Route::put('/gestor/descargoInstructor/{comite}/{instructor}', [GesViewController::class, 'comIns'])->name('gesViews.comIns');
         Route::put('/gestor/descargoAprendiz/{comite}/{aprendiz}', [GesViewController::class, 'comApr'])->name('gesViews.comApr');
+        //Recomendación
+        Route::put('/gestor/recomendacionComite/{comite}', [GesViewController::class, 'comRec'])->name('gesViews.comRec');
+        //Finalizar comité
+        Route::get('/gestor/finComite/{comite}', [GesViewController::class, 'comFin'])->name('gesViews.comFin');
+        //Todos los comites en estado "Finalizado"
+        Route::get('/gestor/comitesFinalizados', [GesViewController::class, 'comAlf'])->name('gesViews.comAlf');
     });
 });
 

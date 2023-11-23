@@ -30,7 +30,7 @@ class Aprendiz extends Model
     //Las solicitudes a las que pertenece el Aprendiz
     public function solicituds(): BelongsToMany
     {
-        return $this->belongsToMany(Solicitud::class)->as('AprendizSolicitud');
+        return $this->belongsToMany(Solicitud::class)->as('AprendizSolicitud')->withPivot('as_descargo');
     }
 
     //Obtener el usuario asociado al Aprendiz

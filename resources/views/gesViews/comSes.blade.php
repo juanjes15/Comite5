@@ -158,38 +158,66 @@
 
                     <div class="bg-sena-100 p-6 rounded-lg mb-6">
                         <h1 class="mb-2 text-lg font-semibold">Descargos de los instructores</h1>
-                        @forelse ($instructors as $instructor)
+                        @foreach ($instructors as $instructor)
                             <form method="POST"
                                 action="{{ route('gesViews.comIns', ['comite' => $comite, 'instructor' => $instructor]) }}">
                                 @csrf
                                 @method('PUT')
                                 <div>
-                                    <x-label for="is_descargo" value="{{ $instructor->ins_nombres }}" />
-                                    <textarea id="is_descargo" rows="4" name="is_descargo" autofocus autocomplete="is_descargo"
-                                        class="block mt-1 p-2.5 w-full rounded-md shadow-sm">{{ $instructor->is_descargo }}</textarea>
+                                    <x-label for="is_descargo"
+                                        value="{{ $instructor->ins_nombres . ' ' . $instructor->ins_apellidos }}" />
+                                    <textarea id="is_descargo" rows="4" name="is_descargo" required autofocus autocomplete="is_descargo"
+                                        class="block mt-1 p-2.5 w-full rounded-md shadow-sm">{{ $instructor->InstructorSolicitud->is_descargo ?? '' }}</textarea>
+                                </div>
+                                <div class="flex mt-4">
+                                    <x-button>
+                                        {{ __('Guardar') }}
+                                    </x-button>
                                 </div>
                             </form>
-                        @endforelse
+                        @endforeach
                     </div>
 
                     <div class="bg-sena-100 p-6 rounded-lg mb-6">
                         <h1 class="mb-2 text-lg font-semibold">Descargos de los aprendices</h1>
-                        @forelse ($aprendizs as $aprendiz)
+                        @foreach ($aprendizs as $aprendiz)
                             <form method="POST"
                                 action="{{ route('gesViews.comApr', ['comite' => $comite, 'aprendiz' => $aprendiz]) }}">
                                 @csrf
                                 @method('PUT')
                                 <div>
-                                    <x-label for="as_descargo" value="{{ $aprendiz->apr_nombres }}" />
-                                    <textarea id="as_descargo" rows="4" name="as_descargo" autofocus autocomplete="as_descargo"
-                                        class="block mt-1 p-2.5 w-full rounded-md shadow-sm">{{ $aprendiz->as_descargo }}</textarea>
+                                    <x-label for="as_descargo"
+                                        value="{{ $aprendiz->apr_nombres . ' ' . $aprendiz->apr_apellidos }}" />
+                                    <textarea id="as_descargo" rows="4" name="as_descargo" required autofocus autocomplete="as_descargo"
+                                        class="block mt-1 p-2.5 w-full rounded-md shadow-sm">{{ $aprendiz->AprendizSolicitud->as_descargo ?? '' }}</textarea>
+                                </div>
+                                <div class="flex mt-4">
+                                    <x-button>
+                                        {{ __('Guardar') }}
+                                    </x-button>
                                 </div>
                             </form>
-                        @endforelse
+                        @endforeach
+                    </div>
+                    <div class="bg-sena-100 p-6 rounded-lg mb-6">
+                        <h1 class="mb-2 text-lg font-semibold">Recomendación</h1>
+                        <form method="POST" action="{{ route('gesViews.comRec', $comite) }}">
+                            @csrf
+                            @method('PUT')
+                            <div>
+                                <x-label for="com_recomendacion" value="{{ __('Recomendación del Comité') }}" />
+                                <textarea id="com_recomendacion" rows="3" name="com_recomendacion" required autofocus
+                                    autocomplete="com_recomendacion" class="block mt-1 p-2.5 w-full rounded-md shadow-sm">{{ $comite->com_recomendacion }}</textarea>
+                            </div>
+                            <div class="flex mt-4">
+                                <x-button>
+                                    {{ __('Guardar') }}
+                                </x-button>
+                            </div>
+                        </form>
                     </div>
                     <div class="flex mt-4">
-                        <x-link href="{{ route('gesViews.comSes', $comite) }}" class="mx-3">Entrar en
-                            sesión</x-link>
+                        <x-link href="{{ route('gesViews.comFin', $comite) }}" class="mx-3">Finalizar</x-link>
                         <x-linkb href="{{ route('gesViews.comAll') }}" class="mx-3">Atrás</x-linkb>
                     </div>
                 </div>

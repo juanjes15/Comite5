@@ -65,6 +65,7 @@ class GesViewController extends Controller
         $solicitud = $comite->solicitud;
         $solicitud->sol_estado = 'Aceptado';
         $solicitud->save();
+        //TODO: Enviar email/notificación
         //A cada aprendiz en esta solicitud se le aumenta su número de comités asistidos
         $aprendizs = $solicitud->aprendizs;
         foreach ($aprendizs as $aprendiz) {
@@ -94,8 +95,21 @@ class GesViewController extends Controller
         $prueba = $comite->solicitud->prueba;
         return view('gesViews.comDet', compact('comite', 'instructors', 'aprendizs', 'articulos', 'numerals', 'prueba'));
     }
+    public function comAls(Request $request)
+    {
+        $comites = Comite::where('com_estado', '=', 'En sesion')
+            ->when($request->q, function ($query, $search) {
+                $query->where('com_fecha', 'like', "%{$search}%")
+                    ->orWhere('com_lugar', 'like', "%{$search}%");
+            })
+            ->orderBy('com_fecha', 'asc')
+            ->paginate(5);
+
+        return view('gesViews.comAls', compact('comites'));
+    }
     public function comSes(Comite $comite)
     {
+        $comite->update(['com_estado' => 'En sesion']);
         $instructors = $comite->solicitud->instructors;
         $aprendizs = $comite->solicitud->aprendizs;
         $articulos = $comite->solicitud->articulos;
@@ -109,13 +123,60 @@ class GesViewController extends Controller
             'is_descargo' => ['required', 'string'],
         ]);
         $is_descargo = $request->input('is_descargo');
+
         $solicitud = $comite->solicitud;
-        $instructor->solicituds()->detach($solicitud);
+        // Obtener la relación entre la solicitud y el instructor
+        $relacion = $solicitud->instructors()->where('instructor_id', $instructor->id)->first();
+        // Verificar si la relación existe
+        if ($relacion) {
+            // Modificar el valor de 'is_descargo' en la tabla intermedia
+            $relacion->InstructorSolicitud->update(['is_descargo' => $is_descargo]);
+        }
         return redirect()->route('gesViews.comSes', $comite);
     }
     public function comApr(Request $request, Comite $comite, Aprendiz $aprendiz)
     {
+        $request->validate([
+            'as_descargo' => ['required', 'string'],
+        ]);
+        $as_descargo = $request->input('as_descargo');
+
         $solicitud = $comite->solicitud;
+        // Obtener la relación entre la solicitud y el aprendiz
+        $relacion = $solicitud->aprendizs()->where('aprendiz_id', $aprendiz->id)->first();
+        // Verificar si la relación existe
+        if ($relacion) {
+            // Modificar el valor de 'as_descargo' en la tabla intermedia
+            $relacion->AprendizSolicitud->update(['as_descargo' => $as_descargo]);
+        }
         return redirect()->route('gesViews.comSes', $comite);
+    }
+    //TODO: Descargos de usuarios
+    public function comRec(Request $request, Comite $comite)
+    {
+        $request->validate([
+            'com_recomendacion' => ['required', 'string'],
+        ]);
+        $com_recomendacion = $request->input('com_recomendacion');
+        $comite->update(['com_recomendacion' => $com_recomendacion]);
+        return redirect()->route('gesViews.comSes', $comite);
+    }
+    public function comFin(Comite $comite)
+    {
+        $comite->update(['com_estado' => 'Finalizado']);
+        //TODO: Generar Acta
+        return redirect()->route('gesViews.comAlf', $comite);
+    }
+    public function comAlf(Request $request)
+    {
+        $comites = Comite::where('com_estado', '=', 'Finalizado')
+            ->when($request->q, function ($query, $search) {
+                $query->where('com_fecha', 'like', "%{$search}%")
+                    ->orWhere('com_lugar', 'like', "%{$search}%");
+            })
+            ->orderBy('com_fecha', 'asc')
+            ->paginate(5);
+
+        return view('gesViews.comAlf', compact('comites'));
     }
 }
