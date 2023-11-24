@@ -41,11 +41,13 @@
                         <input type="text" name="solicitud_id" hidden value="{{ $solicitud_id }}">
                         <div class="flex mt-4">
                             <x-button>
-                                {{ __('Siguiente') }}
+                                {{ __('Finalizar') }}
                             </x-button>
                             <x-linkb href="{{ url()->previous() }}" class="mx-3">Atras</x-link>
                         </div>
                     </form>
+                    <p class="mt-4">Al finalizar, podrás revisar la solicitud y corregir errores, <br> o eliminar la
+                        solicitud antes de que sea aceptada</p>
                 </div>
             </div>
         </div>

@@ -132,6 +132,19 @@ Route::middleware('auth')->group(function () {
         Route::get('/gestor/finComite/{comite}', [GesViewController::class, 'comFin'])->name('gesViews.comFin');
         //Todos los comites en estado "Finalizado"
         Route::get('/gestor/comitesFinalizados', [GesViewController::class, 'comAlf'])->name('gesViews.comAlf');
+        //Detalle del comité finalizado
+        Route::get('/gestor/detalleComiteF/{comite}', [GesViewController::class, 'comDef'])->name('gesViews.comDef');
+        //Descargar acta
+        Route::get('/gestor/acta/{comite}', [GesViewController::class, 'dowAct'])->name('gesViews.dowAct');
+
+        //RUTAS PARA EL PLAN DE MEJORAMIENTO
+        //Todos los planes de mejoramiento
+        Route::get('/gestor/planes', [GesViewController::class, 'plaAll'])->name('gesViews.plaAll');
+        //Detalle del plan
+        Route::get('/gestor/detallePlan/{plan}', [GesViewController::class, 'plaDet'])->name('gesViews.plaDet');
+        //Muestra la vista (GET) y almacena (POST) un plan de mejoramiento
+        Route::get('/gestor/crearPlan/{comite}', [GesViewController::class, 'plaIni'])->name('gesViews.plaIni');
+        Route::post('/gestor/crearPlan', [GesViewController::class, 'storePla']);
     });
 });
 

@@ -210,7 +210,11 @@ class InsViewController extends Controller
 
         Prueba::create($validatedData);
 
-        return redirect()->route('insViews.sol1Ini');
+        //Accede al valor de 'solicitud_id' almacenado en la sesión
+        $solicitud_id = session('solicitud_id');
+        $solicitud = Solicitud::find($solicitud_id);
+
+        return redirect()->route('insViews.revDet', $solicitud);
     }
 
     public function revSol(Request $request)

@@ -179,4 +179,27 @@ class GesViewController extends Controller
 
         return view('gesViews.comAlf', compact('comites'));
     }
+    public function comDef(Comite $comite)
+    {
+        $instructors = $comite->solicitud->instructors;
+        $aprendizs = $comite->solicitud->aprendizs;
+        $articulos = $comite->solicitud->articulos;
+        $numerals = $comite->solicitud->numerals;
+        $prueba = $comite->solicitud->prueba;
+        return view('gesViews.comDef', compact('comite', 'instructors', 'aprendizs', 'articulos', 'numerals', 'prueba'));
+    }
+    public function dowAct(Comite $comite)
+    {
+        if ($comite->com_acta == null) {
+            return redirect()->back()->with('error2', 'El acta no ha sido generada');
+        } else if (Storage::disk('public')->exists($comite->com_acta)) {
+            return Storage::disk('public')->download($comite->com_acta);
+        } else {
+            return redirect()->back()->with('error2', 'No se encuentra el archivo');
+        }
+    }
+    public function plaIni(Comite $comite)
+    {
+        return view('gesViews.plaIni', compact('comite'));
+    }
 }

@@ -19,7 +19,7 @@ class FichaSeeder extends Seeder
                 'fic_modalidad' => 'Presencial',
                 'fic_jornada' => 'Diurna',
                 'programa_id' => fake()->numberBetween(1, 10),
-                'instructor_id' => fake()->numberBetween(1, 10),
+                'instructor_id' => fake()->numberBetween(1, 5),
             ]);
         }
     }

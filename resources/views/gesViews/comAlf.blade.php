@@ -53,7 +53,7 @@
                                         {{ $comite->com_lugar }}
                                     </td>
                                     <td class="px-6 py-4 text-center">
-                                        <x-link2 title="Detalles" href="{{ route('gesViews.comDet', $comite) }}">
+                                        <x-link2 title="Detalles" href="{{ route('gesViews.comDef', $comite) }}">
                                             <x-svg-edit></x-svg-edit>
                                         </x-link2>
                                     </td>

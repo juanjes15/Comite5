@@ -131,44 +131,41 @@
                             <path
                                 d="M14 2a3.963 3.963 0 0 0-1.4.267 6.439 6.439 0 0 1-1.331 6.638A4 4 0 1 0 14 2Zm1 9h-1.264A6.957 6.957 0 0 1 15 15v2a2.97 2.97 0 0 1-.184 1H19a1 1 0 0 0 1-1v-1a5.006 5.006 0 0 0-5-5ZM6.5 9a4.5 4.5 0 1 0 0-9 4.5 4.5 0 0 0 0 9ZM8 10H5a5.006 5.006 0 0 0-5 5v2a1 1 0 0 0 1 1h11a1 1 0 0 0 1-1v-2a5.006 5.006 0 0 0-5-5Z" />
                         </svg>
-                        <span class="flex-1 ml-3 whitespace-nowrap">Por aprobar</span>
+                        <span class="flex-1 ml-3 whitespace-nowrap">Solicitudes</span>
                     </a>
                 </li>
                 <li>
-                    <a href="{{ route('gesViews.comAll') }}"
-                        class="flex items-center p-3 rounded-lg group bg-sena-700 hover:text-black hover:bg-sena-200">
+                    <button type="button"
+                        class="flex items-center w-full p-3 transition duration-75 rounded-lg group bg-sena-700 hover:text-black hover:bg-sena-200"
+                        aria-controls="dropdown-comites" data-collapse-toggle="dropdown-comites">
                         <svg class="flex-shrink-0 w-5 h-5 text-sena-400 transition duration-75 group-hover:text-black"
                             aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
-                            viewBox="0 0 20 18">
+                            viewBox="0 0 18 21">
                             <path
                                 d="M14 2a3.963 3.963 0 0 0-1.4.267 6.439 6.439 0 0 1-1.331 6.638A4 4 0 1 0 14 2Zm1 9h-1.264A6.957 6.957 0 0 1 15 15v2a2.97 2.97 0 0 1-.184 1H19a1 1 0 0 0 1-1v-1a5.006 5.006 0 0 0-5-5ZM6.5 9a4.5 4.5 0 1 0 0-9 4.5 4.5 0 0 0 0 9ZM8 10H5a5.006 5.006 0 0 0-5 5v2a1 1 0 0 0 1 1h11a1 1 0 0 0 1-1v-2a5.006 5.006 0 0 0-5-5Z" />
                         </svg>
-                        <span class="flex-1 ml-3 whitespace-nowrap">Iniciar comité</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="{{ route('gesViews.comAls') }}"
-                        class="flex items-center p-3 rounded-lg group bg-sena-700 hover:text-black hover:bg-sena-200">
-                        <svg class="flex-shrink-0 w-5 h-5 text-sena-400 transition duration-75 group-hover:text-black"
-                            aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
-                            viewBox="0 0 20 18">
-                            <path
-                                d="M14 2a3.963 3.963 0 0 0-1.4.267 6.439 6.439 0 0 1-1.331 6.638A4 4 0 1 0 14 2Zm1 9h-1.264A6.957 6.957 0 0 1 15 15v2a2.97 2.97 0 0 1-.184 1H19a1 1 0 0 0 1-1v-1a5.006 5.006 0 0 0-5-5ZM6.5 9a4.5 4.5 0 1 0 0-9 4.5 4.5 0 0 0 0 9ZM8 10H5a5.006 5.006 0 0 0-5 5v2a1 1 0 0 0 1 1h11a1 1 0 0 0 1-1v-2a5.006 5.006 0 0 0-5-5Z" />
+                        <span class="flex-1 ml-3 text-left whitespace-nowrap">Comités...</span>
+                        <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                            viewBox="0 0 10 6">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                stroke-width="2" d="m1 1 4 4 4-4" />
                         </svg>
-                        <span class="flex-1 ml-3 whitespace-nowrap">En sesión</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="{{ route('gesViews.comAlf') }}"
-                        class="flex items-center p-3 rounded-lg group bg-sena-700 hover:text-black hover:bg-sena-200">
-                        <svg class="flex-shrink-0 w-5 h-5 text-sena-400 transition duration-75 group-hover:text-black"
-                            aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
-                            viewBox="0 0 20 18">
-                            <path
-                                d="M14 2a3.963 3.963 0 0 0-1.4.267 6.439 6.439 0 0 1-1.331 6.638A4 4 0 1 0 14 2Zm1 9h-1.264A6.957 6.957 0 0 1 15 15v2a2.97 2.97 0 0 1-.184 1H19a1 1 0 0 0 1-1v-1a5.006 5.006 0 0 0-5-5ZM6.5 9a4.5 4.5 0 1 0 0-9 4.5 4.5 0 0 0 0 9ZM8 10H5a5.006 5.006 0 0 0-5 5v2a1 1 0 0 0 1 1h11a1 1 0 0 0 1-1v-2a5.006 5.006 0 0 0-5-5Z" />
-                        </svg>
-                        <span class="flex-1 ml-3 whitespace-nowrap">Finalizados</span>
-                    </a>
+                    </button>
+                    {{-- Añadir "hidden" a las clases del ul para ocultar el dropdown --}}
+                    <ul id="dropdown-comites" class="py-2 space-y-2">
+                        <li>
+                            <a class="flex items-center w-full p-2 transition duration-75 rounded-lg pl-11 group bg-sena-600 hover:text-black hover:bg-sena-200"
+                                href="{{ route('gesViews.comAll') }}">aceptados</a>
+                        </li>
+                        <li>
+                            <a class="flex items-center w-full p-2 transition duration-75 rounded-lg pl-11 group bg-sena-600 hover:text-black hover:bg-sena-200"
+                                href="{{ route('gesViews.comAls') }}">en sesión</a>
+                        </li>
+                        <li>
+                            <a class="flex items-center w-full p-2 transition duration-75 rounded-lg pl-11 group bg-sena-600 hover:text-black hover:bg-sena-200"
+                                href="{{ route('gesViews.comAlf') }}">finalizados</a>
+                        </li>
+                    </ul>
                 </li>
             @endif
         </ul>

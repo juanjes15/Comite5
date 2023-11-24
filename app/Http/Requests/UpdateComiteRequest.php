@@ -19,8 +19,8 @@ class UpdateComiteRequest extends FormRequest
             'com_estado' => ['required', 'string', 'max:255'],
             'com_fecha' => ['required', 'date'],
             'com_lugar' => ['required', 'string', 'max:255'],
-            'com_recomendacion' => ['required', 'string', 'max:255'],
-            'com_acta' => ['required', 'string', 'max:255'],
+            'com_recomendacion' => ['nullable', 'string', 'max:255'],
+            'com_acta' => ['nullable', 'file'],
             'solicitud_id' => ['required', 'exists:solicituds,id']
         ];
     }
