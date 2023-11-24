@@ -99,6 +99,14 @@ Route::middleware('auth')->group(function () {
         Route::post('/instructor/revisarFaltas/{solicitud}', [InsViewController::class, 'storeFal']);
         Route::delete('/instructor/eliminarArticulo/{solicitud}/{articulo}', [InsViewController::class, 'revArt'])->name('insViews.revArt');
         Route::delete('/instructor/eliminarNumeral/{solicitud}/{numeral}', [InsViewController::class, 'revNum'])->name('insViews.revNum');
+
+        //RUTAS PARA COMITÉS FINALIZADOS
+        //Todos los comités en estado "Finalizado"
+        Route::get('/instructor/comitesFinalizados', [InsViewController::class, 'comAlf'])->name('insViews.comAlf');
+        //Detalle del comité finalizado
+        Route::get('/instructor/detalleComiteF/{comite}', [InsViewController::class, 'comDef'])->name('insViews.comDef');
+        //Descargar acta
+        Route::get('/instructor/acta/{comite}', [InsViewController::class, 'dowAct'])->name('insViews.dowAct');
     });
 
     //Rutas para el Gestor de Comites

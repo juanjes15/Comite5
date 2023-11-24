@@ -205,4 +205,14 @@ class GesViewController extends Controller
         Plan::create($request->validated());
         return redirect()->route('gesViews.comDef', $comite);
     }
+    public function dowPla(Plan $plan)
+    {
+        if ($plan->pla_url == null) {
+            return redirect()->back()->with('error3', 'No se ha cargado ningún archivo');
+        } else if (Storage::disk('public')->exists($plan->pla_url)) {
+            return Storage::disk('public')->download($plan->pla_url);
+        } else {
+            return redirect()->back()->with('error3', 'No se encuentra el archivo');
+        }
+    }
 }
