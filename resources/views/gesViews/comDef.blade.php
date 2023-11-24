@@ -199,13 +199,60 @@
                             @endif
                         </div>
                     </div>
-                    <div class="flex mt-4">
+                    <div class="bg-sena-100 p-6 rounded-lg mb-6">
                         @if ($comite->plan == null)
-                            <x-link href="{{ route('gesViews.planIni', $comite) }}" class="mx-3">Crear Plan de
-                                mejoramiento</x-link>
+                            <h1 class="mb-2 text-lg font-semibold">Asignar instructor al plan de mejoramiento</h1>
+                            <h2 class="mt-6 mb-2 font-semibold">Con esta acción está creando el plan de mejoramiento
+                                para este comité</h2>
+                            <form method="POST" action="{{ route('gesViews.plaIni', $comite) }}">
+                                @csrf
+                                <div>
+                                    <x-label for="instructor_id" value="{{ __('Instructor encargado del plan') }}" />
+                                    <select name="instructor_id" class="bg-white rounded-md block w-full p-1.5">
+                                        <option value="">--Seleccione un Instructor--</option>
+                                        @foreach ($instructors as $instructor)
+                                            <option value="{{ $instructor->id }}">{{ $instructor->ins_nombres }}
+                                                {{ $instructor->ins_apellidos }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <input type="text" name="comite_id" hidden value="{{ $comite->id }}">
+                                <div class="flex mt-4">
+                                    <x-button>
+                                        {{ __('Crear Plan') }}
+                                    </x-button>
+                                </div>
+                            </form>
                         @else
-                            <x-link href="{{ route('gesViews.planDet', $comite) }}" class="mx-3">Detalles Plan de
-                                mejoramiento</x-link>
+                            <h1 class="mb-2 text-lg font-semibold">Detalles del Plan de Mejoramiento</h1>
+                            <div>
+                                <x-label for="pla_fechaInicio" value="{{ __('Fecha de Inicio') }}" />
+                                <x-input id="pla_fechaInicio" class="block mt-1 w-full" type="date"
+                                    name="pla_fechaInicio" :value="$comite->plan->pla_fechaInicio" disabled
+                                    autocomplete="pla_fechaInicio" />
+                            </div>
+                            <div>
+                                <x-label for="pla_fechaFin" value="{{ __('Fecha Final') }}" />
+                                <x-input id="pla_fechaFin" class="block mt-1 w-full" type="date"
+                                    name="pla_fechaFin" :value="$comite->plan->pla_fechaFin" disabled autocomplete="pla_fechaFin" />
+                            </div>
+                            <div>
+                                <x-label for="pla_descripcion"
+                                    value="{{ __('Breve descripción del plan de mejoramiento') }}" />
+                                <x-input id="pla_descripcion" class="block mt-1 w-full" type="text"
+                                    name="pla_descripcion" :value="$comite->plan->pla_descripcion" disabled
+                                    autocomplete="pla_descripcion" />
+                            </div>
+                            <div>
+                                <x-label for="pla_url" value="{{ __('Archivo') }}" />
+                                <x-link2 href="{{ route('gesViews.dowPla', $comite->plan) }}">Descargar</x-link2>
+                                @if (session('error3'))
+                                    <div class="text-red-500">
+                                        {{ session('error3') }}
+                                    </div>
+                                @endif
+                            </div>
                         @endif
                         <x-linkb href="{{ route('gesViews.comAlf') }}" class="mx-3">Atrás</x-linkb>
                     </div>

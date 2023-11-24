@@ -19,7 +19,7 @@ class UpdatePlanRequest extends FormRequest
             'pla_fechaInicio' => ['required', 'date'],
             'pla_fechaFin' => ['required', 'date'],
             'pla_descripcion' => ['required', 'string', 'max:255'],
-            'pla_url' => ['nullable', 'file'],
+            'pla_url' => ['required', 'file'],
             'comite_id' => ['required', 'exists:comites,id'],
             'instructor_id' => ['required', 'exists:instructors,id']
         ];

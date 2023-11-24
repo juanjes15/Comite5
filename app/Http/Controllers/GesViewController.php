@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreComiteRequest;
+use App\Http\Requests\StorePlanRequest;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 use App\Models\Instructor;
@@ -10,6 +11,7 @@ use App\Models\Solicitud;
 use App\Models\Aprendiz;
 use App\Models\Comite;
 use App\Models\Prueba;
+use App\Models\Plan;
 
 class GesViewController extends Controller
 {
@@ -198,8 +200,9 @@ class GesViewController extends Controller
             return redirect()->back()->with('error2', 'No se encuentra el archivo');
         }
     }
-    public function plaIni(Comite $comite)
+    public function plaIni(StorePlanRequest $request, Comite $comite)
     {
-        return view('gesViews.plaIni', compact('comite'));
+        Plan::create($request->validated());
+        return redirect()->route('gesViews.comDef', $comite);
     }
 }

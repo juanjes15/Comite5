@@ -142,9 +142,8 @@ Route::middleware('auth')->group(function () {
         Route::get('/gestor/planes', [GesViewController::class, 'plaAll'])->name('gesViews.plaAll');
         //Detalle del plan
         Route::get('/gestor/detallePlan/{plan}', [GesViewController::class, 'plaDet'])->name('gesViews.plaDet');
-        //Muestra la vista (GET) y almacena (POST) un plan de mejoramiento
-        Route::get('/gestor/crearPlan/{comite}', [GesViewController::class, 'plaIni'])->name('gesViews.plaIni');
-        Route::post('/gestor/crearPlan', [GesViewController::class, 'storePla']);
+        //Asigna un instructor al plan de mejoramiento, creando dicho plan
+        Route::post('/gestor/crearPlan/{comite}', [GesViewController::class, 'plaIni'])->name('gesViews.plaIni');
     });
 });
 

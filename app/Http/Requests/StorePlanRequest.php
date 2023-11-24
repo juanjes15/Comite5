@@ -16,9 +16,9 @@ class StorePlanRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'pla_fechaInicio' => ['required', 'date'],
-            'pla_fechaFin' => ['required', 'date'],
-            'pla_descripcion' => ['required', 'string', 'max:255'],
+            'pla_fechaInicio' => ['nullable', 'date'],
+            'pla_fechaFin' => ['nullable', 'date'],
+            'pla_descripcion' => ['nullable', 'string', 'max:255'],
             'pla_url' => ['nullable', 'file'],
             'comite_id' => ['required', 'exists:comites,id'],
             'instructor_id' => ['required', 'exists:instructors,id']
