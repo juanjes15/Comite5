@@ -13,6 +13,7 @@ class Plan extends Model
         'pla_fechaFin',
         'pla_descripcion',
         'pla_url',
+        'pla_estado',
         'comite_id',
         'instructor_id',
     ];

@@ -146,12 +146,10 @@ Route::middleware('auth')->group(function () {
         Route::get('/gestor/acta/{comite}', [GesViewController::class, 'dowAct'])->name('gesViews.dowAct');
 
         //RUTAS PARA EL PLAN DE MEJORAMIENTO
-        //Todos los planes de mejoramiento
-        Route::get('/gestor/planes', [GesViewController::class, 'plaAll'])->name('gesViews.plaAll');
-        //Detalle del plan
-        Route::get('/gestor/detallePlan/{plan}', [GesViewController::class, 'plaDet'])->name('gesViews.plaDet');
-        //Asigna un instructor al plan de mejoramiento, creando dicho plan
+        //Asigna un instructor al plan de mejoramiento, creando dicho plan. También relaciona los aprendices al plan
         Route::post('/gestor/crearPlan/{comite}', [GesViewController::class, 'plaIni'])->name('gesViews.plaIni');
+        //Descargar plan de mejoramiento
+        Route::get('/gestor/plan/{comite}', [GesViewController::class, 'dowPla'])->name('gesViews.dowPla');
     });
 });
 

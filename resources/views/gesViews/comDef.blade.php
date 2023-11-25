@@ -217,6 +217,7 @@
                                         @endforeach
                                     </select>
                                 </div>
+                                <input type="text" name="pla_estado" hidden value="Creado">
                                 <input type="text" name="comite_id" hidden value="{{ $comite->id }}">
                                 <div class="flex mt-4">
                                     <x-button>
@@ -226,6 +227,13 @@
                             </form>
                         @else
                             <h1 class="mb-2 text-lg font-semibold">Detalles del Plan de Mejoramiento</h1>
+                            <div>
+                                <x-label for="instructor" value="{{ __('Instructor a cargo') }}" />
+                                <x-input id="instructor" class="block mt-1 w-full" type="text" name="instructor"
+                                    :value="$comite->plan->instructor->ins_nombres .
+                                        ' ' .
+                                        $comite->plan->instructor->ins_apellidos" disabled autocomplete="instructor" />
+                            </div>
                             <div>
                                 <x-label for="pla_fechaInicio" value="{{ __('Fecha de Inicio') }}" />
                                 <x-input id="pla_fechaInicio" class="block mt-1 w-full" type="date"
@@ -245,6 +253,11 @@
                                     autocomplete="pla_descripcion" />
                             </div>
                             <div>
+                                <x-label for="pla_estado" value="{{ __('Estado del plan de mejoramiento') }}" />
+                                <x-input id="pla_estado" class="block mt-1 w-full" type="text" name="pla_estado"
+                                    :value="$comite->plan->pla_estado" disabled autocomplete="pla_estado" />
+                            </div>
+                            <div>
                                 <x-label for="pla_url" value="{{ __('Archivo') }}" />
                                 <x-link2 href="{{ route('gesViews.dowPla', $comite->plan) }}">Descargar</x-link2>
                                 @if (session('error3'))
@@ -254,7 +267,7 @@
                                 @endif
                             </div>
                         @endif
-                        <x-linkb href="{{ route('gesViews.comAlf') }}" class="mx-3">Atrás</x-linkb>
+                        <x-linkb href="{{ route('gesViews.comAlf') }}" class="m-4">Atrás</x-linkb>
                     </div>
                 </div>
             </div>

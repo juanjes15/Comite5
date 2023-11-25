@@ -19,6 +19,7 @@ class StorePlanRequest extends FormRequest
             'pla_fechaInicio' => ['nullable', 'date'],
             'pla_fechaFin' => ['nullable', 'date'],
             'pla_descripcion' => ['nullable', 'string', 'max:255'],
+            'pla_estado' => ['required', 'string'],
             'pla_url' => ['nullable', 'file'],
             'comite_id' => ['required', 'exists:comites,id'],
             'instructor_id' => ['required', 'exists:instructors,id']

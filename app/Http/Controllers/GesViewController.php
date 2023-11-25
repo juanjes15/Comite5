@@ -202,7 +202,12 @@ class GesViewController extends Controller
     }
     public function plaIni(StorePlanRequest $request, Comite $comite)
     {
-        Plan::create($request->validated());
+        $plan = Plan::create($request->validated());
+        //Relacionamos los aprendices del comité con el nuevo plan de mejoramiento
+        $aprendizs = $comite->solicitud->aprendizs;
+        foreach ($aprendizs as $aprendiz) {
+            $aprendiz->plans()->save($plan);
+        }
         return redirect()->route('gesViews.comDef', $comite);
     }
     public function dowPla(Plan $plan)
