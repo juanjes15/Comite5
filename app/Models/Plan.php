@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Model;
 
@@ -26,5 +27,11 @@ class Plan extends Model
     public function instructor(): BelongsTo
     {
         return $this->belongsTo(Instructor::class);
+    }
+
+    //Los aprendices a los que pertenece el Plan
+    public function aprendizs(): BelongsToMany
+    {
+        return $this->belongsToMany(Aprendiz::class)->as('AprendizPlan')->withPivot('ap_observacion', 'ap_url');
     }
 }

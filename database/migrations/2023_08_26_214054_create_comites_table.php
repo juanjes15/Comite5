@@ -14,7 +14,7 @@ return new class extends Migration {
             $table->string('com_lugar');
             $table->string('com_recomendacion')->nullable();
             $table->string('com_acta')->nullable();
-            $table->foreignId('solicitud_id')->constrained();
+            $table->foreignId('solicitud_id')->constrained()->cascadeOnDelete();
             $table->timestamps();
         });
     }

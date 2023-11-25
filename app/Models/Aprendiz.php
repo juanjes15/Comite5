@@ -38,4 +38,10 @@ class Aprendiz extends Model
     {
         return $this->hasOne(User::class);
     }
+
+    //Los planes a los que pertenece el Aprendiz
+    public function plans(): BelongsToMany
+    {
+        return $this->belongsToMany(Plan::class)->as('AprendizPlan')->withPivot('ap_observacion', 'ap_url');
+    }
 }

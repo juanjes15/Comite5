@@ -9,11 +9,12 @@ return new class extends Migration {
     {
         Schema::create('plans', function (Blueprint $table) {
             $table->id();
-            $table->date('pla_fechaInicio');
-            $table->date('pla_fechaFin');
-            $table->string('pla_descripcion');
+            $table->date('pla_fechaInicio')->nullable();
+            $table->date('pla_fechaFin')->nullable();
+            $table->string('pla_descripcion')->nullable();
             $table->string('pla_url')->nullable();
-            $table->foreignId('comite_id')->constrained();
+            $table->string('pla_estado');
+            $table->foreignId('comite_id')->constrained()->cascadeOnDelete();
             $table->foreignId('instructor_id')->constrained();
             $table->timestamps();
         });
