@@ -15,6 +15,7 @@ use App\Models\Articulo;
 use App\Models\Capitulo;
 use App\Models\Aprendiz;
 use App\Models\Numeral;
+use App\Models\Comite;
 use App\Models\Prueba;
 use App\Models\Ficha;
 
@@ -371,10 +372,42 @@ class InsViewController extends Controller
         $numeral->solicituds()->detach($solicitud);
         return redirect()->route('insViews.revFal', $solicitud);
     }
-    
+
     public function revDel(Solicitud $solicitud)
     {
         $solicitud->delete();
         return redirect()->route('insViews.revSol');
+    }
+
+    public function comAll(Request $request)
+    {
+        $comites = Comite::where('com_estado', '=', 'Finalizado')
+            ->when($request->q, function ($query, $search) {
+                $query->where('com_fecha', 'like', "%{$search}%")
+                    ->orWhere('com_lugar', 'like', "%{$search}%");
+            })
+            ->orderBy('com_fecha', 'asc')
+            ->paginate(5);
+
+        return view('insViews.comAll', compact('comites'));
+    }
+    public function comDet(Comite $comite)
+    {
+        $instructors = $comite->solicitud->instructors;
+        $aprendizs = $comite->solicitud->aprendizs;
+        $articulos = $comite->solicitud->articulos;
+        $numerals = $comite->solicitud->numerals;
+        $prueba = $comite->solicitud->prueba;
+        return view('insViews.comDet', compact('comite', 'instructors', 'aprendizs', 'articulos', 'numerals', 'prueba'));
+    }
+    public function dowAct(Comite $comite)
+    {
+        if ($comite->com_acta == null) {
+            return redirect()->back()->with('error2', 'El acta no ha sido generada');
+        } else if (Storage::disk('public')->exists($comite->com_acta)) {
+            return Storage::disk('public')->download($comite->com_acta);
+        } else {
+            return redirect()->back()->with('error2', 'No se encuentra el archivo');
+        }
     }
 }

@@ -102,9 +102,9 @@ Route::middleware('auth')->group(function () {
 
         //RUTAS PARA COMITÉS FINALIZADOS
         //Todos los comités en estado "Finalizado"
-        Route::get('/instructor/comitesFinalizados', [InsViewController::class, 'comAlf'])->name('insViews.comAlf');
+        Route::get('/instructor/comitesFinalizados', [InsViewController::class, 'comAll'])->name('insViews.comAll');
         //Detalle del comité finalizado
-        Route::get('/instructor/detalleComiteF/{comite}', [InsViewController::class, 'comDef'])->name('insViews.comDef');
+        Route::get('/instructor/detalleComiteF/{comite}', [InsViewController::class, 'comDet'])->name('insViews.comDet');
         //Descargar acta
         Route::get('/instructor/acta/{comite}', [InsViewController::class, 'dowAct'])->name('insViews.dowAct');
     });
