@@ -18,6 +18,7 @@ use App\Models\Numeral;
 use App\Models\Comite;
 use App\Models\Prueba;
 use App\Models\Ficha;
+use App\Models\Plan;
 
 class InsViewController extends Controller
 {
@@ -381,7 +382,12 @@ class InsViewController extends Controller
 
     public function comAll(Request $request)
     {
-        $comites = Comite::where('com_estado', '=', 'Finalizado')
+        $instructor = auth()->user()->instructor;
+
+        $comites = Comite::whereHas('solicitud.aprendizs', function ($query) use ($instructor) {
+            $query->whereIn('ficha_id', $instructor->fichas->pluck('id'));
+        })
+            ->where('com_estado', '=', 'Finalizado')
             ->when($request->q, function ($query, $search) {
                 $query->where('com_fecha', 'like', "%{$search}%")
                     ->orWhere('com_lugar', 'like', "%{$search}%");
@@ -408,6 +414,17 @@ class InsViewController extends Controller
             return Storage::disk('public')->download($comite->com_acta);
         } else {
             return redirect()->back()->with('error2', 'No se encuentra el archivo');
+        }
+    }
+
+    public function dowPla(Plan $plan)
+    {
+        if ($plan->pla_url == null) {
+            return redirect()->back()->with('error3', 'No se ha cargado ningún archivo');
+        } else if (Storage::disk('public')->exists($plan->pla_url)) {
+            return Storage::disk('public')->download($plan->pla_url);
+        } else {
+            return redirect()->back()->with('error3', 'No se encuentra el archivo');
         }
     }
 }

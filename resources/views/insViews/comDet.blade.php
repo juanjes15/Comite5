@@ -147,7 +147,7 @@
                         </div>
                         <div>
                             <x-label for="pru_url" value="{{ __('Archivo') }}" />
-                            <x-link2 href="{{ route('gesViews.dowPru', $prueba) }}">Descargar</x-link2>
+                            <x-link2 href="{{ route('insViews.dowPru', $prueba) }}">Descargar</x-link2>
                             @if (session('error'))
                                 <div class="text-red-500">
                                     {{ session('error') }}
@@ -191,7 +191,7 @@
                         <h1 class="mb-2 text-lg font-semibold">Acta</h1>
                         <div>
                             <x-label for="com_acta" value="{{ __('Acta del Comité') }}" />
-                            <x-link2 href="{{ route('gesViews.dowAct', $comite) }}">Descargar</x-link2>
+                            <x-link2 href="{{ route('insViews.dowAct', $comite) }}">Descargar</x-link2>
                             @if (session('error2'))
                                 <div class="text-red-500">
                                     {{ session('error2') }}
@@ -205,46 +205,56 @@
                             <h2 class="mt-6 mb-2 font-semibold">Contacte al gestor de comités para que asigne un plan
                                 de mejoramiento</h2>
                         @elseif ($comite->plan->instructor->id === $comite->solicitud->aprendizs[0]->ficha->instructor->id)
-                            <h1 class="mb-2 text-lg font-semibold">Detalles del Plan de Mejoramiento</h1>
-                            <div>
-                                <x-label for="instructor" value="{{ __('Instructor a cargo') }}" />
-                                <x-input id="instructor" class="block mt-1 w-full" type="text" name="instructor"
-                                    :value="$comite->plan->instructor->ins_nombres .
-                                        ' ' .
-                                        $comite->plan->instructor->ins_apellidos" disabled autocomplete="instructor" />
-                            </div>
-                            <div>
-                                <x-label for="pla_fechaInicio" value="{{ __('Fecha de Inicio') }}" />
-                                <x-input id="pla_fechaInicio" class="block mt-1 w-full" type="date"
-                                    name="pla_fechaInicio" :value="$comite->plan->pla_fechaInicio" disabled
-                                    autocomplete="pla_fechaInicio" />
-                            </div>
-                            <div>
-                                <x-label for="pla_fechaFin" value="{{ __('Fecha Final') }}" />
-                                <x-input id="pla_fechaFin" class="block mt-1 w-full" type="date"
-                                    name="pla_fechaFin" :value="$comite->plan->pla_fechaFin" disabled autocomplete="pla_fechaFin" />
-                            </div>
-                            <div>
-                                <x-label for="pla_descripcion"
-                                    value="{{ __('Breve descripción del plan de mejoramiento') }}" />
-                                <x-input id="pla_descripcion" class="block mt-1 w-full" type="text"
-                                    name="pla_descripcion" :value="$comite->plan->pla_descripcion" disabled
-                                    autocomplete="pla_descripcion" />
-                            </div>
-                            <div>
-                                <x-label for="pla_estado" value="{{ __('Estado del plan de mejoramiento') }}" />
-                                <x-input id="pla_estado" class="block mt-1 w-full" type="text" name="pla_estado"
-                                    :value="$comite->plan->pla_estado" disabled autocomplete="pla_estado" />
-                            </div>
-                            <div>
-                                <x-label for="pla_url" value="{{ __('Archivo') }}" />
-                                <x-link2 href="{{ route('gesViews.dowPla', $comite->plan) }}">Descargar</x-link2>
-                                @if (session('error3'))
-                                    <div class="text-red-500">
-                                        {{ session('error3') }}
-                                    </div>
-                                @endif
-                            </div>
+                            @if ($comite->plan->pla_estado === 'Creado')
+                                <h1 class="mb-2 text-lg font-semibold">Tienes a cargo este plan de mejoramiento</h1>
+                                <h2 class="mt-6 mb-2 font-semibold">Necesitas llenar los campos faltantes para este
+                                    plan</h2>
+                                <div class="flex mt-2">
+                                    <x-link href="{{ route('gesViews.comAlf') }}" class="m-2">Completar plan de
+                                        mejoramiento</x-link>
+                                </div>
+                            @else
+                                <h1 class="mb-2 text-lg font-semibold">Detalles del Plan de Mejoramiento</h1>
+                                <div>
+                                    <x-label for="instructor" value="{{ __('Instructor a cargo') }}" />
+                                    <x-input id="instructor" class="block mt-1 w-full" type="text"
+                                        name="instructor" :value="$comite->plan->instructor->ins_nombres .
+                                            ' ' .
+                                            $comite->plan->instructor->ins_apellidos" disabled autocomplete="instructor" />
+                                </div>
+                                <div>
+                                    <x-label for="pla_fechaInicio" value="{{ __('Fecha de Inicio') }}" />
+                                    <x-input id="pla_fechaInicio" class="block mt-1 w-full" type="date"
+                                        name="pla_fechaInicio" :value="$comite->plan->pla_fechaInicio" disabled
+                                        autocomplete="pla_fechaInicio" />
+                                </div>
+                                <div>
+                                    <x-label for="pla_fechaFin" value="{{ __('Fecha Final') }}" />
+                                    <x-input id="pla_fechaFin" class="block mt-1 w-full" type="date"
+                                        name="pla_fechaFin" :value="$comite->plan->pla_fechaFin" disabled autocomplete="pla_fechaFin" />
+                                </div>
+                                <div>
+                                    <x-label for="pla_descripcion"
+                                        value="{{ __('Breve descripción del plan de mejoramiento') }}" />
+                                    <x-input id="pla_descripcion" class="block mt-1 w-full" type="text"
+                                        name="pla_descripcion" :value="$comite->plan->pla_descripcion" disabled
+                                        autocomplete="pla_descripcion" />
+                                </div>
+                                <div>
+                                    <x-label for="pla_estado" value="{{ __('Estado del plan de mejoramiento') }}" />
+                                    <x-input id="pla_estado" class="block mt-1 w-full" type="text"
+                                        name="pla_estado" :value="$comite->plan->pla_estado" disabled autocomplete="pla_estado" />
+                                </div>
+                                <div>
+                                    <x-label for="pla_url" value="{{ __('Archivo') }}" />
+                                    <x-link2 href="{{ route('insViews.dowPla', $comite->plan) }}">Descargar</x-link2>
+                                    @if (session('error3'))
+                                        <div class="text-red-500">
+                                            {{ session('error3') }}
+                                        </div>
+                                    @endif
+                                </div>
+                            @endif
                         @else
                             <h1 class="mb-2 text-lg font-semibold">No fuiste asignado para aplicar este plan de
                                 mejoramiento</h1>
