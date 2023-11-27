@@ -107,10 +107,17 @@ Route::middleware('auth')->group(function () {
         Route::get('/instructor/detalleComiteF/{comite}', [InsViewController::class, 'comDet'])->name('insViews.comDet');
         //Descargar acta
         Route::get('/instructor/acta/{comite}', [InsViewController::class, 'dowAct'])->name('insViews.dowAct');
-        
+
         //RUTAS PARA EL PLAN DE MEJORAMIENTO
         //Descargar plan de mejoramiento
         Route::get('/instructor/plan/{comite}', [InsViewController::class, 'dowPla'])->name('insViews.dowPla');
+        //Todos los planes en estado "Creado" o "Activo"
+        Route::get('/instructor/planes', [InsViewController::class, 'plaAll'])->name('insViews.plaAll');
+        //Editar plan
+        Route::get('/instructor/editarPlan/{plan}', [InsViewController::class, 'plaUpd'])->name('insViews.plaUpd');
+        Route::put('/instructor/editarPlan/{plan}', [InsViewController::class, 'storePla']);
+        //Todos los planes en estado "Finalizado"
+        Route::get('/instructor/planesFinalizados', [InsViewController::class, 'plaAlf'])->name('insViews.plaAlf');
     });
 
     //Rutas para el Gestor de Comites

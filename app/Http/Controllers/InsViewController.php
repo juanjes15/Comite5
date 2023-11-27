@@ -6,6 +6,7 @@ use App\Http\Requests\UpdateSolicitudRequest;
 use App\Http\Requests\StoreSolicitudRequest;
 use App\Http\Requests\UpdatePruebaRequest;
 use App\Http\Requests\StorePruebaRequest;
+use App\Http\Requests\UpdatePlanRequest;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
@@ -426,5 +427,34 @@ class InsViewController extends Controller
         } else {
             return redirect()->back()->with('error3', 'No se encuentra el archivo');
         }
+    }
+    public function plaAll(Request $request)
+    {
+        $instructor = auth()->user()->instructor;
+
+        $plans = Plan::whereHas('comite.solicitud.aprendizs', function ($query) use ($instructor) {
+            $query->whereIn('ficha_id', $instructor->fichas->pluck('id'));
+        })
+            ->where(function ($query) {
+                $query->where('pla_estado', '=', 'Creado')
+                    ->orWhere('pla_estado', '=', 'Activo');
+            })
+            ->when($request->q, function ($query, $search) {
+                $query->where('com_fecha', 'like', "%{$search}%")
+                    ->orWhere('com_lugar', 'like', "%{$search}%");
+            })
+            ->orderBy('com_fecha', 'asc')
+            ->paginate(5);
+
+        return view('insViews.plaAll', compact('plans'));
+    }
+    public function plaUpd(Plan $plan)
+    {
+        return view('insViews.plaUpd', compact('plan'));
+    }
+    public function storePla(UpdatePlanRequest $request, Plan $plan)
+    {
+        $plan->update($request->validated());
+        return redirect()->route('insViews.plaAll');
     }
 }
