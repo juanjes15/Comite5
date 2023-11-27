@@ -440,10 +440,10 @@ class InsViewController extends Controller
                     ->orWhere('pla_estado', '=', 'Activo');
             })
             ->when($request->q, function ($query, $search) {
-                $query->where('com_fecha', 'like', "%{$search}%")
-                    ->orWhere('com_lugar', 'like', "%{$search}%");
+                $query->where('pla_estado', 'like', "%{$search}%")
+                    ->orWhere('pla_fechaInicio', 'like', "%{$search}%");
             })
-            ->orderBy('com_fecha', 'asc')
+            ->orderBy('pla_fechaInicio', 'asc')
             ->paginate(5);
 
         return view('insViews.plaAll', compact('plans'));
@@ -454,7 +454,20 @@ class InsViewController extends Controller
     }
     public function storePla(UpdatePlanRequest $request, Plan $plan)
     {
-        $plan->update($request->validated());
+        dd($plan);
+        // Obtiene los datos validados del request
+        $validatedData = $request->validated();
+
+        if ($plan->pla_url != null) {
+            // Elimina el archivo anterior
+            Storage::disk('public')->delete($plan->pla_url);
+        }
+        // Guarda el nuevo archivo en el disco public, carpeta plans
+        $path = Storage::disk('public')->put('plans', $request->file('pla_url'));
+
+        // Cambia el path del archivo por el nuevo en los datos validados
+        $validatedData['pla_url'] = $path;
+        $plan->update($validatedData);
         return redirect()->route('insViews.plaAll');
     }
 }

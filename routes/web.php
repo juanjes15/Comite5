@@ -115,7 +115,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/instructor/planes', [InsViewController::class, 'plaAll'])->name('insViews.plaAll');
         //Editar plan
         Route::get('/instructor/editarPlan/{plan}', [InsViewController::class, 'plaUpd'])->name('insViews.plaUpd');
-        Route::put('/instructor/editarPlan/{plan}', [InsViewController::class, 'storePla']);
+        Route::put('/instructor/guardarPlan/{plan}', [InsViewController::class, 'storePla'])->name('insViews.storePla');
         //Todos los planes en estado "Finalizado"
         Route::get('/instructor/planesFinalizados', [InsViewController::class, 'plaAlf'])->name('insViews.plaAlf');
     });
