@@ -454,7 +454,6 @@ class InsViewController extends Controller
     }
     public function storePla(UpdatePlanRequest $request, Plan $plan)
     {
-        dd($plan);
         // Obtiene los datos validados del request
         $validatedData = $request->validated();
 

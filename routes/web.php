@@ -110,7 +110,7 @@ Route::middleware('auth')->group(function () {
 
         //RUTAS PARA EL PLAN DE MEJORAMIENTO
         //Descargar plan de mejoramiento
-        Route::get('/instructor/plan/{comite}', [InsViewController::class, 'dowPla'])->name('insViews.dowPla');
+        Route::get('/instructor/plan/{plan}', [InsViewController::class, 'dowPla'])->name('insViews.dowPla');
         //Todos los planes en estado "Creado" o "Activo"
         Route::get('/instructor/planes', [InsViewController::class, 'plaAll'])->name('insViews.plaAll');
         //Editar plan
