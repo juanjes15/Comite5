@@ -14,7 +14,7 @@ class ComiteCreado extends Mailable
     use Queueable, SerializesModels;
 
     //Crear una nueva instancia de mensaje
-    public function __construct(private $comite)
+    public function __construct(private $comite, private $nombre)
     {
         //
     }
@@ -32,7 +32,7 @@ class ComiteCreado extends Mailable
     {
         return new Content(
             view: 'mail.comiteCreado',
-            with: ['comite' => $this->comite],
+            with: ['comite' => $this->comite, 'nombre' => $this->nombre],
         );
     }
 

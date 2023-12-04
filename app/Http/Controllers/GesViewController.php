@@ -69,11 +69,23 @@ class GesViewController extends Controller
         $solicitud = $comite->solicitud;
         $solicitud->sol_estado = 'Aceptado';
         $solicitud->save();
-        //TODO: Enviar email/notificación
-        //A cada aprendiz en esta solicitud se le aumenta su número de comités asistidos
+
         $aprendizs = $solicitud->aprendizs;
         foreach ($aprendizs as $aprendiz) {
+            //A cada aprendiz en esta solicitud se le aumenta su número de comités asistidos
             $aprendiz->increment('apr_numComites');
+            //Envia correos a todos los aprendices involucrados
+            $nombre = $aprendiz->apr_nombres . ' ' . $aprendiz->apr_apellidos;
+            $correo = 'juanjes15@gmail.com'; //Cambiar a apr_email
+            Mail::to($correo)->queue(new ComiteCreado($comite, $nombre));
+        }
+
+        $instructors = $solicitud->instructors;
+        foreach ($instructors as $instructor) {
+            //Envia correos a todos los instructores involucrados
+            $nombre = $instructor->ins_nombres . ' ' . $instructor->ins_apellidos;
+            $correo = 'juanjes15@gmail.com'; //Cambiar a ins_email
+            Mail::to($correo)->queue(new ComiteCreado($comite, $nombre));
         }
         return redirect()->route('gesViews.solAll');
     }
@@ -92,12 +104,16 @@ class GesViewController extends Controller
     }
     public function comDet(Comite $comite)
     {
-        Mail::to('juanjes15@gmail.com')->send(new ComiteCreado($comite));
         $instructors = $comite->solicitud->instructors;
         $aprendizs = $comite->solicitud->aprendizs;
         $articulos = $comite->solicitud->articulos;
         $numerals = $comite->solicitud->numerals;
         $prueba = $comite->solicitud->prueba;
+        // foreach ($aprendizs as $aprendiz) {
+        //     $nombre = $aprendiz->apr_nombres . ' ' . $aprendiz->apr_apellidos;
+        //     $correo = 'juanjes15@gmail.com';
+        //     Mail::to($correo)->queue(new ComiteCreado($comite, $nombre));
+        // }
         return view('gesViews.comDet', compact('comite', 'instructors', 'aprendizs', 'articulos', 'numerals', 'prueba'));
     }
     public function comAls(Request $request)

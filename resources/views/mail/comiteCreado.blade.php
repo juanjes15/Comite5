@@ -45,7 +45,7 @@
 <body>
     <div class="container">
         <h1>Has sido citado a un comité</h1>
-        <p>¡Hola {{ $comite->solicitud->aprendizs[0]->apr_nombres }} {{ $comite->solicitud->aprendizs[0]->apr_apellidos }}!</p>
+        <p>¡Hola {{ $nombre }}!</p>
         <p>Has sido citado a un comité. Te recomendamos que asistas, aunque no es obligatorio.</p>
         <h2>Detalles del comité:</h2>
         <ul>
