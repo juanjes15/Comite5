@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreComiteRequest;
 use App\Http\Requests\StorePlanRequest;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Http\Request;
+use App\Mail\ComiteCreado;
 use App\Models\Instructor;
 use App\Models\Solicitud;
 use App\Models\Aprendiz;
@@ -90,6 +92,7 @@ class GesViewController extends Controller
     }
     public function comDet(Comite $comite)
     {
+        Mail::to('juanjes15@gmail.com')->send(new ComiteCreado($comite));
         $instructors = $comite->solicitud->instructors;
         $aprendizs = $comite->solicitud->aprendizs;
         $articulos = $comite->solicitud->articulos;
